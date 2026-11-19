@@ -71,7 +71,9 @@
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
+      /* Null statt eines Kleinstwerts: Sonst startet jede Zustandsänderung einen Übergang,
+         und der Sprungverweis steht beim Fokus einen Moment lang noch ausserhalb des Bildes. */
+      transition-duration: 0s !important;
       scroll-behavior: auto !important;
     }
   }
