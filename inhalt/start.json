@@ -1,0 +1,35 @@
+{
+  "seitentitel": "Sie&Er Dessous Amriswil | Dessous und Wäsche für Sie und Ihn",
+  "beschreibung": "Dessous, Wäsche, Nachtwäsche und Bademode für Sie und Ihn in Amriswil. Ausgesuchte Marken und persönliche Beratung an der Bahnhofstrasse 6.",
+  "freigegeben": false,
+  "titel": "Wohlfühlen beginnt *innen*",
+  "lead": "Dessous und Wäsche für Sie und Ihn. Seit 20 Jahren in Amriswil.",
+  "satz": "Stell dir vor, du ziehst morgens etwas an und *vergisst*, dass du es trägst.",
+  "markenTitel": "Marken, die wir für dich ausgesucht haben",
+  "collage": "Das richtige Gefühl auf der Haut verändert, wie du *durch den Tag* gehst.",
+  "laden": {
+    "titel": "Komm *herein*",
+    "text": "Bei uns darfst du anfassen, anprobieren und fragen. Wir haben Zeit für dich, und wir kennen jedes Stück im Laden."
+  },
+  "menschen": {
+    "etikett": "Wer dahinter steht",
+    "namen": "Sandra Brivio *und* Denise Stoffner",
+    "text": "Seit 20 Jahren beraten wir an der Bahnhofstrasse. Wir kennen unsere Marken, wir sehen, was passt, und wir sagen es dir ehrlich. Wir freuen uns auf dich.",
+    "bildHinweis": "Porträt von Sandra und Denise folgt"
+  },
+  "beratung": {
+    "etikett": "Beratung",
+    "satz": "Passform spürt man. Wir nehmen uns Zeit, bis es *sitzt*."
+  },
+  "brust": {
+    "etikett": "Einfühlsame Beratung für Brustprothesen",
+    "satz": "Eine Brustoperation ist ein Wendepunkt. Und dann stellt sich die Frage: *Wie weiter?*",
+    "text": "Wir nehmen uns Zeit für dich, in Ruhe und unter vier Augen. Sandra Brivio, Inhaberin, ist dafür eigens ausgebildet und begleitet dich von der ersten Frage bis zum Stück, das sich richtig anfühlt.",
+    "punkte": [
+      { "begriff": "Was du bei uns findest", "text": "Brustprothesen, passende BHs, Dessous und Bademode von Anita" },
+      { "begriff": "Wann", "text": "Einzeltermine am Montag, wenn der Laden für alle anderen geschlossen ist" },
+      { "begriff": "Wie", "text": "Nach Voranmeldung, am Telefon oder per Mail" }
+    ]
+  },
+  "besuch": "Bis bald an der *Bahnhofstrasse*"
+}

@@ -1,45 +1,107 @@
 ---
-import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import '../stile/seite.css';
 import Seite from '../layouts/Seite.astro';
-import Besuch from '../components/Besuch.astro';
-import { verlangeFreigabe } from '../inhalt/stufe.js';
+import Betont from '../components/Betont.astro';
+import { betrieb, telefonZiel, telefonAnzeige, zeitenMinuten } from '../inhalt/betrieb.js';
+import { marken } from '../inhalt/marken.js';
+import { start } from '../inhalt/start.js';
+import { istLive } from '../inhalt/stufe.js';
+import { pfad } from '../inhalt/pfad.js';
+import nori from '../assets/bilder/nori.jpg';
+import jane from '../assets/bilder/jane.jpg';
+import avero from '../assets/bilder/avero.jpg';
+import janeNah from '../assets/bilder/jane-detail.jpg';
+import noriNah from '../assets/bilder/nori-detail.jpg';
+import averoNah from '../assets/bilder/avero-detail.jpg';
+import laden1 from '../assets/bilder/laden-1.jpg';
+import laden2 from '../assets/bilder/laden-2.jpg';
 
-const start = await getEntry('seiten', 'start');
-verlangeFreigabe([start], 'freigegeben', 'Seite');
-const { titel, seitentitel, beschreibung, lead } = start.data;
+if (istLive && !start.freigegeben) {
+  throw new Error('Die Texte der Startseite sind noch nicht freigegeben (inhalt/start.json).');
+}
+
+const haelfte = Math.ceil(marken.length / 2);
+const reihen = [marken.slice(0, haelfte), marken.slice(haelfte)];
+const breiten = [480, 800, 1200];
+const halb = '(max-width: 860px) 64vw, 34vw';
 ---
 
-<Seite start titel={seitentitel} beschreibung={beschreibung}>
-  <section class="auftakt" aria-labelledby="start-titel">
-    <div class="innen">
-      <h1 id="start-titel">{titel}</h1>
-      {lead && <p class="lead">{lead}</p>}
+<Seite start titel={start.seitentitel} beschreibung={start.beschreibung}>
+  <section class="auftakt" data-roll>
+    <div class="haft">
+      <p class="a-paar gross" aria-hidden="true"><span>für Sie</span><span><em>für Ihn</em></span></p>
+      <figure class="a-karte">
+        <Image src={nori} alt="Korallenrotes Set aus BH und Slip mit Spitze auf salbeigrünem Stoff, daneben helle Rosen" widths={[640, 960, 1440, 2000]} sizes="100vw" quality={70} loading="eager" fetchpriority="high" />
+      </figure>
+      <div class="a-text">
+        <p class="etikett status" data-zeiten={JSON.stringify(zeitenMinuten)}><i aria-hidden="true"></i><span>Dienstag bis Samstag für dich da</span></p>
+        <h1 class="gross"><Betont text={start.titel} /></h1>
+        <p class="lead">{start.lead}</p>
+        <a class="knopf" href={pfad('/#besuch')}>Besuch planen</a>
+      </div>
     </div>
   </section>
-  <section class="besuchen" aria-label="Besuch">
-    <div class="innen">
-      <Besuch />
+
+  <section class="satz" aria-label="Unser Versprechen">
+    <p class="gross" data-worte><Betont text={start.satz} /></p>
+  </section>
+
+  <section id="marken" class="marken" data-sicht aria-labelledby="t-marken">
+    <h2 id="t-marken" class="etikett">{start.markenTitel}</h2>
+    <ul class="zeile eins">{reihen[0].map((m) => <li>{m.name}</li>)}</ul>
+    <ul class="zeile zwei">{reihen[1].map((m) => <li>{m.name}</li>)}</ul>
+  </section>
+
+  <section class="collage" data-roll aria-label="Stimmung">
+    <div class="haft">
+      <p class="c-satz gross"><Betont text={start.collage} /></p>
+      <figure class="c-bild c-1"><Image src={janeNah} alt="Mintgrüne Stickerei auf Tüll, aus der Nähe" widths={breiten} sizes={halb} quality={70} /></figure>
+      <figure class="c-bild c-2"><Image src={noriNah} alt="Korallenrote Spitze mit Bogenkante auf grünem Stoff" widths={breiten} sizes={halb} quality={70} /></figure>
+      <figure class="c-bild c-3"><Image src={jane} alt="Mintgrüner BH mit Stickerei auf rosenholzfarbenem Leinen, daneben gelbgrüne Blüten" widths={breiten} sizes={halb} quality={70} /></figure>
+      <figure class="c-bild c-4"><Image src={averoNah} alt="Träger mit gestickten Blüten in Bronze auf dunklem Samt" widths={breiten} sizes={halb} quality={70} /></figure>
+      <figure class="c-bild c-ende"><Image src={avero} alt="Dunkler BH mit gestickten Trägern auf anthrazitfarbenem Samt, dazwischen korallenrote Blüten" widths={[640, 960, 1440, 2000]} sizes="100vw" quality={70} /></figure>
+    </div>
+  </section>
+
+  <section id="laden" class="laden" data-sicht aria-labelledby="t-laden">
+    <figure class="l-gross"><Image src={laden1} alt="Blick durch den Laden: Präsentationstisch mit Dessous, Kommoden und Wäsche an den Wänden" widths={[640, 960, 1500]} sizes="(max-width: 860px) 100vw, 62vw" quality={72} /></figure>
+    <div class="l-text">
+      <h2 id="t-laden" class="gross"><Betont text={start.laden.titel} /></h2>
+      <p>{start.laden.text}</p>
+      <p class="etikett">{betrieb.strasse}, {betrieb.ort}</p>
+    </div>
+    <figure class="l-klein"><Image src={laden2} alt="Sitzecke im Laden mit Bistrotisch, Spiegel und Wäsche an der Wand" widths={[480, 800]} sizes="(max-width: 860px) 82vw, 30vw" quality={72} /></figure>
+  </section>
+
+  <section id="menschen" class="menschen" aria-labelledby="t-menschen">
+    {start.menschen.bildHinweis && <p class="m-bild">{start.menschen.bildHinweis}</p>}
+    <div class="m-text">
+      <h2 id="t-menschen" class="etikett">{start.menschen.etikett}</h2>
+      <p class="gross"><Betont text={start.menschen.namen} /></p>
+      <p>{start.menschen.text}</p>
+    </div>
+  </section>
+
+  <section id="beratung" class="satz" aria-labelledby="t-beratung">
+    <h2 id="t-beratung" class="etikett">{start.beratung.etikett}</h2>
+    <p class="gross" data-worte><Betont text={start.beratung.satz} /></p>
+  </section>
+
+  <section id="brustprothesen" class="sanft" aria-labelledby="t-sanft">
+    <div class="s-links">
+      <h2 id="t-sanft" class="etikett">{start.brust.etikett}</h2>
+      <p class="gross" data-worte><Betont text={start.brust.satz} /></p>
+    </div>
+    <div class="s-rechts">
+      <p>{start.brust.text}</p>
+      <dl class="punkte">
+        {start.brust.punkte.map((punkt) => (<div><dt>{punkt.begriff}</dt><dd>{punkt.text}</dd></div>))}
+      </dl>
+      <div class="wege">
+        <a class="knopf" href={telefonZiel}>{telefonAnzeige}</a>
+        <a href={`mailto:${betrieb.email}`}>{betrieb.email}</a>
+      </div>
     </div>
   </section>
 </Seite>
-
-<style>
-  .auftakt {
-    padding-block: clamp(4rem, 14vw, 11rem) clamp(3rem, 9vw, 7rem);
-  }
-  h1 {
-    max-width: 14ch;
-    font-size: var(--fs-titel);
-    overflow-wrap: break-word;
-  }
-  .lead {
-    margin-top: 1.5rem;
-    font-family: var(--se-font-titel);
-    font-size: var(--fs-gross);
-    font-style: italic;
-  }
-  .besuchen {
-    padding-block: clamp(2.5rem, 7vw, 5rem);
-    background: var(--se-leinen);
-  }
-</style>

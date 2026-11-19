@@ -1,37 +1,79 @@
 ---
-import { betrieb } from '../inhalt/betrieb.js';
+import Betont from './Betont.astro';
+import { betrieb, telefonZiel, telefonAnzeige, zeitenZeilen } from '../inhalt/betrieb.js';
+import { start } from '../inhalt/start.js';
 ---
 
-<footer class="fuss">
-  <div class="innen zeile">
-    <p>{betrieb.firma}, {betrieb.strasse}, {betrieb.plz} {betrieb.ort}</p>
-    <ul>
-      <li><a class="ziel" href={betrieb.instagram} rel="noopener">Instagram</a></li>
-      <li><a class="ziel" href={betrieb.facebook} rel="noopener">Facebook</a></li>
-    </ul>
+<footer id="besuch" class="fuss">
+  <span class="logo" role="img" aria-label={betrieb.name}></span>
+  <h2 class="gross"><Betont text={start.besuch} /></h2>
+  <div class="spalten">
+    <div>
+      <h3>Adresse</h3>
+      <address>{betrieb.firma}<br />{betrieb.strasse}<br />{betrieb.plz} {betrieb.ort}</address>
+    </div>
+    <div class="breit">
+      <h3>Öffnungszeiten</h3>
+      <dl>
+        {zeitenZeilen.map((zeile) => (<div><dt>{zeile.tage}</dt><dd>{zeile.text}</dd></div>))}
+      </dl>
+    </div>
+    <div>
+      <h3>Kontakt</h3>
+      <ul>
+        <li><a href={telefonZiel}>{telefonAnzeige}</a></li>
+        <li><a href={`mailto:${betrieb.email}`}>{betrieb.email}</a></li>
+        <li><a href={betrieb.instagram} rel="noopener">Instagram</a></li>
+        <li><a href={betrieb.facebook} rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
   </div>
 </footer>
 
 <style>
   .fuss {
-    padding-block: 2rem;
-    background: var(--se-salbei);
+    padding: clamp(48px, 7vw, 100px) var(--rand);
+    background: var(--se-tanne);
     color: var(--se-papier);
-    font-size: var(--fs-klein);
   }
-  .zeile {
+  .logo {
+    width: 150px;
+  }
+  h2 {
+    margin: 36px 0 48px;
+    font-size: clamp(40px, 6vw, 92px);
+    line-height: 0.98;
+  }
+  .spalten {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 2rem;
+    gap: 36px 72px;
   }
-  ul {
-    display: flex;
-    gap: 1.5rem;
+  .spalten > div {
+    flex: 1 1 220px;
+  }
+  .spalten > .breit {
+    flex-basis: 300px;
+  }
+  h3 {
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  dl > div + div {
+    margin-top: 10px;
+  }
+  dt {
+    font-weight: 600;
   }
   a {
-    color: inherit;
+    display: inline-block;
+    padding: 8px 0;
+  }
+  a:hover {
+    color: var(--se-rose);
   }
   a:focus-visible {
     outline-color: var(--se-papier);

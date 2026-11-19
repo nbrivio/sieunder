@@ -5,21 +5,22 @@ import { pfad } from '../inhalt/pfad.js';
 
 <Seite intern titel="Seite nicht gefunden" beschreibung="Diese Adresse gibt es nicht.">
   <section class="leer" aria-labelledby="leer-titel">
-    <div class="innen">
-      <h1 id="leer-titel">Diese Seite gibt es nicht</h1>
-      <p>Vielleicht ist sie umgezogen.</p>
-      <p><a class="ziel" href={pfad('/')}>Zur Startseite</a></p>
-    </div>
+    <h1 id="leer-titel" class="gross">Diese Seite gibt es <em>nicht</em></h1>
+    <p>Vielleicht ist sie umgezogen.</p>
+    <p><a class="knopf" href={pfad('/')}>Zur Startseite</a></p>
   </section>
 </Seite>
 
 <style>
   .leer {
-    padding-block: clamp(4rem, 14vw, 11rem);
-    min-height: 60svh;
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+    min-height: 70svh;
+    padding: clamp(140px, 18vw, 220px) var(--rand) 80px;
   }
   h1 {
-    margin-bottom: 1.5rem;
-    font-size: var(--fs-titel);
+    font-size: clamp(44px, 8vw, 110px);
+    line-height: 0.95;
   }
 </style>

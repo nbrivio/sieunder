@@ -49,3 +49,11 @@ export const zeitenZeilen = betrieb.zeiten.map(({ tage, offen }) => ({
 export const zeitenDaten = betrieb.zeiten.flatMap(({ wochentage, offen }) =>
   offen.map(([opens, closes]) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: wochentage, opens, closes })),
 );
+
+const index = { Sunday: 0, Monday: 1, Tuesday: 2, Wednesday: 3, Thursday: 4, Friday: 5, Saturday: 6 };
+const minuten = (zeit) => Number(zeit.slice(0, 2)) * 60 + Number(zeit.slice(3));
+
+/** Öffnungszeiten je Wochentag in Minuten seit Mitternacht, für die Anzeige «Jetzt geöffnet» im Browser. */
+export const zeitenMinuten = Object.fromEntries(
+  betrieb.zeiten.flatMap(({ wochentage, offen }) => (offen.length ? wochentage.map((tag) => [index[tag], offen.map(([von, bis]) => [minuten(von), minuten(bis)])]) : [])),
+);

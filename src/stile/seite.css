@@ -1,0 +1,507 @@
+/* Startseite. Ohne Skript und bei reduzierter Bewegung steht alles ruhig untereinander.
+   Die Klasse «bewegt» am Wurzelelement schaltet die Scrollbewegungen ein. */
+
+/* 1 Auftakt: Das Bild füllt den Schirm und zieht sich beim Scrollen zur Karte zusammen. */
+.haft {
+  position: relative;
+}
+.auftakt .haft {
+  height: 100svh;
+  overflow: hidden;
+}
+.a-karte {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  overflow: hidden;
+  background: var(--se-tanne);
+}
+.a-karte img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% 50%;
+}
+.a-karte::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(24 34 30 / calc(0.36 - var(--p) * 0.36));
+}
+.a-text {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 26px;
+  padding: 90px var(--rand) 40px;
+  color: var(--se-weiss);
+  text-align: center;
+}
+h1 {
+  max-width: 9.5em;
+  font-size: clamp(54px, 10vw, 150px);
+  line-height: 0.92;
+}
+.lead {
+  max-width: 30em;
+  font-size: clamp(17px, 1.4vw, 20px);
+}
+.a-text .knopf {
+  padding: 16px 28px;
+  background: var(--se-weiss);
+  color: var(--se-tinte);
+}
+.a-text .knopf:hover {
+  background: var(--se-koralle);
+  color: var(--se-weiss);
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.status i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.7);
+}
+.status.offen i {
+  background: #7be0a4;
+  box-shadow: 0 0 0 4px rgb(123 224 164 / 0.25);
+}
+.a-paar {
+  display: none;
+}
+
+.bewegt .auftakt {
+  height: 230svh;
+}
+.bewegt .haft {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+.bewegt .a-karte {
+  inset: calc(var(--p) * 17%) calc(var(--p) * 27%);
+  border-radius: calc(var(--p) * 30px);
+}
+.bewegt .a-karte img {
+  animation: drift 26s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.13) translate(-1.6%, -1.2%);
+  }
+}
+.bewegt .a-text {
+  opacity: calc(1 - var(--p) * 3);
+  transform: translateY(calc(var(--p) * -70px));
+}
+.bewegt .a-paar {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3vw;
+  transform: translateY(-50%);
+  font-size: clamp(60px, 15vw, 236px);
+  line-height: 1;
+  white-space: nowrap;
+  opacity: calc(var(--p) * 2.5 - 1);
+}
+.bewegt .a-paar span:first-child {
+  transform: translateX(calc((1 - var(--p)) * 14vw));
+}
+.bewegt .a-paar span:last-child {
+  transform: translateX(calc((1 - var(--p)) * -14vw));
+}
+
+/* Sätze, deren Worte beim Scrollen scharf werden. Das Skript teilt sie in Worte. */
+.satz {
+  padding: clamp(80px, 13vw, 200px) var(--rand);
+  text-align: center;
+}
+.satz .etikett {
+  margin-bottom: 28px;
+}
+.satz .gross {
+  max-width: 15em;
+  margin-inline: auto;
+  font-size: clamp(38px, 6.4vw, 104px);
+  line-height: 1;
+}
+.wort {
+  display: inline-block;
+  transition:
+    opacity 0.7s,
+    filter 0.7s,
+    transform 0.7s;
+}
+.wort.aus {
+  opacity: 0.08;
+  filter: blur(9px);
+  transform: translateY(0.12em);
+}
+
+/* 2 Marken: zwei Zeilen, die der Scroll gegeneinander schiebt. */
+.marken {
+  padding: clamp(40px, 6vw, 90px) 0;
+  overflow: hidden;
+}
+.marken h2 {
+  margin-bottom: 26px;
+  padding: 0 var(--rand);
+  text-align: center;
+}
+.zeile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.55em;
+  padding: 0 var(--rand);
+  font-family: var(--se-font-titel);
+  font-weight: 300;
+  font-size: clamp(34px, 7.6vw, 118px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+.zeile li {
+  display: flex;
+  gap: 0.55em;
+}
+.zeile li + li::before {
+  content: '/';
+  color: var(--se-koralle);
+}
+.zeile.zwei {
+  font-style: italic;
+}
+.bewegt .zeile {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  width: max-content;
+  padding: 0;
+  white-space: nowrap;
+}
+.bewegt .zeile.eins {
+  transform: translateX(calc(var(--rand) - var(--v) * 32%));
+}
+.bewegt .zeile.zwei {
+  transform: translateX(calc(-46% + var(--v) * 32%));
+}
+
+/* 3 Collage: Ein Satz bleibt stehen, grosse Bilder ziehen an ihm vorbei.
+   Am Schluss füllt das dunkle Bild den Schirm, der Satz wird hell. */
+.collage {
+  --q: clamp(0, calc((var(--p) - 0.74) * 6), 1);
+  background: var(--se-leinen);
+}
+.collage .haft {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: clamp(56px, 8vw, 110px) var(--rand);
+}
+.c-satz {
+  grid-column: 1 / -1;
+  max-width: 10em;
+  margin: 0 auto clamp(24px, 4vw, 48px);
+  font-size: clamp(40px, 6.8vw, 112px);
+  line-height: 0.98;
+  text-align: center;
+}
+.c-bild {
+  overflow: hidden;
+  border-radius: 18px;
+}
+.c-bild img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.c-ende {
+  grid-column: 1 / -1;
+}
+.c-ende img {
+  aspect-ratio: 3 / 2;
+}
+
+.bewegt .collage {
+  height: 380svh;
+}
+.bewegt .collage .haft {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  gap: 0;
+  padding: 0;
+}
+.bewegt .c-satz {
+  position: relative;
+  z-index: 4;
+  margin: 0;
+  padding: 0 var(--rand);
+  color: color-mix(in srgb, var(--se-tinte), var(--se-weiss) calc(var(--q) * 100%));
+}
+.bewegt .c-bild {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: var(--x);
+  width: var(--w);
+  box-shadow: 0 30px 80px rgb(24 34 30 / 0.24);
+  transform: translateY(calc(-50% + (var(--s) - var(--p) * var(--f)) * 1svh));
+}
+.bewegt .c-bild img {
+  aspect-ratio: var(--a);
+}
+.c-1 {
+  --w: 30vw;
+  --x: -4vw;
+  --s: 100;
+  --f: 250;
+  --a: 4 / 5;
+}
+.c-2 {
+  --w: 26vw;
+  --x: 76vw;
+  --s: 125;
+  --f: 330;
+  --a: 3 / 4;
+}
+.c-3 {
+  --w: 34vw;
+  --x: 4vw;
+  --s: 215;
+  --f: 360;
+  --a: 4 / 3;
+}
+.c-4 {
+  --w: 28vw;
+  --x: 70vw;
+  --s: 250;
+  --f: 420;
+  --a: 1 / 1;
+}
+.bewegt .c-ende {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: auto;
+  border-radius: 0;
+  box-shadow: none;
+  opacity: var(--q);
+  transform: none;
+}
+.bewegt .c-ende img {
+  aspect-ratio: auto;
+  transform: scale(calc(1.16 - var(--q) * 0.16));
+}
+.bewegt .c-ende::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(24 34 30 / 0.32);
+}
+
+/* 4 Laden */
+.laden {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 32px;
+  align-items: start;
+  padding: clamp(56px, 8vw, 130px) var(--rand);
+}
+.l-gross {
+  grid-column: 1 / 9;
+  overflow: hidden;
+  border-radius: 18px;
+}
+.l-gross img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+.l-text {
+  grid-column: 9 / 13;
+  align-self: center;
+}
+.l-text p {
+  margin-top: 22px;
+}
+.l-klein {
+  position: relative;
+  z-index: 2;
+  grid-column: 8 / 12;
+  margin-top: -12%;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 30px 70px rgb(24 34 30 / 0.22);
+}
+.l-klein img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+h2.gross {
+  font-size: clamp(40px, 5vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.bewegt .l-gross {
+  clip-path: inset(0 calc((1 - min(1, var(--v) * 2.4)) * 38%) 0 0 round 18px);
+}
+.bewegt .l-gross img {
+  transform: scale(calc(1.18 - var(--v) * 0.18));
+}
+.bewegt .l-klein {
+  transform: translateY(calc((0.5 - var(--v)) * 150px));
+}
+
+/* 5 Menschen */
+.menschen {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 32px;
+  align-items: center;
+  padding: clamp(40px, 6vw, 90px) var(--rand);
+  background: var(--se-leinen);
+}
+.m-bild {
+  grid-column: 2 / 7;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  padding: 24px;
+  border: 1px dashed rgb(24 34 30 / 0.4);
+  border-radius: 18px;
+  color: var(--se-moos);
+  font-size: 14px;
+  text-align: center;
+}
+.m-text {
+  grid-column: 8 / 13;
+}
+.m-text .gross {
+  margin-top: 20px;
+  font-size: clamp(34px, 4.4vw, 66px);
+  line-height: 1;
+}
+.m-text .gross + p {
+  max-width: 30em;
+  margin-top: 22px;
+}
+
+/* 6 Brustprothesen: eigener, wärmerer Ton. */
+.sanft {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 36px;
+  align-items: start;
+  padding: clamp(56px, 8vw, 120px) var(--rand);
+  background: var(--se-rose);
+}
+.s-links {
+  grid-column: 1 / 8;
+}
+.s-links .gross {
+  margin-top: 24px;
+  font-size: clamp(36px, 5.2vw, 82px);
+  line-height: 1;
+}
+.s-rechts {
+  grid-column: 8 / 13;
+}
+.punkte {
+  margin-top: 24px;
+}
+.punkte > div {
+  padding: 16px 0;
+  border-top: 1px solid var(--se-linie);
+}
+.punkte dt {
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.wege {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 26px;
+  margin-top: 28px;
+}
+.wege a:not(.knopf) {
+  padding: 13px 0;
+  font-weight: 500;
+}
+
+@media (max-width: 860px) {
+  .bewegt .auftakt {
+    height: 190svh;
+  }
+  .bewegt .a-karte {
+    inset: calc(var(--p) * 24%) calc(var(--p) * 9%);
+  }
+  .bewegt .a-paar {
+    flex-direction: column;
+    align-items: center;
+    gap: 46svh;
+    font-size: 21vw;
+  }
+  .bewegt .a-paar span:first-child,
+  .bewegt .a-paar span:last-child {
+    transform: none;
+  }
+  .c-1 {
+    --w: 58vw;
+    --x: -10vw;
+  }
+  .c-2 {
+    --w: 52vw;
+    --x: 56vw;
+  }
+  .c-3 {
+    --w: 64vw;
+    --x: -6vw;
+  }
+  .c-4 {
+    --w: 54vw;
+    --x: 52vw;
+  }
+  .l-gross,
+  .l-text,
+  .l-klein,
+  .m-bild,
+  .m-text,
+  .s-links,
+  .s-rechts {
+    grid-column: 1 / -1;
+  }
+  .l-klein {
+    margin: 0 0 0 18%;
+  }
+  .bewegt .l-klein {
+    transform: none;
+  }
+  .m-bild {
+    aspect-ratio: 4 / 3;
+  }
+}

@@ -14,3 +14,15 @@ Regel mit Begründung. Neue Einträge unten anfügen, mit Datum.
 8. **Geführte Marken (im Laden bestätigt):** Marie Jo, Mey, Anita, Hanro, Dacapo, Simone Pérèle, Short Stories, Hom, Zeybra, Lidea, LingaDore, Keine Schwester, Olaf Benz. Quelle für die Seite ist `inhalt/marken.json`. Die alte Seite `/marken` ist damit überholt (Prima Donna, Felina, L'aventure, Naturana, Moya Kala und Anita Care entfallen).
 9. **Repository `nbrivio/sieunder`, öffentlich.** GitHub Pages ist im kostenlosen Konto nur für öffentliche Repositorys verfügbar. Folge: Rohbilder, Herstellerbilder ohne geklärtes Recht und Arbeitsunterlagen bleiben lokal (`.gitignore`). Ins Repository kommen nur Bilder, die auch auf der Seite erscheinen dürfen.
 10. **Domain und Postfach liegen bei Hostpoint** und bleiben dort.
+
+## 20. Nov. 26
+
+11. **Gestaltungsrichtung: Gefühl vor Produkt.** Die Seite verkauft einen Zustand, kein Sortiment. Tragende Mittel: grosse ruhige Sätze, Bilder die am Satz vorbeiziehen, Worte die beim Scrollen scharf werden, ein Kopfbild das sich zur Karte zusammenzieht, eine schwebende Leiste. Vorbild für die Haltung ist sereinwealth.com.
+12. **Typografie: Newsreader für Titel und Sätze, Schibsted Grotesk für Text.** Beide von der eigenen Adresse ausgeliefert. Farben aus den Bildern: Salbeipapier, Tinte, Koralle, Tanne, Rose.
+13. **Keine 3D-Objekte, keine Lupe, kein Vorhang.** Geprüft und verworfen: Ein nachgebauter BH oder Verschluss transportiert kein Gefühl, die Lupe ist Spielerei, der Vorhang überzeugte nur halb.
+14. **Marken stehen früh**, direkt nach dem ersten Satz.
+15. **Pflichtkapitel der Startseite:** Laden mit eigenen Bildern, «Wer dahinter steht» (Sandra Brivio und Denise Stoffner, Porträt folgt), Beratung, Brustprothesen als eigenes ruhiges Kapitel.
+16. **Bewegung nur mit Skript und nur ohne «reduzierte Bewegung».** Die Grundfassung steht ruhig untereinander; die Klasse `bewegt` schaltet die Scrollbewegungen ein. So bleibt die Seite ohne JavaScript vollständig.
+17. **Marie-Jo-Bilder dürfen ins öffentliche Repo und auf die Testseite** (Entscheid Nicolas). Nutzungsrecht und Alter der Motive werden vor dem Livegang geklärt.
+18. **Texte der Startseite liegen in `inhalt/start.json` und sind als Entwurf markiert.** Ein Bau für die richtige Adresse bricht ab, bis `freigegeben` auf `true` steht.
+

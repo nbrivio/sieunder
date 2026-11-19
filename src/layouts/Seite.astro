@@ -1,7 +1,9 @@
 ---
 import '../stile/tokens.css';
 import '../stile/grund.css';
-import Kopf from '../components/Kopf.astro';
+import Leiste from '../components/Leiste.astro';
+import schriftTitel from '../assets/schriften/newsreader-latin-wght-normal.woff2?url';
+import schriftText from '../assets/schriften/schibsted-grotesk-latin-wght-normal.woff2?url';
 import Fuss from '../components/Fuss.astro';
 import { betrieb, zeitenDaten } from '../inhalt/betrieb.js';
 import { istLive } from '../inhalt/stufe.js';
@@ -91,10 +93,12 @@ const graph = {
     <meta name="description" content={beschreibung} />
     <meta name="robots" content={finden ? 'index, follow' : 'noindex, nofollow'} />
     <link rel="canonical" href={adresse} />
-    <meta name="theme-color" content="#f5f1ea" />
+    <meta name="theme-color" content="#eef0ea" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="icon" href={pfad('/favicon.png')} type="image/png" sizes="96x96" />
     <link rel="apple-touch-icon" href={pfad('/apple-touch-icon.png')} />
+    <link rel="preload" href={schriftTitel} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={schriftText} as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={betrieb.name} />
     <meta property="og:locale" content="de_CH" />
@@ -113,10 +117,14 @@ const graph = {
   </head>
   <body>
     <a class="sprung" href="#inhalt">Zum Inhalt springen</a>
-    <Kopf />
+    <Leiste />
     <main id="inhalt">
       <slot />
     </main>
     <Fuss />
   </body>
 </html>
+
+<script>
+  import '../skripte/bewegung.js';
+</script>

@@ -1,4 +1,28 @@
-@layer grund, bausteine, seite;
+@layer schriften, grund, bausteine;
+
+@layer schriften {
+  @font-face {
+    font-family: 'Newsreader';
+    font-style: normal;
+    font-weight: 200 800;
+    font-display: swap;
+    src: url('../assets/schriften/newsreader-latin-wght-normal.woff2') format('woff2-variations');
+  }
+  @font-face {
+    font-family: 'Newsreader';
+    font-style: italic;
+    font-weight: 200 800;
+    font-display: swap;
+    src: url('../assets/schriften/newsreader-latin-wght-italic.woff2') format('woff2-variations');
+  }
+  @font-face {
+    font-family: 'Schibsted Grotesk';
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url('../assets/schriften/schibsted-grotesk-latin-wght-normal.woff2') format('woff2-variations');
+  }
+}
 
 @layer grund {
   *,
@@ -10,35 +34,29 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    scroll-padding-top: calc(var(--kopf-h) + var(--band-h) + 1rem);
+    scroll-padding-top: 90px;
   }
 
   body {
     margin: 0;
+    overflow-x: clip;
     background: var(--se-papier);
     color: var(--se-tinte);
     font-family: var(--se-font-text);
-    font-size: var(--fs-text);
-    line-height: var(--lh-text);
+    font-size: 17px;
+    line-height: 1.55;
   }
 
   h1,
   h2,
   h3,
   p,
+  figure,
   dl,
   dd,
   ul,
   address {
     margin: 0;
-  }
-
-  h1,
-  h2 {
-    font-family: var(--se-font-titel);
-    font-weight: 400;
-    line-height: var(--lh-titel);
-    text-wrap: balance;
   }
 
   ul {
@@ -57,41 +75,27 @@
   }
 
   a {
-    color: var(--se-salbei);
+    color: inherit;
     text-underline-offset: 0.2em;
+  }
+  a:hover {
+    color: var(--se-koralle);
   }
 
   :focus-visible {
-    outline: 2px solid var(--se-salbei);
+    outline: 2px solid var(--se-koralle);
     outline-offset: 3px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      /* Null statt eines Kleinstwerts: Sonst startet jede Zustandsänderung einen Übergang,
-         und der Sprungverweis steht beim Fokus einen Moment lang noch ausserhalb des Bildes. */
-      transition-duration: 0s !important;
-      scroll-behavior: auto !important;
-    }
   }
 }
 
 @layer bausteine {
-  .innen {
-    width: min(100% - 2 * var(--rand), var(--breite));
-    margin-inline: auto;
-  }
-
   .sprung {
     position: absolute;
     left: var(--rand);
-    top: -4rem;
-    z-index: 10;
+    top: -5rem;
+    z-index: 30;
     padding: 0.6rem 1rem;
-    background: var(--se-salbei);
+    background: var(--se-tinte);
     color: var(--se-papier);
   }
   .sprung:focus {
@@ -99,14 +103,44 @@
   }
 
   .etikett {
-    font-size: var(--fs-klein);
-    letter-spacing: 0.12em;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
-  /* Verweise, die für sich stehen, sind gross genug für den Daumen. */
-  .ziel {
+  /* Grosse Sätze und Titel in der Titelschrift. */
+  .gross {
+    font-family: var(--se-font-titel);
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .gross em {
+    font-weight: 300;
+  }
+
+  .knopf {
     display: inline-block;
-    padding-block: 0.35rem;
+    padding: 13px 22px;
+    border-radius: 999px;
+    background: var(--se-tinte);
+    color: var(--se-papier);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .knopf:hover {
+    background: var(--se-koralle);
+    color: var(--se-weiss);
+  }
+
+  /* Das Logo als Maske: So nimmt es die Textfarbe seiner Umgebung an. */
+  .logo {
+    display: block;
+    aspect-ratio: 467 / 189;
+    background: currentColor;
+    -webkit-mask: url('../assets/marke/logo.svg') center / contain no-repeat;
+    mask: url('../assets/marke/logo.svg') center / contain no-repeat;
   }
 }

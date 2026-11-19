@@ -1,0 +1,97 @@
+// Status nach Schweizer Zeit, Scrollfortschritt je Kapitel und Sätze, deren Worte scharf werden.
+// Fällt das Skript aus oder ist reduzierte Bewegung gewünscht, steht die Seite ruhig untereinander.
+const TAGE = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+const KURZ = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const uhr = (m) => `${Math.floor(m / 60)}.${String(m % 60).padStart(2, '0')}`;
+const klemme = (x) => Math.min(1, Math.max(0, x));
+
+/** Liefert, ob jetzt offen ist, und den Satz dazu. Die Zeiten kommen aus inhalt/betrieb.json. */
+export function lage(zeiten, jetzt = new Date()) {
+  const teil = {};
+  for (const p of new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Zurich', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(jetzt)) teil[p.type] = p.value;
+  const tag = KURZ.indexOf(teil.weekday);
+  const min = (Number(teil.hour) % 24) * 60 + Number(teil.minute);
+  const heute = zeiten[tag] ?? [];
+  for (const [von, bis] of heute) if (min >= von && min < bis) return { offen: true, text: `Jetzt geöffnet bis ${uhr(bis)} Uhr` };
+  for (const [i, [von]] of heute.entries()) if (min < von) return { offen: false, text: `${i > 0 ? 'Mittagspause, wieder da um' : 'Wir öffnen heute um'} ${uhr(von)} Uhr` };
+  for (let d = 1; d <= 7; d += 1) {
+    const n = (tag + d) % 7;
+    if (zeiten[n]) return { offen: false, text: `Wir öffnen ${d === 1 ? 'morgen' : `am ${TAGE[n]}`} um ${uhr(zeiten[n][0][0])} Uhr` };
+  }
+  return null;
+}
+
+const status = document.querySelector('[data-zeiten]');
+if (status) {
+  const zeiten = JSON.parse(status.dataset.zeiten);
+  const setzen = () => {
+    const l = lage(zeiten);
+    if (!l) return;
+    status.classList.toggle('offen', l.offen);
+    status.querySelector('span').textContent = l.text;
+  };
+  setzen();
+  setInterval(setzen, 60000);
+}
+
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.classList.add('bewegt');
+
+  // Sätze in Worte teilen. Ohne Skript steht der Satz einfach da.
+  const saetze = [...document.querySelectorAll('[data-worte]')].map((el) => {
+    const worte = [];
+    const teile = (knoten) => {
+      for (const kind of [...knoten.childNodes]) {
+        if (kind.nodeType === Node.ELEMENT_NODE) teile(kind);
+        if (kind.nodeType !== Node.TEXT_NODE) continue;
+        const stueck = document.createDocumentFragment();
+        for (const t of kind.textContent.split(/(\s+)/)) {
+          if (!t.trim()) {
+            stueck.append(t);
+            continue;
+          }
+          const wort = document.createElement('span');
+          wort.className = 'wort';
+          wort.textContent = t;
+          stueck.append(wort);
+          worte.push(wort);
+        }
+        kind.replaceWith(stueck);
+      }
+    };
+    teile(el);
+    return { el, worte };
+  });
+
+  const rollen = [...document.querySelectorAll('[data-roll]')];
+  const sichten = [...document.querySelectorAll('[data-sicht]')];
+  let wartet = false;
+
+  const messen = () => {
+    wartet = false;
+    const h = innerHeight;
+    for (const el of rollen) {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--p', klemme(-r.top / Math.max(1, r.height - h)).toFixed(4));
+    }
+    for (const el of sichten) {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--v', klemme((h - r.top) / (h + r.height)).toFixed(4));
+    }
+    for (const { el, worte } of saetze) {
+      const r = el.getBoundingClientRect();
+      // Unscharf sind Worte nur, solange ihr Satz gleich ins Bild kommt. Weit weg bleibt der Text lesbar.
+      const nah = r.top < h * 1.6;
+      const f = klemme((h * 0.92 - r.top) / (h * 0.5 + r.height * 0.5));
+      worte.forEach((wort, i) => wort.classList.toggle('aus', nah && i / worte.length > f * 1.08 - 0.04));
+    }
+  };
+  const anstossen = () => {
+    if (wartet) return;
+    wartet = true;
+    requestAnimationFrame(messen);
+  };
+  addEventListener('scroll', anstossen, { passive: true });
+  addEventListener('resize', anstossen);
+  messen();
+}

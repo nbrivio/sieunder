@@ -1,0 +1,6 @@
+---
+// Setzt den Teil zwischen Sternen kursiv.
+import { teile } from '../inhalt/start.js';
+const { text } = Astro.props;
+---
+{teile(text).map((teil) => (teil.betont ? <em>{teil.t}</em> : teil.t))}

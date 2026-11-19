@@ -1,7 +1,11 @@
 [
   { "text": "tinte", "grund": "papier", "mindestens": 7, "wofuer": "Fliesstext" },
   { "text": "tinte", "grund": "leinen", "mindestens": 7, "wofuer": "Fliesstext auf Wechselfläche" },
-  { "text": "salbei", "grund": "papier", "mindestens": 7, "wofuer": "Verweise, Fokusrahmen" },
-  { "text": "salbei", "grund": "leinen", "mindestens": 7, "wofuer": "Verweise auf Wechselfläche" },
-  { "text": "papier", "grund": "salbei", "mindestens": 7, "wofuer": "Fuss, Hinweisband" }
+  { "text": "tinte", "grund": "rose", "mindestens": 7, "wofuer": "Fliesstext im Kapitel Brustprothesen" },
+  { "text": "moos", "grund": "leinen", "mindestens": 4.5, "wofuer": "Hinweis im Bildplatz" },
+  { "text": "koralle", "grund": "papier", "mindestens": 4.5, "wofuer": "Verweis unter dem Zeiger, Fokusrahmen" },
+  { "text": "koralle", "grund": "rose", "mindestens": 4.5, "wofuer": "Verweis unter dem Zeiger im Kapitel Brustprothesen" },
+  { "text": "weiss", "grund": "koralle", "mindestens": 4.5, "wofuer": "Knopf unter dem Zeiger" },
+  { "text": "papier", "grund": "tinte", "mindestens": 7, "wofuer": "Knopf" },
+  { "text": "papier", "grund": "tanne", "mindestens": 7, "wofuer": "Fuss, Hinweisband" }
 ]

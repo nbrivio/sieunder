@@ -23,23 +23,25 @@ Alles, was sich ändert, liegt unter `inhalt/`, getrennt vom Code. Eine Änderun
 | `inhalt/betrieb.json` | Name, Adresse, Kontakt und Öffnungszeiten. Kopf, Fuss, Startseite und strukturierte Daten lesen hier |
 | `inhalt/marken.json` | Die geführten Marken |
 | `inhalt/hinweis.json` | Band für Ferien und Anlässe: `text`, `von`, `bis` (Datum als JJJJ-MM-TT). Ausserhalb des Zeitraums verschwindet es von selbst. Höchstens 95 Zeichen |
-| `inhalt/seiten/` | Je Seite eine Datei mit Titel, Beschreibung für Suchmaschinen und Text |
+| `inhalt/start.json` | Alle Texte der Startseite. Ein Teil zwischen Sternen wird kursiv gesetzt |
 
 Der Bau prüft die Angaben. Er bricht ab, wenn ein Pflichtfeld fehlt, ein Bild keinen Alt-Text hat oder ein Datum nicht stimmt.
 
-Seiten tragen `freigegeben`. Solange dort `false` steht, ist der Eintrag ein Entwurf. Auf der Testadresse wird er geduldet. Mit `SITE_STUFE=live` bricht der Bau ab, bis alles freigegeben ist.
+Die Texte der Startseite tragen `freigegeben`. Solange dort `false` steht, ist der Eintrag ein Entwurf. Auf der Testadresse wird er geduldet. Mit `SITE_STUFE=live` bricht der Bau ab, bis alles freigegeben ist.
 
 ## Aufbau
 
 ```
 inhalt/        Inhalte (siehe oben)
-src/stile/     Token und Grundstile
+src/assets/    Bilder, Schriften, Logo
+src/stile/     Token, Grundstile, Startseite
+src/skripte/   Scrollbewegung und Live-Status
 src/layouts/   Seitengerüst mit Kopfangaben und strukturierten Daten
-src/components/ Kopf, Fuss, Hinweisband, Besuch
+src/components/ Leiste, Fuss, Hinweisband
 src/pages/     Seiten
 src/inhalt/    Einlesen und Prüfen der Inhalte
 pruefungen/    Prüfungen vor jeder Veröffentlichung
-docs/          Audit der alten Seite, Entscheide, offene Punkte
+docs/          Stand, Audit der alten Seite, Entscheide, offene Punkte
 ```
 
 ## Prüfungen
@@ -82,5 +84,6 @@ In der Stufe `test` sperren `robots.txt` und die Seiten selbst alle Suchmaschine
 - Keine Tracker, keine fremden Skripte, keine fremden Schriften, keine Cookies, kein Formular. Die Seite überträgt nichts.
 - Content Security Policy als Meta-Angabe mit Prüfsummen, Grundregel `default-src 'none'`. GitHub Pages erlaubt keine eigenen Server-Kopfzeilen.
 - Das Repository ist öffentlich. Rohbilder und Arbeitsunterlagen bleiben lokal, siehe `.gitignore`.
+- Bewegung läuft nur mit Skript und nur, wenn keine reduzierte Bewegung gewünscht ist. Ohne beides steht die Seite ruhig untereinander.
 - Abhängigkeiten mit festen Versionen und Sperrdatei, Einrichtung ohne Installationsskripte, wöchentliche Aktualisierungsvorschläge.
 - Workflow-Schritte sind auf Commit-Kennungen festgelegt, Rechte je Job auf das Nötige beschränkt.
