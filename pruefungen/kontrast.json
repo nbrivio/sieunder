@@ -1,0 +1,7 @@
+[
+  { "text": "tinte", "grund": "papier", "mindestens": 7, "wofuer": "Fliesstext" },
+  { "text": "tinte", "grund": "leinen", "mindestens": 7, "wofuer": "Fliesstext auf Wechselfläche" },
+  { "text": "salbei", "grund": "papier", "mindestens": 7, "wofuer": "Verweise, Fokusrahmen" },
+  { "text": "salbei", "grund": "leinen", "mindestens": 7, "wofuer": "Verweise auf Wechselfläche" },
+  { "text": "papier", "grund": "salbei", "mindestens": 7, "wofuer": "Fuss, Hinweisband" }
+]

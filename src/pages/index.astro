@@ -1,0 +1,46 @@
+---
+import { getEntry } from 'astro:content';
+import Seite from '../layouts/Seite.astro';
+import Besuch from '../components/Besuch.astro';
+import { verlangeFreigabe } from '../inhalt/stufe.js';
+
+const start = await getEntry('seiten', 'start');
+verlangeFreigabe([start], 'freigegeben', 'Seite');
+const { titel, seitentitel, beschreibung, lead } = start.data;
+---
+
+<Seite start titel={seitentitel} beschreibung={beschreibung}>
+  <section class="auftakt" aria-labelledby="start-titel">
+    <div class="innen">
+      <h1 id="start-titel">{titel}</h1>
+      {lead && <p class="lead">{lead}</p>}
+    </div>
+  </section>
+  <section class="besuchen" aria-label="Besuch">
+    <div class="innen">
+      <Besuch />
+    </div>
+  </section>
+</Seite>
+
+<style>
+  .auftakt {
+    padding-block: clamp(4rem, 14vw, 11rem) clamp(3rem, 9vw, 7rem);
+  }
+  h1 {
+    max-width: 14ch;
+    font-size: var(--fs-titel);
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  .lead {
+    margin-top: 1.5rem;
+    font-family: var(--se-font-titel);
+    font-size: var(--fs-gross);
+    font-style: italic;
+  }
+  .besuchen {
+    padding-block: clamp(2.5rem, 7vw, 5rem);
+    background: var(--se-leinen);
+  }
+</style>

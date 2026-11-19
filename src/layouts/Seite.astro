@@ -1,0 +1,122 @@
+---
+import '../stile/tokens.css';
+import '../stile/grund.css';
+import Kopf from '../components/Kopf.astro';
+import Fuss from '../components/Fuss.astro';
+import { betrieb, zeitenDaten } from '../inhalt/betrieb.js';
+import { istLive } from '../inhalt/stufe.js';
+import { pfad } from '../inhalt/pfad.js';
+
+const { titel, beschreibung, start = false, intern = false, daten = [], pfad: brotkrumen = [] } = Astro.props;
+
+if (beschreibung.length > 160) {
+  throw new Error(`Beschreibung zu lang (${beschreibung.length} Zeichen): ${Astro.url.pathname}`);
+}
+
+const seitentitel = start ? titel : `${titel} | ${betrieb.name}`;
+const adresse = new URL(Astro.url.pathname, Astro.site).href;
+const anfang = new URL(pfad('/'), Astro.site).href;
+const vorschau = new URL(pfad('/vorschau.jpg'), Astro.site).href;
+const finden = istLive && !intern;
+
+// Ein Block je Seite, dieselbe Kennung für dieselbe Sache auf allen Seiten.
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ClothingStore',
+      '@id': `${anfang}#betrieb`,
+      description: 'Fachgeschäft für Dessous, Wäsche, Nachtwäsche und Bademode für Frauen und Männer, mit persönlicher Beratung.',
+      image: vorschau,
+      currenciesAccepted: 'CHF',
+      name: betrieb.name,
+      legalName: betrieb.firma,
+      url: anfang,
+      email: betrieb.email,
+      telephone: betrieb.telefon.replaceAll(' ', ''),
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: betrieb.strasse,
+        postalCode: betrieb.plz,
+        addressLocality: betrieb.ort,
+        addressCountry: betrieb.land,
+      },
+      openingHoursSpecification: zeitenDaten,
+      sameAs: [betrieb.instagram, betrieb.facebook],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${anfang}#website`,
+      url: anfang,
+      name: betrieb.name,
+      inLanguage: 'de-CH',
+      publisher: { '@id': `${anfang}#betrieb` },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${adresse}#seite`,
+      url: adresse,
+      name: seitentitel,
+      description: beschreibung,
+      inLanguage: 'de-CH',
+      isPartOf: { '@id': `${anfang}#website` },
+      about: { '@id': `${anfang}#betrieb` },
+      ...(brotkrumen.length > 0 && { breadcrumb: { '@id': `${adresse}#pfad` } }),
+    },
+    ...(brotkrumen.length > 0
+      ? [
+          {
+            '@type': 'BreadcrumbList',
+            '@id': `${adresse}#pfad`,
+            itemListElement: [['Start', '/'], ...brotkrumen].map(([name, ziel], i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name,
+              item: new URL(pfad(ziel), Astro.site).href,
+            })),
+          },
+        ]
+      : []),
+    ...daten,
+  ],
+};
+---
+
+<!doctype html>
+<html lang="de-CH">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seitentitel}</title>
+    <meta name="description" content={beschreibung} />
+    <meta name="robots" content={finden ? 'index, follow' : 'noindex, nofollow'} />
+    <link rel="canonical" href={adresse} />
+    <meta name="theme-color" content="#f5f1ea" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href={pfad('/favicon.png')} type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href={pfad('/apple-touch-icon.png')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={betrieb.name} />
+    <meta property="og:locale" content="de_CH" />
+    <meta property="og:url" content={adresse} />
+    <meta property="og:title" content={seitentitel} />
+    <meta property="og:description" content={beschreibung} />
+    <meta property="og:image" content={vorschau} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`Blick in den Laden von ${betrieb.name} in ${betrieb.ort}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seitentitel} />
+    <meta name="twitter:description" content={beschreibung} />
+    <meta name="twitter:image" content={vorschau} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(graph)} />
+  </head>
+  <body>
+    <a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+    <Kopf />
+    <main id="inhalt">
+      <slot />
+    </main>
+    <Fuss />
+  </body>
+</html>

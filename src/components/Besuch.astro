@@ -1,0 +1,65 @@
+---
+// Adresse, Öffnungszeiten und Kontakt. Steht auf der Startseite und im Fuss, gelesen aus inhalt/betrieb.json.
+import { betrieb, telefonZiel, telefonAnzeige, zeitenZeilen } from '../inhalt/betrieb.js';
+const { ebene = 'h2' } = Astro.props;
+const Titel = ebene;
+---
+
+<div class="besuch">
+  <div>
+    <Titel class="etikett">Adresse</Titel>
+    <address>
+      {betrieb.firma}<br />
+      {betrieb.strasse}<br />
+      {betrieb.plz} {betrieb.ort}
+    </address>
+  </div>
+  <div>
+    <Titel class="etikett">Öffnungszeiten</Titel>
+    <dl>
+      {
+        zeitenZeilen.map((zeile) => (
+          <div>
+            <dt>{zeile.tage}</dt>
+            <dd>{zeile.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+  <div>
+    <Titel class="etikett">Kontakt</Titel>
+    <ul>
+      <li><a class="ziel" href={telefonZiel}>{telefonAnzeige}</a></li>
+      <li><a class="ziel" href={`mailto:${betrieb.email}`}>{betrieb.email}</a></li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .besuch {
+    display: grid;
+    gap: 2rem;
+  }
+  .etikett {
+    margin-bottom: 0.6rem;
+    font-family: var(--se-font-text);
+    font-weight: 600;
+    line-height: var(--lh-text);
+  }
+  dl > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  dl > div + div {
+    margin-top: 0.5rem;
+  }
+  dt {
+    font-weight: 600;
+  }
+  @media (min-width: 820px) {
+    .besuch {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

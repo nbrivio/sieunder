@@ -1,0 +1,110 @@
+@layer grund, bausteine, seite;
+
+@layer grund {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--kopf-h) + var(--band-h) + 1rem);
+  }
+
+  body {
+    margin: 0;
+    background: var(--se-papier);
+    color: var(--se-tinte);
+    font-family: var(--se-font-text);
+    font-size: var(--fs-text);
+    line-height: var(--lh-text);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  dl,
+  dd,
+  ul,
+  address {
+    margin: 0;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--se-font-titel);
+    font-weight: 400;
+    line-height: var(--lh-titel);
+    text-wrap: balance;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    color: var(--se-salbei);
+    text-underline-offset: 0.2em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--se-salbei);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer bausteine {
+  .innen {
+    width: min(100% - 2 * var(--rand), var(--breite));
+    margin-inline: auto;
+  }
+
+  .sprung {
+    position: absolute;
+    left: var(--rand);
+    top: -4rem;
+    z-index: 10;
+    padding: 0.6rem 1rem;
+    background: var(--se-salbei);
+    color: var(--se-papier);
+  }
+  .sprung:focus {
+    top: 0.5rem;
+  }
+
+  .etikett {
+    font-size: var(--fs-klein);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Verweise, die für sich stehen, sind gross genug für den Daumen. */
+  .ziel {
+    display: inline-block;
+    padding-block: 0.35rem;
+  }
+}

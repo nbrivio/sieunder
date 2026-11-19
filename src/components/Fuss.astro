@@ -1,0 +1,39 @@
+---
+import { betrieb } from '../inhalt/betrieb.js';
+---
+
+<footer class="fuss">
+  <div class="innen zeile">
+    <p>{betrieb.firma}, {betrieb.strasse}, {betrieb.plz} {betrieb.ort}</p>
+    <ul>
+      <li><a class="ziel" href={betrieb.instagram} rel="noopener">Instagram</a></li>
+      <li><a class="ziel" href={betrieb.facebook} rel="noopener">Facebook</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .fuss {
+    padding-block: 2rem;
+    background: var(--se-salbei);
+    color: var(--se-papier);
+    font-size: var(--fs-klein);
+  }
+  .zeile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+  }
+  ul {
+    display: flex;
+    gap: 1.5rem;
+  }
+  a {
+    color: inherit;
+  }
+  a:focus-visible {
+    outline-color: var(--se-papier);
+  }
+</style>

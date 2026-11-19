@@ -1,0 +1,21 @@
+{
+  "name": "Sie&Er Dessous",
+  "firma": "Sie&Er Dessous GmbH",
+  "strasse": "Bahnhofstrasse 6",
+  "plz": "8580",
+  "ort": "Amriswil",
+  "land": "CH",
+  "email": "info@sieunder-dessous.ch",
+  "telefon": "+41 71 410 22 87",
+  "instagram": "https://www.instagram.com/sie_und_er_dessous/",
+  "facebook": "https://www.facebook.com/sieunderdessous/",
+  "zeiten": [
+    { "tage": "Montag", "wochentage": ["Monday"], "offen": [] },
+    {
+      "tage": "Dienstag bis Freitag",
+      "wochentage": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+      "offen": [["09:00", "11:30"], ["13:30", "18:00"]]
+    },
+    { "tage": "Samstag", "wochentage": ["Saturday"], "offen": [["09:00", "14:00"]] }
+  ]
+}
