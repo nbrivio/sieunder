@@ -6,14 +6,14 @@ Stand: 20. Nov. 26
 
 - **Repo:** `nbrivio/sieunder`, öffentlich. Jeder Push auf `main` baut, prüft und veröffentlicht.
 - **Testseite:** https://nbrivio.github.io/sieunder/ (für Suchmaschinen gesperrt).
-- **Unterbau:** wie aperozauber, ohne Formular und ohne Datenbank. Alle Prüfungen laufen grün.
+- **Unterbau:** wie aperozauber, ohne Formular und ohne Datenbank. Alle Prüfungen laufen grün. Favicon, Vorschaubild, Sitemap mit Änderungsdatum und Hinweisband stehen. Dunkle Flächen in Espresso, dem Braun des Logos.
 - **Startseite:** in der Richtung «Gefühl vor Produkt» gebaut. Auftakt, Gefühlssatz, Marken, Collage, Laden, Wer dahinter steht, Beratung, Brustprothesen, Besuch.
 - **Unterseiten:** Marken, Über uns, Beratung für Brustprothesen, Impressum, Datenschutz. Alle als Entwurf.
 - **Alte Seite:** vollständig aufgenommen, siehe `audit-altseite.md`. Alle sieben alten Adressen haben ihr endgültiges Ziel.
 
 ## Was als Nächstes ansteht
 
-1. **Startseite verfeinern.** Collage und Sätze am echten Gerät prüfen, Texte in eurer Stimme, Porträt einsetzen.
+1. **Startseite verfeinern.** Collage und Sätze am echten Gerät prüfen, Texte in eurer Stimme, Porträt einsetzen. Zwei Überraschungen sind beschlossen: Produktbild beim Überfahren der Markennamen (gebaut, Bilder für zwölf Marken fehlen) und eine Handschrift-Zeile von Sandra und Denise, die sich am Schluss selbst schreibt (wartet auf das Foto der Handschrift).
 2. **Bildmaterial.** Neue Ladenbilder, ein ruhiges Video, Herrenbilder (bisher gibt es nur Damenmotive einer Marke).
 3. **Unterseiten füllen.** Je Marke ein eigener Abschnitt, Texte in eurer Stimme, UID ins Impressum, Rechtstexte gegenlesen, dann freigeben.
 4. **Vor dem Umzug.** Zugriffszahlen aus Squarespace sichern, Search Console über DNS bestätigen, Rechte der Herstellerbilder klären, Entscheid zum vorgeschalteten Dienst bestätigen.
