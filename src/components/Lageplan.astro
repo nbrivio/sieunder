@@ -1,0 +1,138 @@
+---
+// Die Umgebung des Ladens als schlichte Strichzeichnung direkt auf dem Grund: Strassen, Bahnhof, Marktplatz und wir.
+// Ein Klick öffnet die Routenplanung. Mit Bewegung zeichnen sich die Strassen einmal, sobald der Plan ins Bild kommt.
+import { betrieb, route } from '../inhalt/betrieb.js';
+import { karte } from '../inhalt/karte.js';
+
+const [bx, by] = karte.bahnhof;
+const [mx, my] = karte.marktplatz;
+const meter = Math.round(Math.hypot(bx, by) / 50) * 50;
+const text = `Lageplan: ${betrieb.name} an der ${betrieb.strasse}, rund ${meter} Meter vom Bahnhof ${betrieb.ort}. Route planen`;
+const arten = ['neben', 'haupt', 'weg-zu-uns'];
+---
+
+<figure class="plan">
+  <a href={route} rel="noopener" data-karte>
+    <svg viewBox="-320 -510 720 720" role="img" aria-label={text} focusable="false">
+      <defs>
+        <radialGradient id="auslauf">
+          <stop offset="0.72" stop-color="#fff"></stop>
+          <stop offset="1" stop-color="#000"></stop>
+        </radialGradient>
+        <mask id="weich" maskUnits="userSpaceOnUse" x="-320" y="-510" width="720" height="720">
+          <rect x="-320" y="-510" width="720" height="720" fill="url(#auslauf)"></rect>
+        </mask>
+      </defs>
+      <g mask="url(#weich)">
+        {arten.flatMap((art) => karte.wege.filter((weg) => weg.art === art).map((weg) => <polyline class={`spur ${art}`} points={weg.punkte} pathLength="1" />))}
+      </g>
+      <g class="orte">
+        <circle class="punkt" cx={bx} cy={by} r="5"></circle>
+        <text x={bx} y={by + 36}>Bahnhof</text>
+        <circle class="punkt" cx={mx} cy={my} r="5"></circle>
+        <text x={mx} y={my + 36}>Marktplatz</text>
+        <text class="strasse" x="140" y="-78" transform="rotate(-57 140 -78)">Bahnhofstrasse</text>
+      </g>
+      <g class="wir">
+        <circle class="hof" r="20"></circle>
+        <circle r="8"></circle>
+        <text x="32" y="9">{betrieb.name}</text>
+      </g>
+    </svg>
+  </a>
+  <figcaption>Kartendaten © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap-Mitwirkende</a></figcaption>
+</figure>
+
+<style>
+  .plan {
+    width: min(100%, 520px);
+  }
+  .plan > a {
+    display: block;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .spur {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .spur.neben {
+    stroke: var(--se-moos);
+    stroke-width: 1.5;
+    opacity: 0.45;
+  }
+  .spur.haupt {
+    stroke: var(--se-tinte);
+    stroke-width: 2.5;
+    opacity: 0.8;
+  }
+  .spur.weg-zu-uns {
+    stroke: var(--se-koralle);
+    stroke-width: 4.5;
+  }
+  text {
+    font-family: var(--se-font-titel);
+    font-size: 24px;
+    font-style: italic;
+    fill: var(--se-tinte);
+    text-anchor: middle;
+    paint-order: stroke;
+    stroke: var(--se-rose);
+    stroke-width: 8px;
+    stroke-linejoin: round;
+  }
+  .punkt {
+    fill: var(--se-tinte);
+  }
+  .orte .strasse {
+    font-size: 21px;
+    fill: var(--se-koralle);
+  }
+  .wir circle {
+    fill: var(--se-koralle);
+  }
+  .wir .hof {
+    opacity: 0.16;
+  }
+  .wir text {
+    font-size: 30px;
+    text-anchor: start;
+  }
+  figcaption {
+    margin-top: 10px;
+    color: var(--se-moos);
+    font-size: 12px;
+    text-align: center;
+  }
+  figcaption a {
+    display: inline-block;
+    padding: 6px 0;
+  }
+  /* Mit Bewegung: Die Strassen zeichnen sich der Reihe nach, die Bahnhofstrasse zuletzt. Das Skript setzt die Reihenfolge. */
+  :global(.bewegt) .spur {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  :global(.bewegt) .schreibt .spur {
+    animation: zeichnen 1.1s ease-out forwards;
+    animation-delay: calc(var(--i) * 60ms);
+  }
+  :global(.bewegt) .wir,
+  :global(.bewegt) .orte {
+    opacity: 0;
+  }
+  :global(.bewegt) .schreibt .wir,
+  :global(.bewegt) .schreibt .orte {
+    opacity: 1;
+    transition: opacity 0.6s 1.7s;
+  }
+  @keyframes zeichnen {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

@@ -1,7 +1,7 @@
 import { z } from 'astro/zod';
 import roh from '../../inhalt/karte.json';
 
-// Strassen rund um den Laden für die gestickte Karte. Die Verläufe stammen aus OpenStreetMap und sind nicht erfunden.
+// Strassen rund um den Laden für den gezeichneten Lageplan. Die Verläufe stammen aus OpenStreetMap und sind nicht erfunden.
 const punkt = z.tuple([z.number(), z.number()]);
 const schema = z.object({
   quelle: z.string().min(1),

@@ -1,6 +1,6 @@
 ---
-// Schluss der Unterseiten: Einladung in den Laden mit Adresse, Status und der Karte auf dem Seidentuch.
-import Stickkarte from './Stickkarte.astro';
+// Schluss der Unterseiten: Einladung in den Laden mit Adresse, Status und dem Lageplan.
+import Lageplan from './Lageplan.astro';
 import { betrieb, route, telefonZiel, telefonAnzeige, zeitenMinuten } from '../inhalt/betrieb.js';
 ---
 
@@ -14,7 +14,7 @@ import { betrieb, route, telefonZiel, telefonAnzeige, zeitenMinuten } from '../i
       <a href={telefonZiel}>{telefonAnzeige}</a>
     </div>
   </div>
-  <Stickkarte />
+  <Lageplan />
 </section>
 
 <style>

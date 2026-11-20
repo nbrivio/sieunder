@@ -11,7 +11,6 @@
     "build": "astro build",
     "preview": "astro preview",
     "handschrift": "node werkzeuge/handschrift.mjs",
-    "tuch": "node werkzeuge/tuch.mjs",
     "pruefen:html": "html-validate \"dist/**/*.html\"",
     "pruefen:abhaengigkeiten": "node pruefungen/abhaengigkeiten.mjs",
     "pruefen:gate": "node pruefungen/gate.mjs",
