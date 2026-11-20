@@ -1,0 +1,193 @@
+/* Kopf und Menü. Die Klassen «js», «weg» und «fest» setzt das Skript am Wurzelelement. */
+.kopf {
+  position: fixed;
+  z-index: 20;
+  top: var(--band-h);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 28px;
+  padding: 10px var(--rand);
+  color: var(--se-tinte);
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.3s,
+    color 0.3s;
+}
+/* Über dem Kopfbild der Startseite ist der Kopf hell, solange die Seite ganz oben steht. */
+.kopf.hell {
+  color: var(--se-weiss);
+}
+.fest .kopf {
+  background: var(--se-papier);
+  color: var(--se-tinte);
+  box-shadow: 0 1px 0 var(--se-linie);
+}
+/* Wer mit der Tastatur in den Kopf kommt, sieht ihn sofort, ohne Übergang. */
+.kopf:focus-within {
+  transition: none;
+}
+.weg .kopf:not(:focus-within) {
+  transform: translateY(calc(-100% - var(--band-h) - 4px));
+}
+.kopf .heim {
+  display: block;
+  padding: 8px 0;
+  color: inherit;
+}
+.kopf .logo {
+  width: clamp(104px, 9vw, 132px);
+}
+.k-zeile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+  font-size: 15px;
+}
+.k-zeile a {
+  padding: 12px 0;
+  text-decoration: none;
+}
+.js .k-zeile {
+  display: none;
+}
+.k-menue {
+  padding: 14px 0 14px 18px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.k-menue:hover {
+  color: var(--se-koralle);
+}
+.kopf.hell .k-menue:hover,
+.menue .k-menue:hover {
+  color: var(--se-rose);
+}
+.fest .kopf.hell .k-menue:hover {
+  color: var(--se-koralle);
+}
+
+html:has(.menue[open]) {
+  overflow: hidden;
+}
+.menue {
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 10px var(--rand) clamp(24px, 4vw, 48px);
+  border: 0;
+  overflow-y: auto;
+  background: var(--se-espresso);
+  color: var(--se-papier);
+}
+.menue[open] {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 4vw, 48px);
+  animation: menue-auf 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.menue::backdrop {
+  background: var(--se-espresso);
+}
+@keyframes menue-auf {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+}
+.m-oben {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.m-oben .logo {
+  width: clamp(104px, 9vw, 132px);
+  margin: 8px 0;
+}
+.m-seiten {
+  flex: 1;
+  display: grid;
+  align-content: center;
+}
+.m-seiten li a {
+  display: inline-block;
+  padding: 0.04em 0;
+  font-family: var(--se-font-titel);
+  font-weight: 300;
+  font-size: clamp(38px, min(9vw, 10.5svh), 112px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-decoration: none;
+}
+.m-seiten li.unter a {
+  padding-left: 0.9em;
+  font-size: clamp(22px, min(4.4vw, 5.4svh), 52px);
+  font-style: italic;
+  line-height: 1.3;
+}
+.m-seiten a:hover,
+.m-unten a:hover {
+  color: var(--se-rose);
+}
+.menue :focus-visible {
+  outline-color: var(--se-papier);
+}
+.m-unten {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 48px;
+}
+.m-angaben {
+  display: grid;
+  gap: 10px;
+}
+.m-angaben .status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.m-angaben .status i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.7);
+}
+.m-angaben .status.offen i {
+  background: #7be0a4;
+  box-shadow: 0 0 0 4px rgb(123 224 164 / 0.25);
+}
+.m-wege {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+}
+.m-wege a {
+  padding: 10px 0;
+}
+.m-unten .hand {
+  width: min(100%, 380px);
+  margin: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kopf {
+    transition: none;
+  }
+  .menue[open] {
+    animation: none;
+  }
+}

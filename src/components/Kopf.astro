@@ -1,0 +1,48 @@
+---
+// Kopf: links das Logo, rechts das Wort «Menü». Beim Hinunterscrollen verschwindet er, beim Hochscrollen kommt er zurück.
+// Das Menü öffnet sich über den ganzen Schirm. Ohne Skript stehen die Seiten als einfache Zeile im Kopf.
+import Handschrift from './Handschrift.astro';
+import { betrieb, route, telefonZiel, telefonAnzeige, zeitenMinuten } from '../inhalt/betrieb.js';
+import { pfad } from '../inhalt/pfad.js';
+
+const { aufBild = false } = Astro.props;
+const seiten = [
+  { name: 'Marken', ziel: pfad('/marken/') },
+  { name: 'Beratung', ziel: pfad('/#beratung') },
+  { name: 'Brustprothesen', ziel: pfad('/beratung/brustprothesen/'), unter: true },
+  { name: 'Über uns', ziel: pfad('/ueber-uns/') },
+  { name: 'Besuch', ziel: '#besuch' },
+];
+---
+
+<header class:list={['kopf', { hell: aufBild }]} data-kopf>
+  <a class="heim" href={pfad('/')} aria-label={`${betrieb.name}, zur Startseite`}><span class="logo"></span></a>
+  <nav class="k-zeile" aria-label="Hauptnavigation">
+    {seiten.map((seite) => <a href={seite.ziel}>{seite.name}</a>)}
+  </nav>
+  <button class="k-menue" type="button" data-menue-auf aria-haspopup="dialog" hidden>Menü</button>
+</header>
+
+<dialog class="menue" data-menue aria-label="Menü">
+  <div class="m-oben">
+    <span class="logo" role="img" aria-label={betrieb.name}></span>
+    <button class="k-menue" type="button" data-menue-zu>Schliessen</button>
+  </div>
+  <nav class="m-seiten" aria-label="Seiten">
+    <ul>
+      {seiten.map((seite) => (<li class:list={{ unter: seite.unter }}><a href={seite.ziel} data-menue-ziel>{seite.name}</a></li>))}
+    </ul>
+  </nav>
+  <div class="m-unten">
+    <div class="m-angaben">
+      <p class="etikett status" data-zeiten={JSON.stringify(zeitenMinuten)}><i aria-hidden="true"></i><span>Dienstag bis Samstag für dich da</span></p>
+      <address>{betrieb.strasse}, {betrieb.plz} {betrieb.ort}</address>
+      <p class="m-wege">
+        <a href={telefonZiel}>{telefonAnzeige}</a>
+        <a href={`mailto:${betrieb.email}`}>{betrieb.email}</a>
+        <a href={route} rel="noopener">Route planen</a>
+      </p>
+    </div>
+    <Handschrift />
+  </div>
+</dialog>

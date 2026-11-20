@@ -101,6 +101,30 @@ for (const seite of seiten) {
   }
 }
 
+// Menü: öffnet über das Wort im Kopf, besteht die Prüfung, läuft nicht über und schliesst mit Escape.
+for (const [name, width, height] of [breiten[0], breiten[3]]) {
+  const ort = `Menü (${name})`;
+  const kontext = await browser.newContext({ viewport: { width, height } });
+  const fenster = await kontext.newPage();
+  fenster.on('console', (meldung) => meldung.type() === 'error' && b.melde(ort, `Konsole: ${meldung.text()}`));
+  fenster.on('pageerror', (fehler) => b.melde(ort, `Skriptfehler: ${fehler.message}`));
+  await fenster.goto(`${adresse}/`, { waitUntil: 'networkidle' });
+  await fenster.locator('[data-menue-auf]').click();
+  const dialog = fenster.locator('dialog[open]');
+  if ((await dialog.count()) !== 1) {
+    b.melde(ort, 'das Menü öffnet sich nicht');
+  } else {
+    await fenster.waitForTimeout(600);
+    const breiter = await dialog.evaluate((e) => e.scrollWidth - e.clientWidth);
+    if (breiter > 0) b.melde(ort, `Menü läuft um ${breiter} Pixel über`);
+    const { violations } = await new AxeBuilder({ page: fenster }).include('dialog').withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
+    for (const v of violations) b.melde(ort, `${v.id}: ${v.help} (${v.nodes.length}x, ${v.nodes[0].target.join(' ')})`);
+    await fenster.keyboard.press('Escape');
+    if ((await fenster.locator('dialog[open]').count()) !== 0) b.melde(ort, 'Escape schliesst das Menü nicht');
+  }
+  await kontext.close();
+}
+
 // Ohne JavaScript: die ruhige Fassung zeigt jede Überschrift und läuft nicht über.
 for (const seite of seiten) {
   const ort = `${seite} (ohne JavaScript)`;

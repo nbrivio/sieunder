@@ -21,8 +21,7 @@ export function lage(zeiten, jetzt = new Date()) {
   return null;
 }
 
-const status = document.querySelector('[data-zeiten]');
-if (status) {
+for (const status of document.querySelectorAll('[data-zeiten]')) {
   const zeiten = JSON.parse(status.dataset.zeiten);
   const setzen = () => {
     const l = lage(zeiten);
@@ -33,6 +32,32 @@ if (status) {
   setzen();
   setInterval(setzen, 60000);
 }
+
+// Kopf und Menü. Mit Skript ersetzt das Wort «Menü» die Zeile der Seiten.
+const wurzel = document.documentElement;
+wurzel.classList.add('js');
+const menue = document.querySelector('[data-menue]');
+const auf = document.querySelector('[data-menue-auf]');
+if (menue && auf && typeof menue.showModal === 'function') {
+  auf.hidden = false;
+  auf.addEventListener('click', () => menue.showModal());
+  menue.querySelector('[data-menue-zu]').addEventListener('click', () => menue.close());
+  // Ein Ziel auf derselben Seite lädt nicht neu, darum schliesst jeder Verweis das Menü selbst.
+  for (const ziel of menue.querySelectorAll('[data-menue-ziel]')) ziel.addEventListener('click', () => menue.close());
+} else {
+  wurzel.classList.remove('js');
+}
+
+// Der Kopf weicht beim Hinunterscrollen und kommt beim Hochscrollen zurück. Ganz oben liegt er ohne Grund über dem Bild.
+let zuletzt = scrollY;
+const kopfStellen = () => {
+  const y = scrollY;
+  wurzel.classList.toggle('fest', y > 24);
+  if (Math.abs(y - zuletzt) > 6) wurzel.classList.toggle('weg', y > zuletzt && y > 140);
+  zuletzt = y;
+};
+addEventListener('scroll', kopfStellen, { passive: true });
+kopfStellen();
 
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   document.documentElement.classList.add('bewegt');
@@ -114,7 +139,7 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
         hand.classList.add('schreibt');
         waechter.disconnect();
       },
-      { threshold: 0.6 },
+      { threshold: 0.4 },
     ).observe(hand);
   }
 

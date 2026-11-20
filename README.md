@@ -39,7 +39,7 @@ src/assets/    Bilder, Schriften, Logo
 src/stile/     Token, Grundstile, Startseite
 src/skripte/   Scrollbewegung und Live-Status
 src/layouts/   Seitengerüst mit Kopfangaben und strukturierten Daten
-src/components/ Leiste, Fuss, Hinweisband
+src/components/ Kopf mit Menü, Fuss, Hinweisband, Handschrift
 src/pages/     Seiten
 src/inhalt/    Einlesen und Prüfen der Inhalte
 pruefungen/    Prüfungen vor jeder Veröffentlichung
@@ -57,7 +57,7 @@ docs/          Stand, Audit der alten Seite, Entscheide, offene Punkte
 | `pruefen:kontrast` | Farbpaare aus `pruefungen/kontrast.json` gegen ihre Schwelle |
 | `pruefen:vermerke` | Dateien, gebaute Seite und Commit-Texte auf Werkzeug-Vermerke |
 | `pruefen:abhaengigkeiten` | Bekannte Sicherheitslücken, mit begründeten und befristeten Ausnahmen |
-| `pruefen:browser` | Fünf Bildschirmbreiten in Chrome: kein Überlauf, keine Fehler, keine Abrufe nach aussen, WCAG 2.2 AA, Tastatur und Fokus. Dazu jede Seite ohne JavaScript |
+| `pruefen:browser` | Fünf Bildschirmbreiten in Chrome: kein Überlauf, keine Fehler, keine Abrufe nach aussen, WCAG 2.2 AA, Tastatur und Fokus. Dazu das Menü und jede Seite ohne JavaScript |
 | `pruefen:ladezeit` | Startseite wie auf einem mittleren Handy: grösstes Element unter 2,5 s, Layoutsprung unter 0,1, Gewicht unter 1 MB |
 
 Hausregeln im Gate: kein ß, keine Gedankenstriche, Guillemets statt gerader Anführungszeichen, keine Platzhalter, Titel ohne Punkt am Schluss, Marke immer als «Sie&Er».
