@@ -1,10 +1,8 @@
 ---
 import Betont from './Betont.astro';
-import { betrieb, telefonZiel, telefonAnzeige, zeitenZeilen } from '../inhalt/betrieb.js';
+import { betrieb, route, telefonZiel, telefonAnzeige, zeitenZeilen } from '../inhalt/betrieb.js';
 import { start } from '../inhalt/start.js';
 import { pfad } from '../inhalt/pfad.js';
-
-const route = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${betrieb.name}, ${betrieb.strasse}, ${betrieb.plz} ${betrieb.ort}`)}`;
 ---
 
 <footer id="besuch" class="fuss">
@@ -56,7 +54,7 @@ const route = `https://www.google.com/maps/dir/?api=1&destination=${encodeURICom
 <style>
   .fuss {
     padding: clamp(48px, 7vw, 100px) var(--rand);
-    background: var(--se-tanne);
+    background: var(--se-espresso);
     color: var(--se-papier);
   }
   .oben {

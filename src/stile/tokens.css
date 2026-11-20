@@ -1,4 +1,4 @@
-/* Marken-Token. Die Farben kommen aus den Bildern: Salbei vom Stoff, Koralle von der Spitze, Rose vom Leinen. */
+/* Marken-Token. Die Farben kommen aus den Bildern: Salbei vom Stoff, Koralle von der Spitze, Rose vom Leinen, Espresso vom Logo. */
 :root {
   color-scheme: light;
 
@@ -8,7 +8,7 @@
   --se-tinte: #18221e;
   --se-moos: #3d4a43;
   --se-koralle: #c4391f;
-  --se-tanne: #26332c;
+  --se-espresso: #413630; /* das Braun des Logos */
   --se-weiss: #fff;
 
   --se-linie: rgb(24 34 30 / 0.2);

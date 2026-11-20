@@ -18,7 +18,7 @@ Regel mit Begründung. Neue Einträge unten anfügen, mit Datum.
 ## 20. Nov. 26
 
 11. **Gestaltungsrichtung: Gefühl vor Produkt.** Die Seite verkauft einen Zustand, kein Sortiment. Tragende Mittel: grosse ruhige Sätze, Bilder die am Satz vorbeiziehen, Worte die beim Scrollen scharf werden, ein Kopfbild das sich zur Karte zusammenzieht, eine schwebende Leiste. Vorbild für die Haltung ist sereinwealth.com.
-12. **Typografie: Newsreader für Titel und Sätze, Schibsted Grotesk für Text.** Beide von der eigenen Adresse ausgeliefert. Farben aus den Bildern: Salbeipapier, Tinte, Koralle, Tanne, Rose.
+12. **Typografie: Newsreader für Titel und Sätze, Schibsted Grotesk für Text.** Beide von der eigenen Adresse ausgeliefert. Farben aus den Bildern: Salbeipapier, Tinte, Koralle, Espresso, Rose.
 13. **Keine 3D-Objekte, keine Lupe, kein Vorhang.** Geprüft und verworfen: Ein nachgebauter BH oder Verschluss transportiert kein Gefühl, die Lupe ist Spielerei, der Vorhang überzeugte nur halb.
 14. **Marken stehen früh**, direkt nach dem ersten Satz.
 15. **Pflichtkapitel der Startseite:** Laden mit eigenen Bildern, «Wer dahinter steht» (Sandra Brivio und Denise Stoffner, Porträt folgt), Beratung, Brustprothesen als eigenes ruhiges Kapitel.
@@ -27,4 +27,4 @@ Regel mit Begründung. Neue Einträge unten anfügen, mit Datum.
 18. **Texte der Startseite liegen in `inhalt/start.json` und sind als Entwurf markiert.** Ein Bau für die richtige Adresse bricht ab, bis `freigegeben` auf `true` steht.
 19. **Unterseiten:** `/marken/`, `/ueber-uns/`, `/beratung/brustprothesen/`, `/impressum/`, `/datenschutz/`. Ihre Texte liegen in `inhalt/seiten.json` und sind als Entwurf markiert. Damit hat jede alte Adresse ihr endgültiges Ziel: `/geschaeft` führt auf Über uns, `/brustprothesen1` auf die Beratungsseite, `/marken` und `/datenschutz` bleiben unter ihrer Adresse.
 20. **Datenschutz ohne Cookies, Messung und Formular.** Die Erklärung nennt nur, was tatsächlich geschieht: die Auslieferung über GitHub Pages in den USA und den Kontakt per Telefon und Mail.
-
+21. **Dunkle Flächen in Espresso, dem Braun des Logos, nicht in Grün.** Fuss, Hinweisband und Favicon sollen sich klar von aperozauber unterscheiden.

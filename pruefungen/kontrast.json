@@ -7,5 +7,5 @@
   { "text": "koralle", "grund": "rose", "mindestens": 4.5, "wofuer": "Verweis unter dem Zeiger im Kapitel Brustprothesen" },
   { "text": "weiss", "grund": "koralle", "mindestens": 4.5, "wofuer": "Knopf unter dem Zeiger" },
   { "text": "papier", "grund": "tinte", "mindestens": 7, "wofuer": "Knopf" },
-  { "text": "papier", "grund": "tanne", "mindestens": 7, "wofuer": "Fuss, Hinweisband" }
+  { "text": "papier", "grund": "espresso", "mindestens": 7, "wofuer": "Fuss, Hinweisband" }
 ]

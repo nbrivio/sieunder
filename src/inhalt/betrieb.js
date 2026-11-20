@@ -57,3 +57,6 @@ const minuten = (zeit) => Number(zeit.slice(0, 2)) * 60 + Number(zeit.slice(3));
 export const zeitenMinuten = Object.fromEntries(
   betrieb.zeiten.flatMap(({ wochentage, offen }) => (offen.length ? wochentage.map((tag) => [index[tag], offen.map(([von, bis]) => [minuten(von), minuten(bis)])]) : [])),
 );
+
+/** Routenplanung zum Laden. Der Verweis öffnet Google Maps, eingebettet wird nichts. */
+export const route = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${betrieb.name}, ${betrieb.strasse}, ${betrieb.plz} ${betrieb.ort}`)}`;

@@ -14,7 +14,7 @@
   z-index: 2;
   inset: 0;
   overflow: hidden;
-  background: var(--se-tanne);
+  background: var(--se-espresso);
 }
 .a-karte img {
   width: 100%;
@@ -339,6 +339,10 @@ h1 {
 .l-text p {
   max-width: 28em;
   margin-top: 22px;
+}
+.ort {
+  display: inline-block;
+  padding: 12px 0;
 }
 .l-klein {
   position: relative;

@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import '../stile/seite.css';
 import Seite from '../layouts/Seite.astro';
 import Betont from '../components/Betont.astro';
-import { betrieb, telefonZiel, telefonAnzeige, zeitenMinuten } from '../inhalt/betrieb.js';
+import { betrieb, route, telefonZiel, telefonAnzeige, zeitenMinuten } from '../inhalt/betrieb.js';
 import { marken } from '../inhalt/marken.js';
 import { start } from '../inhalt/start.js';
 import { istLive } from '../inhalt/stufe.js';
@@ -67,7 +67,7 @@ const halb = '(max-width: 860px) 64vw, 34vw';
     <div class="l-text">
       <h2 id="t-laden" class="gross"><Betont text={start.laden.titel} /></h2>
       <p>{start.laden.text}</p>
-      <p class="etikett">{betrieb.strasse}, {betrieb.ort}</p>
+      <p class="etikett"><a class="ort" href={route} rel="noopener">{betrieb.strasse}, {betrieb.ort}</a></p>
     </div>
     <figure class="l-klein"><Image src={laden2} alt="Sitzecke im Laden mit Bistrotisch, Spiegel und Wäsche an der Wand" widths={[480, 800]} sizes="(max-width: 860px) 82vw, 30vw" quality={72} /></figure>
   </section>
