@@ -1,42 +1,65 @@
 ---
-// Die Umgebung des Ladens als schlichte Strichzeichnung direkt auf dem Grund: Strassen, Bahnhof, Marktplatz und wir.
-// Ein Klick öffnet die Routenplanung. Mit Bewegung zeichnen sich die Strassen einmal, sobald der Plan ins Bild kommt.
+// Der Lageplan als eigens gezeichnetes Kartenblatt: feine Strassen, leise Grundrisse, die Bahnhofstrasse als roter Faden
+// und ein eigenes Zeichen für den Laden. Alles stammt aus OpenStreetMap und wird beim Bau gezeichnet; es lädt kein Kartendienst.
+// Ein Klick öffnet die Routenplanung. Ohne Bewegung steht das Blatt vollständig da.
 import { betrieb, route } from '../inhalt/betrieb.js';
 import { karte } from '../inhalt/karte.js';
 
 const [bx, by] = karte.bahnhof;
-const [mx, my] = karte.marktplatz;
 const meter = Math.round(Math.hypot(bx, by) / 50) * 50;
-const text = `Lageplan: ${betrieb.name} an der ${betrieb.strasse}, rund ${meter} Meter vom Bahnhof ${betrieb.ort}. Route planen`;
-const arten = ['neben', 'haupt', 'weg-zu-uns'];
+const text = `Lageplan: ${betrieb.name} an der ${betrieb.strasse}, rund ${meter} Meter vom Bahnhof ${betrieb.ort}, der Marktplatz liegt gleich um die Ecke. Route planen`;
+const wege = (art) => karte.wege.filter((weg) => weg.art === art);
+// Blatt: 720 auf 720 Meter, der Laden liegt unterhalb der Mitte.
+const B = { x: -320, y: -510, s: 720 };
 ---
 
 <figure class="plan">
   <a href={route} rel="noopener" data-karte>
-    <svg viewBox="-320 -510 720 720" role="img" aria-label={text} focusable="false">
+    <svg viewBox={`${B.x} ${B.y} ${B.s} ${B.s}`} role="img" aria-label={text} focusable="false">
       <defs>
-        <radialGradient id="auslauf">
-          <stop offset="0.72" stop-color="#fff"></stop>
-          <stop offset="1" stop-color="#000"></stop>
-        </radialGradient>
-        <mask id="weich" maskUnits="userSpaceOnUse" x="-320" y="-510" width="720" height="720">
-          <rect x="-320" y="-510" width="720" height="720" fill="url(#auslauf)"></rect>
-        </mask>
+        <clipPath id="blatt"><rect x={B.x + 14} y={B.y + 14} width={B.s - 28} height={B.s - 28} rx="7"></rect></clipPath>
       </defs>
-      <g mask="url(#weich)">
-        {arten.flatMap((art) => karte.wege.filter((weg) => weg.art === art).map((weg) => <polyline class={`spur ${art}`} points={weg.punkte} pathLength="1" />))}
-      </g>
-      <g class="orte">
-        <circle class="punkt" cx={bx} cy={by} r="5"></circle>
-        <text x={bx} y={by + 36}>Bahnhof</text>
-        <circle class="punkt" cx={mx} cy={my} r="5"></circle>
-        <text x={mx} y={my + 36}>Marktplatz</text>
-        <text class="strasse" x="140" y="-78" transform="rotate(-57 140 -78)">Bahnhofstrasse</text>
-      </g>
-      <g class="wir">
-        <circle class="hof" r="20"></circle>
-        <circle r="8"></circle>
-        <text x="32" y="9">{betrieb.name}</text>
+      <rect class="grund" x={B.x} y={B.y} width={B.s} height={B.s} rx="18"></rect>
+      <g clip-path="url(#blatt)">
+        <g class="flaechen">
+          {karte.gruen.map((form) => <polygon class="gruen" points={form} />)}
+          <polygon class="platz" points={karte.marktplatzForm}></polygon>
+        </g>
+        <g class="netz">
+          {wege('neben').map((weg) => <polyline class="neben" points={weg.punkte} />)}
+          {wege('haupt').map((weg) => <polyline class="haupt" points={weg.punkte} />)}
+          {karte.gleise.map((gleis) => <polyline class="gleis" points={gleis} />)}
+          {karte.gleise.map((gleis) => <polyline class="schwelle" points={gleis} />)}
+        </g>
+        <g class="bauten">
+          {karte.bauten.map((form) => <polygon points={form} />)}
+        </g>
+        {wege('weg-zu-uns').map((weg) => <polyline class="faden spur" points={weg.punkte} pathLength="1" />)}
+        <g class="ort">
+          <polygon class="bau" points={karte.bahnhofForm}></polygon>
+          <text x={bx - 12} y={by + 44}>Bahnhof</text>
+        </g>
+        <g class="ort">
+          <text x="-111" y="136">Marktplatz</text>
+        </g>
+        <text class="strasse" x="136" y="-120" transform="rotate(-57 136 -120)">Bahnhofstrasse</text>
+        <g class="wir">
+          <circle class="hof" r="46"></circle>
+          <polygon class="haus" points={karte.ladenForm}></polygon>
+          <circle class="ring" r="19"></circle>
+          <circle class="kern" r="4.2"></circle>
+          <line x1="19" y1="0" x2="58" y2="0"></line>
+          <text x="68" y="4">{betrieb.name}</text>
+          <text class="klein" x="69" y="30">{betrieb.strasse}</text>
+        </g>
+        <g class="rand">
+          <rect x={B.x + 14} y={B.y + 14} width={B.s - 28} height={B.s - 28} rx="7"></rect>
+          <path class="nord" d="M366,-470 l0,-14 m-5,7 l5,-8 l5,8"></path>
+          <text class="klein" x="366" y="-450">N</text>
+          <path d={`M${B.x + 40},174 l100,0 m-100,-5 l0,10 m100,-10 l0,10`}></path>
+          <text class="klein links" x={B.x + 40} y="162">100 m</text>
+          <text class="klein links ortsname" x={B.x + 40} y={B.y + 56}>{betrieb.ort}</text>
+        </g>
       </g>
     </svg>
   </a>
@@ -45,62 +68,161 @@ const arten = ['neben', 'haupt', 'weg-zu-uns'];
 
 <style>
   .plan {
-    width: min(100%, 520px);
+    /* Warme Grautöne und ein gedämpftes Terrakotta, alle aus den Hausfarben gemischt. */
+    --blatt: color-mix(in srgb, var(--se-rose) 35%, #fff);
+    --strich: color-mix(in srgb, var(--se-espresso) 34%, var(--blatt));
+    --strich-fein: color-mix(in srgb, var(--se-espresso) 17%, var(--blatt));
+    --bau: color-mix(in srgb, var(--se-espresso) 12%, var(--blatt));
+    --terra: color-mix(in srgb, var(--se-koralle) 78%, var(--se-espresso));
+    width: min(100%, 600px);
   }
   .plan > a {
     display: block;
+    border-radius: 18px;
   }
   svg {
     display: block;
     width: 100%;
     height: auto;
   }
-  .spur {
+  .grund {
+    fill: var(--blatt);
+  }
+  .gruen {
+    fill: color-mix(in srgb, var(--se-leinen) 70%, var(--blatt));
+  }
+  .platz {
+    fill: color-mix(in srgb, var(--se-espresso) 5%, var(--blatt));
+    stroke: var(--strich-fein);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+  }
+  .netz polyline,
+  .faden {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-  .spur.neben {
-    stroke: var(--se-moos);
-    stroke-width: 1.5;
-    opacity: 0.45;
+  .neben {
+    stroke: var(--strich-fein);
+    stroke-width: 1.6;
   }
-  .spur.haupt {
-    stroke: var(--se-tinte);
-    stroke-width: 2.5;
-    opacity: 0.8;
+  .haupt {
+    stroke: var(--strich);
+    stroke-width: 2.6;
   }
-  .spur.weg-zu-uns {
-    stroke: var(--se-koralle);
-    stroke-width: 4.5;
+  .gleis {
+    stroke: var(--strich);
+    stroke-width: 1;
+  }
+  .netz .schwelle {
+    stroke: var(--strich);
+    stroke-width: 5;
+    stroke-dasharray: 1 9;
+    stroke-linecap: butt;
+  }
+  .bauten polygon {
+    fill: var(--bau);
+  }
+  .faden {
+    stroke: var(--terra);
+    stroke-width: 5;
   }
   text {
     font-family: var(--se-font-titel);
     font-size: 24px;
     font-style: italic;
     fill: var(--se-tinte);
-    text-anchor: middle;
     paint-order: stroke;
-    stroke: var(--se-rose);
-    stroke-width: 8px;
+    stroke: var(--blatt);
+    stroke-width: 7px;
     stroke-linejoin: round;
   }
-  .punkt {
-    fill: var(--se-tinte);
+  .klein,
+  .strasse {
+    font-family: var(--se-font-text);
+    font-size: 12.5px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    fill: var(--se-moos);
+    stroke-width: 5px;
   }
-  .orte .strasse {
-    font-size: 21px;
-    fill: var(--se-koralle);
+  .strasse {
+    fill: var(--terra);
+    text-anchor: middle;
   }
-  .wir circle {
-    fill: var(--se-koralle);
+  .ort text {
+    text-anchor: middle;
+    transition: fill 0.3s;
+  }
+  .ort .bau {
+    fill: color-mix(in srgb, var(--se-espresso) 26%, var(--blatt));
+    transition: fill 0.3s;
+  }
+  .ort:hover text {
+    fill: var(--terra);
+  }
+  .ort:hover .bau {
+    fill: var(--terra);
+  }
+  .wir text:not(.klein) {
+    font-size: 34px;
   }
   .wir .hof {
-    opacity: 0.16;
+    fill: var(--terra);
+    opacity: 0.1;
   }
-  .wir text {
-    font-size: 30px;
-    text-anchor: start;
+  .wir .haus {
+    fill: var(--terra);
+    opacity: 0.55;
+  }
+  .wir .ring {
+    fill: var(--blatt);
+    fill-opacity: 0.72;
+    stroke: var(--terra);
+    stroke-width: 1.4;
+  }
+  .wir .kern {
+    fill: var(--terra);
+  }
+  .wir line {
+    stroke: var(--terra);
+    stroke-width: 1;
+  }
+  .rand rect,
+  .rand path {
+    fill: none;
+    stroke: var(--strich);
+    stroke-width: 1;
+  }
+  .rand .klein:not(.links) {
+    text-anchor: middle;
+  }
+  .rand .ortsname {
+    letter-spacing: 0.34em;
+    fill: var(--se-tinte);
+  }
+  .plan > a:hover .wir .ring {
+    stroke-width: 2.4;
+  }
+  .wir .ring {
+    transition: stroke-width 0.3s;
+  }
+  /* Auf schmalen Schirmen wird das Blatt klein: Die Nebenschrift wächst mit, damit sie lesbar bleibt. */
+  @media (max-width: 560px) {
+    .klein,
+    .strasse {
+      font-size: 18px;
+      letter-spacing: 0.14em;
+    }
+    text {
+      font-size: 30px;
+    }
+    .wir text:not(.klein) {
+      font-size: 40px;
+    }
   }
   figcaption {
     margin-top: 10px;
@@ -112,27 +234,54 @@ const arten = ['neben', 'haupt', 'weg-zu-uns'];
     display: inline-block;
     padding: 6px 0;
   }
-  /* Mit Bewegung: Die Strassen zeichnen sich der Reihe nach, die Bahnhofstrasse zuletzt. Das Skript setzt die Reihenfolge. */
-  :global(.bewegt) .spur {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
+  /* Mit Bewegung auf grossen Schirmen: Das Netz erscheint, die Bahnhofstrasse zeichnet sich nach, der Hof um den Laden atmet einmal.
+     Auf kleinen Schirmen steht das Blatt sofort da. */
+  @media (min-width: 861px) {
+    :global(.bewegt) .plan .flaechen,
+    :global(.bewegt) .plan .netz,
+    :global(.bewegt) .plan .bauten,
+    :global(.bewegt) .plan .ort,
+    :global(.bewegt) .plan .strasse,
+    :global(.bewegt) .plan .wir {
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+    :global(.bewegt) .plan .schreibt :is(.flaechen, .netz, .bauten, .ort, .strasse, .wir) {
+      opacity: 1;
+    }
+    :global(.bewegt) .plan .schreibt .bauten {
+      transition-delay: 0.35s;
+    }
+    :global(.bewegt) .plan .schreibt :is(.ort, .strasse) {
+      transition-delay: 1.5s;
+    }
+    :global(.bewegt) .plan .schreibt .wir {
+      transition-delay: 1.9s;
+    }
+    :global(.bewegt) .plan .spur {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+    :global(.bewegt) .plan .schreibt .spur {
+      animation: nachzeichnen 1.5s 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    :global(.bewegt) .plan .schreibt .hof {
+      animation: atmen 2.2s 2.1s ease-out 1 both;
+    }
   }
-  :global(.bewegt) .schreibt .spur {
-    animation: zeichnen 1.1s ease-out forwards;
-    animation-delay: calc(var(--i) * 60ms);
-  }
-  :global(.bewegt) .wir,
-  :global(.bewegt) .orte {
-    opacity: 0;
-  }
-  :global(.bewegt) .schreibt .wir,
-  :global(.bewegt) .schreibt .orte {
-    opacity: 1;
-    transition: opacity 0.6s 1.7s;
-  }
-  @keyframes zeichnen {
+  @keyframes nachzeichnen {
     to {
       stroke-dashoffset: 0;
+    }
+  }
+  @keyframes atmen {
+    0% {
+      r: 19px;
+      opacity: 0.4;
+    }
+    100% {
+      r: 46px;
+      opacity: 0.1;
     }
   }
 </style>

@@ -5,13 +5,13 @@
   grid-template-areas:
     'titel bild'
     'lead bild';
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr;
   column-gap: clamp(32px, 5vw, 88px);
-  padding: clamp(120px, 11vw, 160px) var(--rand) clamp(40px, 6vw, 80px);
+  padding: clamp(112px, 10vw, 150px) var(--rand) clamp(40px, 6vw, 80px);
 }
 .u-kopf h1 {
   grid-area: titel;
-  align-self: end;
+  align-self: start;
   max-width: 9em;
   font-size: clamp(46px, 7vw, 112px);
   line-height: 0.94;
@@ -27,8 +27,8 @@
   grid-area: bild;
   overflow: hidden;
   border-radius: 18px;
-  aspect-ratio: 5 / 6;
-  max-height: min(74vh, 720px);
+  aspect-ratio: 1;
+  max-height: min(58vh, 560px);
   justify-self: end;
   width: 100%;
 }
