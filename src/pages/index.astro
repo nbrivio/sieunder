@@ -21,8 +21,6 @@ if (istLive && !start.freigegeben) {
   throw new Error('Die Texte der Startseite sind noch nicht freigegeben (inhalt/start.json).');
 }
 
-const haelfte = Math.ceil(marken.length / 2);
-const reihen = [marken.slice(0, haelfte), marken.slice(haelfte)];
 const breiten = [480, 800, 1200];
 const halb = '(max-width: 860px) 64vw, 34vw';
 ---
@@ -47,10 +45,9 @@ const halb = '(max-width: 860px) 64vw, 34vw';
     <p class="gross" data-worte><Betont text={start.satz} /></p>
   </section>
 
-  <section id="marken" class="marken" data-sicht aria-labelledby="t-marken">
+  <section id="marken" class="marken" aria-labelledby="t-marken">
     <h2 id="t-marken" class="etikett">{start.markenTitel}</h2>
-    <ul class="zeile eins">{reihen[0].map((m) => <li>{m.name}</li>)}</ul>
-    <ul class="zeile zwei">{reihen[1].map((m) => <li>{m.name}</li>)}</ul>
+    <ul class="zeile" data-worte>{marken.map((m) => <li>{m.name}</li>)}</ul>
     <p class="weiter"><a href={pfad('/marken/')}>Alle Marken ansehen</a></p>
   </section>
 

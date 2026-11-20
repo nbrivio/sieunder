@@ -154,51 +154,36 @@ h1 {
   transform: translateY(0.12em);
 }
 
-/* 2 Marken: zwei Zeilen, die der Scroll gegeneinander schiebt. */
+/* 2 Marken: alle auf einen Blick, gross gesetzt. Die Namen werden beim Scrollen scharf wie die Sätze. */
 .marken {
-  padding: clamp(40px, 6vw, 90px) 0;
-  overflow: hidden;
+  padding: clamp(40px, 6vw, 90px) var(--rand);
 }
 .marken h2 {
-  margin-bottom: 26px;
-  padding: 0 var(--rand);
+  margin-bottom: 30px;
   text-align: center;
 }
 .zeile {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0 0.55em;
-  padding: 0 var(--rand);
+  gap: 0 0.5em;
+  max-width: 1280px;
+  margin-inline: auto;
   font-family: var(--se-font-titel);
   font-weight: 300;
-  font-size: clamp(34px, 7.6vw, 118px);
-  line-height: 1.12;
+  font-size: clamp(30px, 5.4vw, 84px);
+  line-height: 1.16;
   letter-spacing: -0.02em;
+  text-align: center;
 }
-.zeile li {
-  display: flex;
-  gap: 0.55em;
-}
-.zeile li + li::before {
-  content: '/';
-  color: var(--se-koralle);
-}
-.zeile.zwei {
+.zeile li:nth-child(even) {
   font-style: italic;
 }
-.bewegt .zeile {
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  width: max-content;
-  padding: 0;
-  white-space: nowrap;
-}
-.bewegt .zeile.eins {
-  transform: translateX(calc(var(--rand) - var(--v) * 32%));
-}
-.bewegt .zeile.zwei {
-  transform: translateX(calc(-46% + var(--v) * 32%));
+.zeile li:not(:last-child)::after {
+  content: '/';
+  margin-left: 0.5em;
+  color: var(--se-koralle);
+  font-style: normal;
 }
 
 /* Verweise auf Unterseiten */
@@ -328,17 +313,17 @@ h1 {
   background: rgb(24 34 30 / 0.32);
 }
 
-/* 4 Laden */
+/* 4 Laden: grosses Bild oben, darunter links der Text und rechts das zweite Bild, das ins erste greift. */
 .laden {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 24px;
-  row-gap: 32px;
+  row-gap: 0;
   align-items: start;
   padding: clamp(56px, 8vw, 130px) var(--rand);
 }
 .l-gross {
-  grid-column: 1 / 9;
+  grid-column: 1 / 10;
   overflow: hidden;
   border-radius: 18px;
 }
@@ -348,17 +333,18 @@ h1 {
   object-fit: cover;
 }
 .l-text {
-  grid-column: 9 / 13;
-  align-self: center;
+  grid-column: 1 / 7;
+  padding-top: clamp(32px, 5vw, 72px);
 }
 .l-text p {
+  max-width: 28em;
   margin-top: 22px;
 }
 .l-klein {
   position: relative;
   z-index: 2;
-  grid-column: 8 / 12;
-  margin-top: -12%;
+  grid-column: 7 / 13;
+  margin-top: -16%;
   overflow: hidden;
   border-radius: 18px;
   box-shadow: 0 30px 70px rgb(24 34 30 / 0.22);
@@ -380,7 +366,7 @@ h2.gross {
   transform: scale(calc(1.18 - var(--v) * 0.18));
 }
 .bewegt .l-klein {
-  transform: translateY(calc((0.5 - var(--v)) * 150px));
+  transform: translateY(calc((0.5 - var(--v)) * 110px));
 }
 
 /* 5 Menschen */
@@ -508,7 +494,7 @@ h2.gross {
     grid-column: 1 / -1;
   }
   .l-klein {
-    margin: 0 0 0 18%;
+    margin: 28px 0 0 18%;
   }
   .bewegt .l-klein {
     transform: none;
