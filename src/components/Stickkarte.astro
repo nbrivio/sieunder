@@ -1,58 +1,80 @@
 ---
-// Die Umgebung des Ladens, wie auf Tüll gestickt und in einen Stickrahmen gespannt. Ein Klick öffnet die Routenplanung.
-// Mit Bewegung sticht sich die Karte Stich für Stich, sobald sie ins Bild kommt.
+// Die Umgebung des Ladens als Muster auf einem Seidentuch, von oben gesehen und leicht zerknittert.
+// Strassen, Schrift und Saum folgen den Falten; Glanz und Schatten liegen als Lichtbild darüber.
+// Ein Klick öffnet die Routenplanung. Mit Bewegung sticht sich die Karte Stich für Stich, sobald sie ins Bild kommt.
+import { Image } from 'astro:assets';
+import lichtbild from '../assets/bilder/tuch-licht.png';
 import { betrieb, route } from '../inhalt/betrieb.js';
 import { karte } from '../inhalt/karte.js';
+import { FLAECHE, alsPunkte, linie, umriss, verzogen } from '../inhalt/tuch.js';
 
-const [bx, by] = karte.bahnhof;
-const [mx, my] = karte.marktplatz;
-const meter = Math.round(Math.hypot(bx, by) / 50) * 50;
-const text = `Gestickte Karte: ${betrieb.name} an der ${betrieb.strasse}, rund ${meter} Meter vom Bahnhof ${betrieb.ort}. Route planen`;
+const meter = Math.round(Math.hypot(...karte.bahnhof) / 50) * 50;
+const text = `Karte auf einem Seidentuch: ${betrieb.name} an der ${betrieb.strasse}, rund ${meter} Meter vom Bahnhof ${betrieb.ort}. Route planen`;
 const arten = ['neben', 'haupt', 'weg-zu-uns'];
+const wege = karte.wege.map((weg) => ({ art: weg.art, punkte: alsPunkte(linie(weg.punkte.split(' ').map((p) => p.split(',').map(Number)))) }));
+const [bx, by] = verzogen(...karte.bahnhof);
+const [mx, my] = verzogen(...karte.marktplatz);
+const [sx, sy] = verzogen(140, -78);
+const [wx, wy] = verzogen(0, 0);
+const rahmen = `${FLAECHE.x} ${FLAECHE.y} ${FLAECHE.seite} ${FLAECHE.seite}`;
 ---
 
 <figure class="stick">
-  <a class="rahmen" href={route} rel="noopener" data-karte>
-    <svg viewBox="-320 -510 720 720" role="img" aria-label={text} focusable="false">
+  <a class="tuch" href={route} rel="noopener" data-karte>
+    <svg viewBox={rahmen} role="img" aria-label={text} focusable="false">
       <defs>
-        <pattern id="tuell" width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="5.5" cy="5.5" r="1.1"></circle></pattern>
-        <clipPath id="rund"><circle cx="40" cy="-150" r="332"></circle></clipPath>
-        <mask id="stich" maskUnits="userSpaceOnUse" x="-320" y="-510" width="720" height="720">
-          {karte.wege.map((weg) => <polyline class="spur" points={weg.punkte} pathLength="1" />)}
+        <clipPath id="tuchrand"><polygon points={alsPunkte(umriss(4))}></polygon></clipPath>
+        <mask id="stich" maskUnits="userSpaceOnUse" x={FLAECHE.x} y={FLAECHE.y} width={FLAECHE.seite} height={FLAECHE.seite}>
+          {wege.map((weg) => <polyline class="spur" points={weg.punkte} pathLength="1" />)}
         </mask>
       </defs>
-      <circle class="stoff" cx="40" cy="-150" r="332"></circle>
-      <circle class="tuell" cx="40" cy="-150" r="332"></circle>
-      <g clip-path="url(#rund)">
-        <g mask="url(#stich)">
-          {arten.flatMap((art) => karte.wege.filter((weg) => weg.art === art).map((weg) => <polyline class={`faden ${art}`} points={weg.punkte} />))}
-        </g>
-        <g class="orte">
-          <rect class="haus" x={bx - 26} y={by - 12} width="52" height="24" rx="3"></rect>
-          <text x={bx} y={by + 44}>Bahnhof</text>
-          <text class="klein" x={mx - 14} y={my - 16}>Marktplatz</text>
-          <text class="strasse" x="112" y="-92" transform="rotate(-57 112 -92)">Bahnhofstrasse</text>
-        </g>
-        <g class="wir">
-          <circle r="21"></circle>
-          <path d="M-9,-9 L9,9 M9,-9 L-9,9 M0,-12 L0,12 M-12,0 L12,0"></path>
-          <text x="34" y="10">hier sind wir</text>
-        </g>
+      <polygon class="stoff" points={alsPunkte(umriss())}></polygon>
+      <polygon class="saum" points={alsPunkte(umriss(11))}></polygon>
+      <g clip-path="url(#tuchrand)">
+      <g mask="url(#stich)">
+        {arten.flatMap((art) => wege.filter((weg) => weg.art === art).map((weg) => <polyline class={`faden ${art}`} points={weg.punkte} />))}
       </g>
-      <circle class="reif" cx="40" cy="-150" r="340"></circle>
-      <circle class="reif innen" cx="40" cy="-150" r="329"></circle>
+      </g>
+      <g class="orte">
+        <rect class="haus" x={bx - 26} y={by - 12} width="52" height="24" rx="3"></rect>
+        <text x={bx} y={by + 44}>Bahnhof</text>
+        <text class="klein" x={mx - 62} y={my + 34}>Marktplatz</text>
+        <text class="strasse" x={sx} y={sy} transform={`rotate(-57 ${sx} ${sy})`}>Bahnhofstrasse</text>
+      </g>
+      <g class="wir" transform={`translate(${wx} ${wy})`}>
+        <circle r="21"></circle>
+        <path d="M-9,-9 L9,9 M9,-9 L-9,9 M0,-12 L0,12 M-12,0 L12,0"></path>
+        <text x="34" y="10">hier sind wir</text>
+      </g>
     </svg>
+    <Image class="licht" src={lichtbild} alt="" widths={[520, 1000]} sizes="(max-width: 600px) 90vw, 520px" quality={80} />
   </a>
   <figcaption>Kartendaten © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap-Mitwirkende</a></figcaption>
 </figure>
 
 <style>
   .stick {
+    --tuch: #cfd8cb;
+    --faden-fein: var(--se-moos);
     width: min(100%, 520px);
   }
-  .rahmen {
+  .tuch {
+    position: relative;
     display: block;
-    border-radius: 50%;
+    isolation: isolate;
+    rotate: -3deg;
+    transition: rotate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .tuch:hover {
+    rotate: -1deg;
+  }
+  .licht {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: hard-light;
+    pointer-events: none;
   }
   svg {
     display: block;
@@ -61,24 +83,15 @@ const arten = ['neben', 'haupt', 'weg-zu-uns'];
     overflow: visible;
   }
   .stoff {
-    fill: var(--se-papier);
+    fill: var(--tuch);
+    filter: drop-shadow(0 14px 16px rgb(65 54 48 / 0.28));
   }
-  .tuell {
-    fill: url(#tuell);
-    color: var(--se-moos);
-    opacity: 0.22;
-  }
-  pattern circle {
-    fill: var(--se-moos);
-  }
-  .reif {
+  .saum {
     fill: none;
-    stroke: var(--se-espresso);
-    stroke-width: 13;
-  }
-  .reif.innen {
-    stroke: rgb(255 255 255 / 0.28);
-    stroke-width: 2;
+    stroke: var(--faden-fein);
+    stroke-width: 1.6;
+    stroke-dasharray: 5 4;
+    opacity: 0.6;
   }
   .faden {
     fill: none;
@@ -115,6 +128,10 @@ const arten = ['neben', 'haupt', 'weg-zu-uns'];
     font-style: italic;
     fill: var(--se-tinte);
     text-anchor: middle;
+    paint-order: stroke;
+    stroke: var(--tuch);
+    stroke-width: 7px;
+    stroke-linejoin: round;
   }
   .orte .klein {
     font-size: 24px;
@@ -131,7 +148,7 @@ const arten = ['neben', 'haupt', 'weg-zu-uns'];
     stroke-linecap: round;
   }
   .wir circle {
-    fill: var(--se-papier);
+    fill: var(--tuch);
     stroke: var(--se-koralle);
     stroke-width: 4.5;
     stroke-dasharray: 9 5;
@@ -147,12 +164,9 @@ const arten = ['neben', 'haupt', 'weg-zu-uns'];
     font-size: 34px;
     text-anchor: start;
     paint-order: stroke;
-    stroke: var(--se-papier);
+    stroke: var(--tuch);
     stroke-width: 9px;
     stroke-linejoin: round;
-  }
-  .rahmen:hover .reif:not(.innen) {
-    stroke: var(--se-koralle);
   }
   figcaption {
     margin-top: 10px;

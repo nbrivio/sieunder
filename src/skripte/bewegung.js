@@ -131,7 +131,7 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   }
 
   // Der Gruss im Fuss schreibt sich einmal, sobald er ins Bild kommt.
-  // Dasselbe gilt für die gestickte Karte: Ihre Fäden erscheinen der Reihe nach.
+  // Dasselbe gilt für die Karte auf dem Tuch: Ihre Fäden erscheinen der Reihe nach.
   for (const hand of document.querySelectorAll('[data-hand], [data-karte]')) {
     hand.querySelectorAll('path, .spur').forEach((pfad, i) => pfad.style.setProperty('--i', i));
     new IntersectionObserver(
