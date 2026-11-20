@@ -31,5 +31,6 @@
       { "begriff": "Wie", "text": "Nach Voranmeldung, am Telefon oder per Mail" }
     ]
   },
+  "gruss": { "zeile": "Wir freuen uns auf dich", "namen": "Sandra & Denise" },
   "besuch": "Bis bald an der *Bahnhofstrasse*"
 }

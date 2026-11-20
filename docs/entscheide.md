@@ -29,5 +29,5 @@ Regel mit Begründung. Neue Einträge unten anfügen, mit Datum.
 20. **Datenschutz ohne Cookies, Messung und Formular.** Die Erklärung nennt nur, was tatsächlich geschieht: die Auslieferung über GitHub Pages in den USA und den Kontakt per Telefon und Mail.
 21. **Dunkle Flächen in Espresso, dem Braun des Logos, nicht in Grün.** Fuss, Hinweisband und Favicon sollen sich klar von aperozauber unterscheiden.
 22. **Markennamen zeigen beim Überfahren ein Produktbild.** Gebaut, vorerst nur mit Bild für Marie Jo. Die Bilder der übrigen Marken liefert Nicolas nach; bis dahin reagiert nur ein Name.
-23. **Handschrift als Schlusspunkt.** Vor «Bis bald an der Bahnhofstrasse» zeichnet sich eine handgeschriebene Zeile von Sandra und Denise Strich für Strich. Gebaut wird sie, sobald die echte Handschrift vorliegt; nachgeahmt wird sie nicht.
+23. **Handschrift als Schlusspunkt, in erfundener Schrift.** Im Fuss jeder Seite schreibt sich «Wir freuen uns auf dich, Sandra & Denise» Zeichen für Zeichen. Es ist bewusst keine echte Unterschrift: Eine echte liesse sich abzeichnen und fälschen. Die Linien entstehen aus der Schrift WindSong mit `npm run handschrift`.
 

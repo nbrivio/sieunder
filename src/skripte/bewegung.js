@@ -105,6 +105,19 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     addEventListener('scroll', () => ohneZeiger.matches && aktiv && zeigen(null), { passive: true });
   }
 
+  // Der Gruss im Fuss schreibt sich einmal, sobald er ins Bild kommt.
+  for (const hand of document.querySelectorAll('[data-hand]')) {
+    hand.querySelectorAll('path').forEach((pfad, i) => pfad.style.setProperty('--i', i));
+    new IntersectionObserver(
+      (eintraege, waechter) => {
+        if (!eintraege[0].isIntersecting) return;
+        hand.classList.add('schreibt');
+        waechter.disconnect();
+      },
+      { threshold: 0.6 },
+    ).observe(hand);
+  }
+
   const rollen = [...document.querySelectorAll('[data-roll]')];
   const sichten = [...document.querySelectorAll('[data-sicht]')];
   let wartet = false;

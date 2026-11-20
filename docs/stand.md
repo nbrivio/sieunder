@@ -13,7 +13,7 @@ Stand: 20. Nov. 26
 
 ## Was als Nächstes ansteht
 
-1. **Startseite verfeinern.** Collage und Sätze am echten Gerät prüfen, Texte in eurer Stimme, Porträt einsetzen. Zwei Überraschungen sind beschlossen: Produktbild beim Überfahren der Markennamen (gebaut, Bilder für zwölf Marken fehlen) und eine Handschrift-Zeile von Sandra und Denise, die sich am Schluss selbst schreibt (wartet auf das Foto der Handschrift).
+1. **Startseite verfeinern.** Collage und Sätze am echten Gerät prüfen, Texte in eurer Stimme, Porträt einsetzen. Zwei Überraschungen sind beschlossen: Produktbild beim Überfahren der Markennamen (gebaut, Bilder für zwölf Marken fehlen) und ein Gruss in erfundener Schreibschrift, der sich im Fuss selbst schreibt (gebaut, bewusst keine echte Unterschrift).
 2. **Bildmaterial.** Neue Ladenbilder, ein ruhiges Video, Herrenbilder (bisher gibt es nur Damenmotive einer Marke).
 3. **Unterseiten füllen.** Je Marke ein eigener Abschnitt, Texte in eurer Stimme, UID ins Impressum, Rechtstexte gegenlesen, dann freigeben.
 4. **Vor dem Umzug.** Zugriffszahlen aus Squarespace sichern, Search Console über DNS bestätigen, Rechte der Herstellerbilder klären, Entscheid zum vorgeschalteten Dienst bestätigen.

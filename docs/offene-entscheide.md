@@ -23,6 +23,5 @@
 | 28 | Markenseite listet nur Namen. Je Marke ein eigener Abschnitt bringt Suchtreffer wie «Marie Jo Amriswil». | Mit zwei bis drei Marken beginnen | Nicolas |
 | 29 | Trockenlauf für die richtige Adresse kann jetzt in die Bau-Strecke: Alle Weiterleitungen haben ihr Ziel. Er läuft aber erst grün, wenn die Texte freigegeben sind. | Mit der Freigabe einschalten | Nicolas |
 | 30 | Produktbilder für die zwölf übrigen Marken fehlen (Hochformat, je eines). | In `Bilder/` legen, dann trage ich sie ein | Nicolas |
-| 31 | Handschrift von Sandra und Denise fehlt: eine kurze Zeile und beide Unterschriften, mit dunklem Filzstift gross auf weisses Papier, gerade von oben bei Tageslicht fotografiert. | Foto in `Bilder/` legen | Nicolas, Inhaberin |
 | 32 | Auf dem Handy weiss niemand, dass man Markennamen antippen kann. | Kleiner Hinweis unter der Liste, sobald mehrere Marken Bilder haben | Nicolas |
 

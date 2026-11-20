@@ -1,0 +1,72 @@
+---
+// Der Gruss in erfundener Schreibschrift. Mit Bewegung schreibt er sich Zeichen für Zeichen, sobald er ins Bild kommt.
+import handschrift from '../inhalt/handschrift.json';
+import { start } from '../inhalt/start.js';
+
+const erwartet = [start.gruss.zeile, start.gruss.namen];
+if (handschrift.zeilen.some((zeile, i) => zeile.text !== erwartet[i])) {
+  throw new Error('Der Gruss in inhalt/start.json wurde geändert. Bitte die Linien neu erzeugen: npm run handschrift');
+}
+---
+
+<p class="hand" data-hand>
+  {
+    handschrift.zeilen.map((zeile, i) => (
+      <svg class={i === 0 ? 'eins' : 'zwei'} viewBox={zeile.rahmen} role="img" aria-label={zeile.text}>
+        {zeile.pfade.map((d) => <path d={d} pathLength="1" />)}
+      </svg>
+    ))
+  }
+</p>
+
+<style>
+  .hand {
+    display: grid;
+    gap: 2px;
+    justify-items: start;
+    width: min(100%, 740px);
+    margin: 44px 0 6px;
+    color: var(--se-rose);
+    transform: rotate(-3deg);
+    transform-origin: left center;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .zwei {
+    width: 62%;
+    margin-left: 34%;
+  }
+  path {
+    fill: currentColor;
+  }
+  /* Mit Bewegung: erst unsichtbar, dann zeichnet sich die Linie und füllt sich. Das Skript setzt die Reihenfolge. */
+  :global(.bewegt) .hand path {
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 1.1;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  :global(.bewegt) .hand.schreibt path {
+    animation:
+      strich 0.5s ease-out forwards,
+      fuellen 0.35s ease-out forwards;
+    animation-delay: calc(var(--i) * 62ms), calc(var(--i) * 62ms + 0.3s);
+  }
+  @keyframes strich {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes fuellen {
+    to {
+      fill: currentColor;
+      stroke-width: 0.3;
+    }
+  }
+</style>

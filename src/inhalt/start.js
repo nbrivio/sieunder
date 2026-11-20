@@ -26,6 +26,8 @@ const schema = z.object({
     text: absatz,
     punkte: z.array(z.object({ begriff: z.string().min(1).max(40), text: z.string().min(1).max(120) })).min(1).max(4),
   }),
+  // Der handgeschriebene Gruss im Fuss. Nach einer Änderung: npm run handschrift.
+  gruss: z.object({ zeile: z.string().min(3).max(40), namen: z.string().min(3).max(30) }),
   besuch: titel,
 });
 
