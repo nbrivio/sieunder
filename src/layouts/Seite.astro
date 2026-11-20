@@ -2,6 +2,7 @@
 import '../stile/tokens.css';
 import '../stile/grund.css';
 import Leiste from '../components/Leiste.astro';
+import Hinweisband from '../components/Hinweisband.astro';
 import schriftTitel from '../assets/schriften/newsreader-latin-wght-normal.woff2?url';
 import schriftText from '../assets/schriften/schibsted-grotesk-latin-wght-normal.woff2?url';
 import Fuss from '../components/Fuss.astro';
@@ -117,6 +118,7 @@ const graph = {
   </head>
   <body>
     <a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+    <Hinweisband />
     <Leiste />
     <main id="inhalt">
       <slot />

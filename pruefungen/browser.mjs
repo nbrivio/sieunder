@@ -36,6 +36,10 @@ for (const seite of seiten) {
     const ueberlauf = await fenster.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     if (ueberlauf > 0) b.melde(ort, `horizontaler Überlauf um ${ueberlauf} Pixel`);
 
+    // Abgeschnittener Text erzeugt keinen Überlauf. Darum wird der Hinweis im gezeichneten Zustand nachgemessen.
+    const gekappt = await fenster.evaluate(() => [...document.querySelectorAll('.band p')].some((p) => p.scrollHeight > p.clientHeight + 1));
+    if (gekappt) b.melde(ort, 'der Hinweis im Band ist abgeschnitten');
+
     const kaputt = await fenster.evaluate(() => [...document.images].filter((bild) => bild.complete && bild.naturalWidth === 0).map((bild) => bild.currentSrc));
     for (const bild of kaputt) b.melde(ort, `Bild lädt nicht: ${bild}`);
 

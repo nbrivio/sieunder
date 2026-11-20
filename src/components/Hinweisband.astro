@@ -12,7 +12,13 @@ const text = gueltigerHinweis();
 }
 
 <style>
+  /* Das Band steht fest am oberen Rand, die schwebende Leiste rückt um seine Höhe nach unten. */
   .band {
+    position: fixed;
+    z-index: 21;
+    top: 0;
+    left: 0;
+    right: 0;
     display: grid;
     place-items: center;
     block-size: var(--band-h);
@@ -29,5 +35,11 @@ const text = gueltigerHinweis();
     -webkit-line-clamp: 2;
     line-clamp: 2;
     overflow: hidden;
+  }
+  @media (max-width: 480px) {
+    .band p {
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+    }
   }
 </style>

@@ -118,6 +118,17 @@ const sitemap = await readFile('dist/sitemap-0.xml', 'utf8').catch(() => '');
 if (!sitemap) b.melde('sitemap', 'fehlt');
 if (/<priority>|<changefreq>/.test(sitemap)) b.melde('sitemap', 'priority oder changefreq enthalten');
 if (/grundlagen|404/.test(sitemap)) b.melde('sitemap', 'interne Seite enthalten');
+const eintraege = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => m[1]);
+for (const eintrag of eintraege) {
+  if (!/<lastmod>\d{4}-\d{2}-\d{2}/.test(eintrag)) b.melde('sitemap', `Änderungsdatum fehlt: ${eintrag.match(/<loc>([^<]+)/)?.[1]}`);
+}
+// Jede echte Seite steht in der Sitemap, sonst findet die Suche sie nicht. Weiterleitungen und die Fehlerseite gehören nicht hinein.
+for (const datei of seiten) {
+  const ort = relative('dist', datei);
+  if (ort === '404.html' || /http-equiv="refresh"/.test(await readFile(datei, 'utf8'))) continue;
+  const adresse = `${unterpfad}/${ort.replace(/index\.html$/, '')}`;
+  if (!eintraege.some((eintrag) => eintrag.includes(`${adresse}</loc>`))) b.melde(ort, 'fehlt in der Sitemap');
+}
 
 if (!(await vorhanden('dist/robots.txt'))) b.melde('robots.txt', 'fehlt');
 

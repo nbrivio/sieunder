@@ -16,7 +16,6 @@
 | 19 | Porträt von Sandra und Denise fehlt. | Bild in den Ordner `Bilder/` legen | Nicolas |
 | 20 | Ladenbilder sind von 2013 und klein (1500 Pixel). | Neue Aufnahmen | Nicolas |
 | 21 | Bewegtbild fehlt: ein ruhiges Video (Stoff im Licht, Laden am Morgen) brächte am meisten Gefühl. | Zehn Sekunden vom Handy auf Stativ als Test | Nicolas |
-| 22 | Hinweisband ist gebaut, aber noch nicht in die schwebende Leiste eingepasst. | Mit dem ersten echten Hinweis einbauen | Nicolas |
 | 24 | Soll Sandra im Kapitel Brustprothesen namentlich stehen? | Ja, so steht es auf der alten Seite | Inhaberin |
 | 25 | Impressum: Die UID der GmbH fehlt, ich habe sie öffentlich nicht gefunden. | Aus dem Handelsregisterauszug eintragen | Nicolas |
 | 26 | Impressum und Datenschutz sind Entwürfe und nicht rechtlich geprüft. Der Satz zu den Herstellerbildern («mit deren Einverständnis») stimmt erst, wenn die Rechte geklärt sind. | Gegenlesen lassen, dann freigeben | Nicolas |

@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { execFileSync } from 'node:child_process';
 import { copyFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import sitemap from '@astrojs/sitemap';
@@ -9,6 +10,27 @@ import { weiterleitungen } from './src/inhalt/weiterleitungen.js';
 // deshalb bleibt www die Hauptadresse (Canonical, Sitemap, strukturierte Daten).
 const site = process.env.SITE_ADRESSE ?? 'https://www.sieunder-dessous.ch';
 const base = process.env.SITE_PFAD ?? '/';
+
+// Letzte inhaltliche Änderung je Seite, aus der Versionsgeschichte der Dateien, aus denen sie entsteht.
+// So steht in der Sitemap ein ehrliches Datum und nicht der Tag des täglichen Neubaus.
+const quellen = {
+  '/': ['inhalt/start.json', 'inhalt/marken.json', 'inhalt/betrieb.json', 'src/pages/index.astro'],
+  '/marken/': ['inhalt/seiten.json', 'inhalt/marken.json', 'src/pages/marken.astro'],
+  '/ueber-uns/': ['inhalt/seiten.json', 'inhalt/start.json', 'src/pages/ueber-uns.astro'],
+  '/beratung/brustprothesen/': ['inhalt/seiten.json', 'inhalt/start.json', 'src/pages/beratung/brustprothesen.astro'],
+  '/impressum/': ['inhalt/seiten.json', 'inhalt/betrieb.json', 'src/pages/impressum.astro'],
+  '/datenschutz/': ['inhalt/seiten.json', 'inhalt/betrieb.json', 'src/pages/datenschutz.astro'],
+};
+function geaendert(adresse) {
+  const pfad = new URL(adresse).pathname.slice(base.replace(/\/$/, '').length) || '/';
+  const dateien = quellen[pfad];
+  if (!dateien) return undefined;
+  try {
+    return execFileSync('git', ['log', '-1', '--format=%cI', '--', ...dateien], { encoding: 'utf8' }).trim() || undefined;
+  } catch {
+    return undefined;
+  }
+}
 
 export default defineConfig({
   site,
@@ -24,6 +46,7 @@ export default defineConfig({
     sitemap({
       // Interne Arbeitsseiten gehören nicht in die Sitemap.
       filter: (seite) => !seite.includes('/grundlagen/'),
+      serialize: (eintrag) => ({ ...eintrag, lastmod: geaendert(eintrag.url) }),
     }),
     {
       // Die bisherige Seite lieferte ihre Sitemap unter /sitemap.xml. Wer sie so eingereicht hat, findet sie weiter dort.

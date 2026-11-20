@@ -29,3 +29,9 @@
 :root:has(.band) {
   --band-h: 2.75rem;
 }
+/* Auf schmalen Handys braucht derselbe Hinweis drei Zeilen. */
+@media (max-width: 480px) {
+  :root:has(.band) {
+    --band-h: 3.9rem;
+  }
+}

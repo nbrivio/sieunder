@@ -3,10 +3,10 @@ import roh from '../../inhalt/hinweis.json';
 
 const tag = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Datum als JJJJ-MM-TT');
 
-// Das Band zeigt hoechstens zwei Zeilen. Auf einem schmalen Handy passen rund 50 Zeichen je Zeile,
-// alles darueber wird stillschweigend abgeschnitten. Darum hier eine harte Grenze: lieber ein
-// fehlgeschlagener Bau als ein Hinweis, dessen Pointe auf dem Handy fehlt.
-const MAX_ZEICHEN = 95;
+// Das Band zeigt auf dem Handy höchstens drei Zeilen, sonst zwei. Auf 320 Pixel passen rund 30 Zeichen je Zeile,
+// alles darüber wird stillschweigend abgeschnitten. Darum hier eine harte Grenze: lieber ein fehlgeschlagener
+// Bau als ein Hinweis, dessen Schluss auf dem Handy fehlt. Der Browser-Durchlauf misst zusätzlich nach.
+const MAX_ZEICHEN = 88;
 
 const schema = z
   .object({ text: z.string(), von: tag.nullable(), bis: tag.nullable() })
