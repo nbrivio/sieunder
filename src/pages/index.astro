@@ -22,6 +22,14 @@ if (istLive && !start.freigegeben) {
 }
 
 const breiten = [480, 800, 1200];
+
+// Produktbilder je Marke. Fehlt die Datei zu einem Eintrag, bricht der Bau ab.
+const markenDateien = import.meta.glob('../assets/bilder/marken/*.{jpg,png}', { eager: true });
+const markenBilder = marken.filter((m) => m.bild).map((m) => {
+  const datei = Object.entries(markenDateien).find(([pfadName]) => pfadName.endsWith(`/${m.bild}`));
+  if (!datei) throw new Error(`Bild zur Marke ${m.name} fehlt: src/assets/bilder/marken/${m.bild}`);
+  return { name: m.name, bild: datei[1].default };
+});
 const halb = '(max-width: 860px) 64vw, 34vw';
 ---
 
@@ -47,7 +55,12 @@ const halb = '(max-width: 860px) 64vw, 34vw';
 
   <section id="marken" class="marken" aria-labelledby="t-marken">
     <h2 id="t-marken" class="etikett">{start.markenTitel}</h2>
-    <ul class="zeile" data-worte>{marken.map((m) => <li>{m.name}</li>)}</ul>
+    <ul class="zeile" data-worte>{marken.map((m) => <li data-hat-bild={m.bild ? m.name : undefined}>{m.name}</li>)}</ul>
+    {markenBilder.length > 0 && (
+      <div class="m-schau" data-schau aria-hidden="true">
+        <figure>{markenBilder.map((m) => <Image src={m.bild} alt="" data-marke={m.name} widths={[320, 640]} sizes="(max-width: 860px) 60vw, 22vw" quality={72} />)}</figure>
+      </div>
+    )}
     <p class="weiter"><a href={pfad('/marken/')}>Alle Marken ansehen</a></p>
   </section>
 

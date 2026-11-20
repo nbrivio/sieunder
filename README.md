@@ -21,7 +21,7 @@ Alles, was sich ändert, liegt unter `inhalt/`, getrennt vom Code. Eine Änderun
 | Datei | Inhalt |
 | --- | --- |
 | `inhalt/betrieb.json` | Name, Adresse, Kontakt und Öffnungszeiten. Kopf, Fuss, Startseite und strukturierte Daten lesen hier |
-| `inhalt/marken.json` | Die geführten Marken |
+| `inhalt/marken.json` | Die geführten Marken. Mit `bild` (Datei unter `src/assets/bilder/marken/`) erscheint beim Überfahren des Namens ein Produktbild |
 | `inhalt/hinweis.json` | Band für Ferien und Anlässe: `text`, `von`, `bis` (Datum als JJJJ-MM-TT). Ausserhalb des Zeitraums verschwindet es von selbst. Höchstens 88 Zeichen. Das Band steht fest am oberen Rand jeder Seite |
 | `inhalt/start.json` | Alle Texte der Startseite. Ein Teil zwischen Sternen wird kursiv gesetzt |
 | `inhalt/seiten.json` | Texte der Unterseiten samt Impressum und Datenschutz |

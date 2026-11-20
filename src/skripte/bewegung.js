@@ -63,6 +63,48 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return { el, worte };
   });
 
+  // Markenbilder: erscheinen beim Überfahren eines Namens und folgen dem Zeiger mit leichtem Nachziehen.
+  const schau = document.querySelector('[data-schau]');
+  if (schau) {
+    const bilder = new Map([...schau.querySelectorAll('[data-marke]')].map((bild) => [bild.dataset.marke, bild]));
+    const ohneZeiger = matchMedia('(hover: none)');
+    let zielX = 0;
+    let zielY = 0;
+    let x = 0;
+    let y = 0;
+    let aktiv = null;
+    let folgt = false;
+    const folgen = () => {
+      x += (zielX - x) * 0.16;
+      y += (zielY - y) * 0.16;
+      schau.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+      if (aktiv) requestAnimationFrame(folgen);
+      else folgt = false;
+    };
+    const zeigen = (name, vonX, vonY) => {
+      aktiv = (name && bilder.get(name)) || null;
+      for (const bild of bilder.values()) bild.classList.toggle('an', bild === aktiv);
+      schau.classList.toggle('offen', Boolean(aktiv));
+      if (!aktiv) return;
+      zielX = x = vonX;
+      zielY = y = vonY;
+      if (!folgt) {
+        folgt = true;
+        requestAnimationFrame(folgen);
+      }
+    };
+    for (const eintrag of document.querySelectorAll('[data-hat-bild]')) {
+      eintrag.addEventListener('pointerenter', (e) => e.pointerType === 'mouse' && zeigen(eintrag.dataset.hatBild, e.clientX, e.clientY));
+      eintrag.addEventListener('pointermove', (e) => {
+        zielX = e.clientX;
+        zielY = e.clientY;
+      });
+      eintrag.addEventListener('pointerleave', (e) => e.pointerType === 'mouse' && zeigen(null));
+      eintrag.addEventListener('click', () => ohneZeiger.matches && zeigen(aktiv ? null : eintrag.dataset.hatBild, innerWidth / 2, innerHeight / 2));
+    }
+    addEventListener('scroll', () => ohneZeiger.matches && aktiv && zeigen(null), { passive: true });
+  }
+
   const rollen = [...document.querySelectorAll('[data-roll]')];
   const sichten = [...document.querySelectorAll('[data-sicht]')];
   let wartet = false;

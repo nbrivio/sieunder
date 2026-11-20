@@ -186,6 +186,57 @@ h1 {
   font-style: normal;
 }
 
+/* Fährt man über einen Markennamen, erscheint ein Bild der Marke und folgt dem Zeiger. Auf dem Handy genügt ein Tippen. */
+.zeile li[data-hat-bild] {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.zeile li[data-hat-bild]:hover {
+  color: var(--se-koralle);
+}
+.m-schau {
+  position: fixed;
+  z-index: 15;
+  top: 0;
+  left: 0;
+  display: none;
+  width: clamp(190px, 22vw, 330px);
+  pointer-events: none;
+}
+.m-schau.offen {
+  display: block;
+}
+.m-schau figure {
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 30px 80px rgb(24 34 30 / 0.3);
+  transform: translate(34px, 28px) rotate(-3deg);
+}
+.m-schau img {
+  display: none;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.m-schau img.an {
+  display: block;
+  animation: auf 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@keyframes auf {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+@media (hover: none) {
+  .m-schau {
+    width: 60vw;
+  }
+  .m-schau figure {
+    transform: translate(-50%, -50%) rotate(-3deg);
+  }
+}
+
 /* Verweise auf Unterseiten */
 .weiter {
   margin-top: 26px;
