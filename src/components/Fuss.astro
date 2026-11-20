@@ -2,6 +2,7 @@
 import Betont from './Betont.astro';
 import { betrieb, telefonZiel, telefonAnzeige, zeitenZeilen } from '../inhalt/betrieb.js';
 import { start } from '../inhalt/start.js';
+import { pfad } from '../inhalt/pfad.js';
 ---
 
 <footer id="besuch" class="fuss">
@@ -28,6 +29,13 @@ import { start } from '../inhalt/start.js';
       </ul>
     </div>
   </div>
+  <nav class="klein" aria-label="Weitere Seiten">
+    <a href={pfad('/marken/')}>Marken</a>
+    <a href={pfad('/ueber-uns/')}>Über uns</a>
+    <a href={pfad('/beratung/brustprothesen/')}>Brustprothesen</a>
+    <a href={pfad('/impressum/')}>Impressum</a>
+    <a href={pfad('/datenschutz/')}>Datenschutz</a>
+  </nav>
 </footer>
 
 <style>
@@ -67,6 +75,15 @@ import { start } from '../inhalt/start.js';
   }
   dt {
     font-weight: 600;
+  }
+  .klein {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 28px;
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(238 240 234 / 0.25);
+    font-size: 15px;
   }
   a {
     display: inline-block;

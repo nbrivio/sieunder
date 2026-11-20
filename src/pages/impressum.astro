@@ -1,0 +1,21 @@
+---
+import '../stile/unterseite.css';
+import Seite from '../layouts/Seite.astro';
+import { betrieb, telefonZiel, telefonAnzeige } from '../inhalt/betrieb.js';
+import { seiten } from '../inhalt/seiten.js';
+
+const s = seiten.impressum;
+const name = { impressum: 'Impressum', datenschutz: 'Datenschutz' }['impressum'];
+---
+
+<Seite titel={s.seitentitel} beschreibung={s.beschreibung} pfad={[[name, '/impressum/']]}>
+  <header class="u-kopf">
+    <h1 class="gross">{s.titel}</h1>
+    {s.stand && <p class="lead">Stand {s.stand}</p>}
+  </header>
+  <div class="recht">
+    <address>{betrieb.firma}<br />{betrieb.strasse}<br />{betrieb.plz} {betrieb.ort}</address>
+    <p><a href={telefonZiel}>{telefonAnzeige}</a><br /><a href={`mailto:${betrieb.email}`}>{betrieb.email}</a></p>
+    {s.teile.map((teil) => (<><h2>{teil.titel}</h2>{teil.text.map((absatz) => <p>{absatz}</p>)}</>))}
+  </div>
+</Seite>

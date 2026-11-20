@@ -1,0 +1,29 @@
+---
+import '../stile/unterseite.css';
+import Seite from '../layouts/Seite.astro';
+import Betont from '../components/Betont.astro';
+import { marken } from '../inhalt/marken.js';
+import { seiten } from '../inhalt/seiten.js';
+import { pfad } from '../inhalt/pfad.js';
+
+const s = seiten.marken;
+const fuer = (wen) => marken.filter((m) => m.fuer.includes(wen));
+---
+
+<Seite titel={s.seitentitel} beschreibung={s.beschreibung} pfad={[['Marken', '/marken/']]}>
+  <header class="u-kopf">
+    <h1 class="gross"><Betont text={s.titel} /></h1>
+    <p class="lead">{s.lead}</p>
+  </header>
+  <section class="u-teil leinen" aria-labelledby="t-sie">
+    <h2 id="t-sie" class="etikett">Für Sie</h2>
+    <ul class="u-inhalt liste-gross">{fuer('sie').map((m) => <li>{m.name}</li>)}</ul>
+  </section>
+  <section class="u-teil" aria-labelledby="t-er">
+    <h2 id="t-er" class="etikett">Für Ihn</h2>
+    <ul class="u-inhalt liste-gross">{fuer('er').map((m) => <li>{m.name}</li>)}</ul>
+  </section>
+  <section class="u-teil rose" aria-label="Besuch">
+    <div class="u-ganz wege"><a class="knopf" href={pfad('/#besuch')}>Besuch planen</a></div>
+  </section>
+</Seite>

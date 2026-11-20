@@ -1,0 +1,157 @@
+/* Unterseiten: ruhiger Kopf unter der schwebenden Leiste, danach Kapitel im selben Raster wie die Startseite. */
+.u-kopf {
+  padding: clamp(140px, 17vw, 230px) var(--rand) clamp(40px, 6vw, 80px);
+}
+.u-kopf h1 {
+  max-width: 11em;
+  font-size: clamp(46px, 8vw, 124px);
+  line-height: 0.94;
+}
+.u-kopf .lead {
+  max-width: 32em;
+  margin-top: 28px;
+  font-size: clamp(18px, 1.6vw, 22px);
+}
+.u-teil {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 28px;
+  align-items: start;
+  padding: clamp(40px, 6vw, 90px) var(--rand);
+}
+.u-teil.leinen {
+  background: var(--se-leinen);
+}
+.u-teil.rose {
+  background: var(--se-rose);
+}
+.u-teil > h2 {
+  grid-column: 1 / 5;
+}
+.u-teil > .u-inhalt {
+  grid-column: 5 / 13;
+}
+.u-teil > .u-ganz {
+  grid-column: 1 / -1;
+}
+h2.gross {
+  font-size: clamp(34px, 4.4vw, 66px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.u-inhalt p {
+  max-width: 36em;
+}
+.u-inhalt p + p {
+  margin-top: 14px;
+}
+.liste-gross {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5em;
+  font-family: var(--se-font-titel);
+  font-weight: 300;
+  font-size: clamp(30px, 4.6vw, 70px);
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+}
+.liste-gross li:not(:last-child)::after {
+  content: '/';
+  margin-left: 0.5em;
+  color: var(--se-koralle);
+}
+.schritte {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  counter-reset: schritt;
+}
+.schritte li {
+  padding-top: 18px;
+  border-top: 1px solid var(--se-linie);
+  counter-increment: schritt;
+}
+.schritte li::before {
+  content: counter(schritt);
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--se-font-titel);
+  font-size: 40px;
+  line-height: 1;
+  color: var(--se-koralle);
+}
+.schritte h3 {
+  margin-bottom: 6px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.punkte > div {
+  padding: 16px 0;
+  border-top: 1px solid var(--se-linie);
+}
+.punkte dt {
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.wege {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 26px;
+  margin-top: 28px;
+}
+.wege a:not(.knopf) {
+  padding: 13px 0;
+  font-weight: 500;
+}
+.u-bild {
+  overflow: hidden;
+  border-radius: 18px;
+}
+.u-bild img {
+  width: 100%;
+  object-fit: cover;
+}
+.m-bild {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  padding: 24px;
+  border: 1px dashed rgb(24 34 30 / 0.4);
+  border-radius: 18px;
+  color: var(--se-moos);
+  font-size: 14px;
+  text-align: center;
+}
+.recht h2 {
+  margin: 36px 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.recht {
+  max-width: 44em;
+  padding: 0 var(--rand) clamp(56px, 8vw, 110px);
+}
+.recht p + p {
+  margin-top: 12px;
+}
+.recht a {
+  display: inline-block;
+  padding: 4px 0;
+}
+@media (max-width: 860px) {
+  .u-teil > h2,
+  .u-teil > .u-inhalt {
+    grid-column: 1 / -1;
+  }
+  .schritte {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

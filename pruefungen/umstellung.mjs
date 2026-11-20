@@ -34,7 +34,7 @@ for (const alt of Object.keys(weiterleitungen)) {
 }
 
 // 2. Die Hauptseiten der bisherigen Seite müssen in der Sitemap bleiben.
-for (const alt of ['/']) {
+for (const alt of ['/', '/marken/', '/ueber-uns/', '/beratung/brustprothesen/', '/impressum/', '/datenschutz/']) {
   if (!sitemapAdressen.some((a) => a === `${hauptadresse}${alt}` || a.endsWith(`${unterpfad}${alt}`))) {
     b.melde(alt, 'fehlt in der Sitemap');
   }

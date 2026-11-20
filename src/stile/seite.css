@@ -201,6 +201,18 @@ h1 {
   transform: translateX(calc(-46% + var(--v) * 32%));
 }
 
+/* Verweise auf Unterseiten */
+.weiter {
+  margin-top: 26px;
+  text-align: center;
+}
+.weiter a,
+.mehr {
+  display: inline-block;
+  padding: 13px 0;
+  font-weight: 500;
+}
+
 /* 3 Collage: Ein Satz bleibt stehen, grosse Bilder ziehen an ihm vorbei.
    Am Schluss füllt das dunkle Bild den Schirm, der Satz wird hell. */
 .collage {

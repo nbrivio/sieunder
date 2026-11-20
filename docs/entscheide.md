@@ -25,4 +25,6 @@ Regel mit Begründung. Neue Einträge unten anfügen, mit Datum.
 16. **Bewegung nur mit Skript und nur ohne «reduzierte Bewegung».** Die Grundfassung steht ruhig untereinander; die Klasse `bewegt` schaltet die Scrollbewegungen ein. So bleibt die Seite ohne JavaScript vollständig.
 17. **Marie-Jo-Bilder dürfen ins öffentliche Repo und auf die Testseite** (Entscheid Nicolas). Nutzungsrecht und Alter der Motive werden vor dem Livegang geklärt.
 18. **Texte der Startseite liegen in `inhalt/start.json` und sind als Entwurf markiert.** Ein Bau für die richtige Adresse bricht ab, bis `freigegeben` auf `true` steht.
+19. **Unterseiten:** `/marken/`, `/ueber-uns/`, `/beratung/brustprothesen/`, `/impressum/`, `/datenschutz/`. Ihre Texte liegen in `inhalt/seiten.json` und sind als Entwurf markiert. Damit hat jede alte Adresse ihr endgültiges Ziel: `/geschaeft` führt auf Über uns, `/brustprothesen1` auf die Beratungsseite, `/marken` und `/datenschutz` bleiben unter ihrer Adresse.
+20. **Datenschutz ohne Cookies, Messung und Formular.** Die Erklärung nennt nur, was tatsächlich geschieht: die Auslieferung über GitHub Pages in den USA und den Kontakt per Telefon und Mail.
 

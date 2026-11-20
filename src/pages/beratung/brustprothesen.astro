@@ -1,0 +1,35 @@
+---
+import '../../stile/unterseite.css';
+import Seite from '../../layouts/Seite.astro';
+import Betont from '../../components/Betont.astro';
+import { betrieb, telefonZiel, telefonAnzeige } from '../../inhalt/betrieb.js';
+import { seiten } from '../../inhalt/seiten.js';
+import { start } from '../../inhalt/start.js';
+
+const s = seiten.brust;
+---
+
+<Seite titel={s.seitentitel} beschreibung={s.beschreibung} pfad={[['Brustprothesen', '/beratung/brustprothesen/']]}>
+  <header class="u-kopf">
+    <h1 class="gross"><Betont text={s.titel} /></h1>
+    <p class="lead">{start.brust.text}</p>
+  </header>
+  <section class="u-teil rose" aria-labelledby="t-frage">
+    <h2 id="t-frage" class="gross"><Betont text={start.brust.satz} /></h2>
+    <div class="u-inhalt">
+      <dl class="punkte">
+        {start.brust.punkte.map((punkt) => (<div><dt>{punkt.begriff}</dt><dd>{punkt.text}</dd></div>))}
+      </dl>
+      <div class="wege">
+        <a class="knopf" href={telefonZiel}>{telefonAnzeige}</a>
+        <a href={`mailto:${betrieb.email}`}>{betrieb.email}</a>
+      </div>
+    </div>
+  </section>
+  <section class="u-teil" aria-labelledby="t-ablauf">
+    <h2 id="t-ablauf" class="gross"><Betont text={s.ablaufTitel} /></h2>
+    <ol class="u-ganz schritte">
+      {s.ablauf.map((schritt) => (<li><h3>{schritt.titel}</h3><p>{schritt.text}</p></li>))}
+    </ol>
+  </section>
+</Seite>

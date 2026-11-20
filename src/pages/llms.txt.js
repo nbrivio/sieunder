@@ -27,6 +27,11 @@ export function GET({ site }) {
     '## Seiten',
     '',
     `- [Startseite](${voll('/')})`,
+    `- [Marken](${voll('/marken/')})`,
+    `- [Über uns](${voll('/ueber-uns/')})`,
+    `- [Beratung für Brustprothesen](${voll('/beratung/brustprothesen/')})`,
+    `- [Impressum](${voll('/impressum/')})`,
+    `- [Datenschutz](${voll('/datenschutz/')})`,
     '',
   ];
   return new Response(zeilen.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

@@ -51,6 +51,7 @@ const halb = '(max-width: 860px) 64vw, 34vw';
     <h2 id="t-marken" class="etikett">{start.markenTitel}</h2>
     <ul class="zeile eins">{reihen[0].map((m) => <li>{m.name}</li>)}</ul>
     <ul class="zeile zwei">{reihen[1].map((m) => <li>{m.name}</li>)}</ul>
+    <p class="weiter"><a href={pfad('/marken/')}>Alle Marken ansehen</a></p>
   </section>
 
   <section class="collage" data-roll aria-label="Stimmung">
@@ -80,6 +81,7 @@ const halb = '(max-width: 860px) 64vw, 34vw';
       <h2 id="t-menschen" class="etikett">{start.menschen.etikett}</h2>
       <p class="gross"><Betont text={start.menschen.namen} /></p>
       <p>{start.menschen.text}</p>
+      <p><a class="mehr" href={pfad('/ueber-uns/')}>Mehr über uns</a></p>
     </div>
   </section>
 
@@ -101,6 +103,7 @@ const halb = '(max-width: 860px) 64vw, 34vw';
       <div class="wege">
         <a class="knopf" href={telefonZiel}>{telefonAnzeige}</a>
         <a href={`mailto:${betrieb.email}`}>{betrieb.email}</a>
+        <a href={pfad('/beratung/brustprothesen/')}>So läuft ein Termin ab</a>
       </div>
     </div>
   </section>

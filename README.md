@@ -24,10 +24,11 @@ Alles, was sich ändert, liegt unter `inhalt/`, getrennt vom Code. Eine Änderun
 | `inhalt/marken.json` | Die geführten Marken |
 | `inhalt/hinweis.json` | Band für Ferien und Anlässe: `text`, `von`, `bis` (Datum als JJJJ-MM-TT). Ausserhalb des Zeitraums verschwindet es von selbst. Höchstens 95 Zeichen |
 | `inhalt/start.json` | Alle Texte der Startseite. Ein Teil zwischen Sternen wird kursiv gesetzt |
+| `inhalt/seiten.json` | Texte der Unterseiten samt Impressum und Datenschutz |
 
 Der Bau prüft die Angaben. Er bricht ab, wenn ein Pflichtfeld fehlt, ein Bild keinen Alt-Text hat oder ein Datum nicht stimmt.
 
-Die Texte der Startseite tragen `freigegeben`. Solange dort `false` steht, ist der Eintrag ein Entwurf. Auf der Testadresse wird er geduldet. Mit `SITE_STUFE=live` bricht der Bau ab, bis alles freigegeben ist.
+Die Texte der Startseite und der Unterseiten tragen `freigegeben`. Solange dort `false` steht, ist der Eintrag ein Entwurf. Auf der Testadresse wird er geduldet. Mit `SITE_STUFE=live` bricht der Bau ab, bis alles freigegeben ist.
 
 ## Aufbau
 
