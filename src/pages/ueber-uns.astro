@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import '../stile/unterseite.css';
 import Seite from '../layouts/Seite.astro';
 import Betont from '../components/Betont.astro';
+import Unterkopf from '../components/Unterkopf.astro';
 import BesuchBand from '../components/BesuchBand.astro';
 import { seiten } from '../inhalt/seiten.js';
 import { start } from '../inhalt/start.js';
@@ -13,10 +14,7 @@ const s = seiten.ueber;
 ---
 
 <Seite titel={s.seitentitel} beschreibung={s.beschreibung} pfad={[['Über uns', '/ueber-uns/']]}>
-  <header class="u-kopf">
-    <h1 class="gross"><Betont text={s.titel} /></h1>
-    <p class="lead">{start.menschen.text}</p>
-  </header>
+  <Unterkopf titel={s.titel} lead={start.menschen.text} bild={laden1} alt="Blick durch den Laden: Präsentationstisch mit Dessous, Kommoden und Wäsche an den Wänden" />
   <section class="u-teil leinen" aria-labelledby="t-wir">
     <h2 id="t-wir" class="gross"><Betont text={start.menschen.namen} /></h2>
     <div class="u-inhalt">
@@ -28,7 +26,6 @@ const s = seiten.ueber;
     <div class="u-inhalt">
       <p>{start.laden.text}</p>
     </div>
-    <figure class="u-ganz u-bild"><Image src={laden1} alt="Blick durch den Laden: Präsentationstisch mit Dessous, Kommoden und Wäsche an den Wänden" widths={[640, 960, 1500]} sizes="100vw" quality={72} /></figure>
     <figure class="u-ganz u-bild"><Image src={laden2} alt="Sitzecke im Laden mit Bistrotisch, Spiegel und Wäsche an der Wand" widths={[640, 960, 1500]} sizes="100vw" quality={72} /></figure>
   </section>
   <BesuchBand />

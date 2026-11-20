@@ -2,19 +2,18 @@
 import '../stile/unterseite.css';
 import Seite from '../layouts/Seite.astro';
 import Betont from '../components/Betont.astro';
+import Unterkopf from '../components/Unterkopf.astro';
 import BesuchBand from '../components/BesuchBand.astro';
 import { marken } from '../inhalt/marken.js';
 import { seiten } from '../inhalt/seiten.js';
+import avero from '../assets/bilder/avero.jpg';
 
 const s = seiten.marken;
 const fuer = (wen) => marken.filter((m) => m.fuer.includes(wen));
 ---
 
 <Seite titel={s.seitentitel} beschreibung={s.beschreibung} pfad={[['Marken', '/marken/']]}>
-  <header class="u-kopf">
-    <h1 class="gross"><Betont text={s.titel} /></h1>
-    <p class="lead">{s.lead}</p>
-  </header>
+  <Unterkopf titel={s.titel} lead={s.lead} bild={avero} alt="Dunkler BH mit gestickten Trägern auf anthrazitfarbenem Samt, dazwischen korallenrote Blüten" />
   <section class="u-teil leinen" aria-labelledby="t-sie">
     <h2 id="t-sie" class="etikett">Für Sie</h2>
     <ul class="u-inhalt liste-gross">{fuer('sie').map((m) => <li>{m.name}</li>)}</ul>
