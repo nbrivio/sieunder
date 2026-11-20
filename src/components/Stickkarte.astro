@@ -1,0 +1,190 @@
+---
+// Die Umgebung des Ladens, wie auf Tüll gestickt und in einen Stickrahmen gespannt. Ein Klick öffnet die Routenplanung.
+// Mit Bewegung sticht sich die Karte Stich für Stich, sobald sie ins Bild kommt.
+import { betrieb, route } from '../inhalt/betrieb.js';
+import { karte } from '../inhalt/karte.js';
+
+const [bx, by] = karte.bahnhof;
+const [mx, my] = karte.marktplatz;
+const meter = Math.round(Math.hypot(bx, by) / 50) * 50;
+const text = `Gestickte Karte: ${betrieb.name} an der ${betrieb.strasse}, rund ${meter} Meter vom Bahnhof ${betrieb.ort}. Route planen`;
+const arten = ['neben', 'haupt', 'weg-zu-uns'];
+---
+
+<figure class="stick">
+  <a class="rahmen" href={route} rel="noopener" aria-label={text} data-karte>
+    <svg viewBox="-320 -510 720 720" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="tuell" width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="5.5" cy="5.5" r="1.1"></circle></pattern>
+        <clipPath id="rund"><circle cx="40" cy="-150" r="332"></circle></clipPath>
+        <mask id="stich" maskUnits="userSpaceOnUse" x="-320" y="-510" width="720" height="720">
+          {karte.wege.map((weg) => <polyline class="spur" points={weg.punkte} pathLength="1" />)}
+        </mask>
+      </defs>
+      <circle class="stoff" cx="40" cy="-150" r="332"></circle>
+      <circle class="tuell" cx="40" cy="-150" r="332"></circle>
+      <g clip-path="url(#rund)">
+        <g mask="url(#stich)">
+          {arten.flatMap((art) => karte.wege.filter((weg) => weg.art === art).map((weg) => <polyline class={`faden ${art}`} points={weg.punkte} />))}
+        </g>
+        <g class="orte">
+          <rect class="haus" x={bx - 26} y={by - 12} width="52" height="24" rx="3"></rect>
+          <text x={bx} y={by + 44}>Bahnhof</text>
+          <text class="klein" x={mx - 14} y={my - 16}>Marktplatz</text>
+          <text class="strasse" x="112" y="-92" transform="rotate(-57 112 -92)">Bahnhofstrasse</text>
+        </g>
+        <g class="wir">
+          <circle r="21"></circle>
+          <path d="M-9,-9 L9,9 M9,-9 L-9,9 M0,-12 L0,12 M-12,0 L12,0"></path>
+          <text x="34" y="10">hier sind wir</text>
+        </g>
+      </g>
+      <circle class="reif" cx="40" cy="-150" r="340"></circle>
+      <circle class="reif innen" cx="40" cy="-150" r="329"></circle>
+    </svg>
+  </a>
+  <figcaption>Kartendaten © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap-Mitwirkende</a></figcaption>
+</figure>
+
+<style>
+  .stick {
+    width: min(100%, 520px);
+  }
+  .rahmen {
+    display: block;
+    border-radius: 50%;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .stoff {
+    fill: var(--se-papier);
+  }
+  .tuell {
+    fill: url(#tuell);
+    color: var(--se-moos);
+    opacity: 0.22;
+  }
+  pattern circle {
+    fill: var(--se-moos);
+  }
+  .reif {
+    fill: none;
+    stroke: var(--se-espresso);
+    stroke-width: 13;
+  }
+  .reif.innen {
+    stroke: rgb(255 255 255 / 0.28);
+    stroke-width: 2;
+  }
+  .faden {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .faden.neben {
+    stroke: var(--se-moos);
+    stroke-width: 3;
+    stroke-dasharray: 8 7;
+    opacity: 0.75;
+  }
+  .faden.haupt {
+    stroke: var(--se-tinte);
+    stroke-width: 4.5;
+    stroke-dasharray: 12 7;
+  }
+  .faden.weg-zu-uns {
+    stroke: var(--se-koralle);
+    stroke-width: 7.5;
+    stroke-dasharray: 15 8;
+  }
+  .spur {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 14;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .orte text,
+  .wir text {
+    font-family: var(--se-font-titel);
+    font-size: 30px;
+    font-style: italic;
+    fill: var(--se-tinte);
+    text-anchor: middle;
+  }
+  .orte .klein {
+    font-size: 24px;
+  }
+  .orte .strasse {
+    font-size: 23px;
+    fill: var(--se-koralle);
+  }
+  .haus {
+    fill: none;
+    stroke: var(--se-tinte);
+    stroke-width: 3.5;
+    stroke-dasharray: 8 5;
+    stroke-linecap: round;
+  }
+  .wir circle {
+    fill: var(--se-papier);
+    stroke: var(--se-koralle);
+    stroke-width: 4.5;
+    stroke-dasharray: 9 5;
+    stroke-linecap: round;
+  }
+  .wir path {
+    fill: none;
+    stroke: var(--se-koralle);
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+  .wir text {
+    font-size: 34px;
+    text-anchor: start;
+    paint-order: stroke;
+    stroke: var(--se-papier);
+    stroke-width: 9px;
+    stroke-linejoin: round;
+  }
+  .rahmen:hover .reif:not(.innen) {
+    stroke: var(--se-koralle);
+  }
+  figcaption {
+    margin-top: 10px;
+    color: var(--se-moos);
+    font-size: 12px;
+    text-align: center;
+  }
+  figcaption a {
+    display: inline-block;
+    padding: 6px 0;
+  }
+  /* Mit Bewegung: Die Fäden erscheinen entlang der Strassen, die Bahnhofstrasse zuletzt. Das Skript setzt die Reihenfolge. */
+  :global(.bewegt) .spur {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  :global(.bewegt) .schreibt .spur {
+    animation: stechen 1.1s ease-out forwards;
+    animation-delay: calc(var(--i) * 70ms);
+  }
+  :global(.bewegt) .wir,
+  :global(.bewegt) .orte {
+    opacity: 0;
+  }
+  :global(.bewegt) .schreibt .wir,
+  :global(.bewegt) .schreibt .orte {
+    opacity: 1;
+    transition: opacity 0.6s 1.9s;
+  }
+  @keyframes stechen {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

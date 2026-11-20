@@ -1,0 +1,68 @@
+---
+// Schluss der Unterseiten: Einladung in den Laden mit Adresse, Status und der gestickten Karte.
+import Stickkarte from './Stickkarte.astro';
+import { betrieb, route, telefonZiel, telefonAnzeige, zeitenMinuten } from '../inhalt/betrieb.js';
+---
+
+<section class="besuchband" aria-labelledby="t-band">
+  <div class="b-text">
+    <p class="etikett status dunkel" data-zeiten={JSON.stringify(zeitenMinuten)}><i aria-hidden="true"></i><span>Dienstag bis Samstag für dich da</span></p>
+    <h2 id="t-band" class="gross">Komm <em>vorbei</em></h2>
+    <address>{betrieb.strasse}<br />{betrieb.plz} {betrieb.ort}</address>
+    <div class="wege">
+      <a class="knopf" href={route} rel="noopener">Route planen</a>
+      <a href={telefonZiel}>{telefonAnzeige}</a>
+    </div>
+  </div>
+  <Stickkarte />
+</section>
+
+<style>
+  .besuchband {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px 64px;
+    padding: clamp(48px, 7vw, 100px) var(--rand);
+    background: var(--se-rose);
+  }
+  .b-text {
+    flex: 1 1 320px;
+    display: grid;
+    gap: 22px;
+    justify-items: start;
+  }
+  h2 {
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 0.95;
+  }
+  address {
+    font-size: clamp(18px, 1.6vw, 22px);
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .status i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--se-moos);
+  }
+  .status.offen i {
+    background: #2f8f5b;
+    box-shadow: 0 0 0 4px rgb(47 143 91 / 0.18);
+  }
+  .wege {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 26px;
+  }
+  .wege a:not(.knopf) {
+    padding: 13px 0;
+    font-weight: 500;
+  }
+</style>

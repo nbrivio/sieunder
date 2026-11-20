@@ -131,15 +131,16 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   }
 
   // Der Gruss im Fuss schreibt sich einmal, sobald er ins Bild kommt.
-  for (const hand of document.querySelectorAll('[data-hand]')) {
-    hand.querySelectorAll('path').forEach((pfad, i) => pfad.style.setProperty('--i', i));
+  // Dasselbe gilt für die gestickte Karte: Ihre Fäden erscheinen der Reihe nach.
+  for (const hand of document.querySelectorAll('[data-hand], [data-karte]')) {
+    hand.querySelectorAll('path, .spur').forEach((pfad, i) => pfad.style.setProperty('--i', i));
     new IntersectionObserver(
       (eintraege, waechter) => {
         if (!eintraege[0].isIntersecting) return;
         hand.classList.add('schreibt');
         waechter.disconnect();
       },
-      { threshold: 0.4 },
+      { threshold: 0.35 },
     ).observe(hand);
   }
 

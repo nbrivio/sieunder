@@ -1,0 +1,132 @@
+{
+  "quelle": "OpenStreetMap, abgerufen am 20. Nov. 26. Koordinaten in Metern, der Laden liegt im Ursprung, Norden ist oben.",
+  "laden": [
+    0,
+    0
+  ],
+  "bahnhof": [
+    130,
+    -460
+  ],
+  "marktplatz": [
+    -126,
+    65
+  ],
+  "wege": [
+    {
+      "name": "Bahnhofstrasse",
+      "art": "weg-zu-uns",
+      "punkte": "-67,69 -69,61 -64,48 11,-26 40,-66 121,-191 148,-245 222,-400"
+    },
+    {
+      "name": "Weinfelderstrasse",
+      "art": "haupt",
+      "punkte": "-362,98 -280,109 -213,119 -151,122 -129,128 -95,133 -68,138 -39,148"
+    },
+    {
+      "name": "Romanshornerstrasse",
+      "art": "haupt",
+      "punkte": "-15,139 -11,108 -8,70 4,47 28,26 88,-7"
+    },
+    {
+      "name": "Arbonerstrasse",
+      "art": "haupt",
+      "punkte": "-18,155 17,156 132,175"
+    },
+    {
+      "name": "St. Gallerstrasse",
+      "art": "haupt",
+      "punkte": "-129,128 -169,324"
+    },
+    {
+      "name": "Kirchstrasse",
+      "art": "haupt",
+      "punkte": "-213,119 -82,-237 -76,-254"
+    },
+    {
+      "name": "Freiestrasse",
+      "art": "neben",
+      "punkte": "-340,-338 -76,-254 121,-191"
+    },
+    {
+      "name": "Rütistrasse",
+      "art": "neben",
+      "punkte": "-8,70 -33,64 -67,69 -84,74 -111,68 -179,27 -257,-17"
+    },
+    {
+      "name": "Schulstrasse",
+      "art": "neben",
+      "punkte": "-109,-165 -13,-134 55,-89"
+    },
+    {
+      "name": "Schulstrasse",
+      "art": "neben",
+      "punkte": "71,-114 84,-105 119,-58 134,-36"
+    },
+    {
+      "name": "Tellstrasse",
+      "art": "neben",
+      "punkte": "-58,-301 -24,-290 86,-274 131,-255 148,-245"
+    },
+    {
+      "name": "Rennweg",
+      "art": "neben",
+      "punkte": "131,-255 135,-266 125,-293 118,-357"
+    },
+    {
+      "name": "Winkelriedstrasse",
+      "art": "neben",
+      "punkte": "148,-245 301,-141"
+    },
+    {
+      "name": "Zielweg",
+      "art": "neben",
+      "punkte": "-118,-141 -42,-117 -13,-95 40,-66"
+    },
+    {
+      "name": "Zielstrasse",
+      "art": "neben",
+      "punkte": "-298,-141 -179,-97"
+    },
+    {
+      "name": "Lindenstrasse",
+      "art": "neben",
+      "punkte": "46,16 17,-34"
+    },
+    {
+      "name": "Schmidgasse",
+      "art": "neben",
+      "punkte": "9,145 17,82 13,74 -6,64"
+    },
+    {
+      "name": "Haldenstrasse",
+      "art": "neben",
+      "punkte": "301,136 260,89 172,-60"
+    },
+    {
+      "name": "Florastrasse",
+      "art": "neben",
+      "punkte": "219,-119 213,-143 254,-179 365,-307"
+    },
+    {
+      "name": "Bachstrasse",
+      "art": "neben",
+      "punkte": "252,-88 322,62"
+    },
+    {
+      "name": "Dianastrasse",
+      "art": "neben",
+      "punkte": "80,-310 85,-303 125,-293"
+    },
+    {
+      "name": "Berglistrasse",
+      "art": "neben",
+      "punkte": "147,180 143,257"
+    },
+    {
+      "name": "Hegibachstrasse",
+      "art": "neben",
+      "punkte": "240,210 247,194 284,159 301,136 378,66"
+    }
+  ]
+}

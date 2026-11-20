@@ -3,9 +3,9 @@ import { Image } from 'astro:assets';
 import '../stile/unterseite.css';
 import Seite from '../layouts/Seite.astro';
 import Betont from '../components/Betont.astro';
+import BesuchBand from '../components/BesuchBand.astro';
 import { seiten } from '../inhalt/seiten.js';
 import { start } from '../inhalt/start.js';
-import { pfad } from '../inhalt/pfad.js';
 import laden1 from '../assets/bilder/laden-1.jpg';
 import laden2 from '../assets/bilder/laden-2.jpg';
 
@@ -31,7 +31,5 @@ const s = seiten.ueber;
     <figure class="u-ganz u-bild"><Image src={laden1} alt="Blick durch den Laden: Präsentationstisch mit Dessous, Kommoden und Wäsche an den Wänden" widths={[640, 960, 1500]} sizes="100vw" quality={72} /></figure>
     <figure class="u-ganz u-bild"><Image src={laden2} alt="Sitzecke im Laden mit Bistrotisch, Spiegel und Wäsche an der Wand" widths={[640, 960, 1500]} sizes="100vw" quality={72} /></figure>
   </section>
-  <section class="u-teil rose" aria-label="Besuch">
-    <div class="u-ganz wege"><a class="knopf" href={pfad('/#besuch')}>Besuch planen</a></div>
-  </section>
+  <BesuchBand />
 </Seite>

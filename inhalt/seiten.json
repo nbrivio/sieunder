@@ -29,7 +29,7 @@
     "titel": "Impressum",
     "teile": [
       { "titel": "Verantwortlich für den Inhalt", "text": ["Sandra Brivio, Inhaberin"] },
-      { "titel": "Bilder", "text": ["Die Bilder der Kollektionen stammen von den jeweiligen Herstellern und werden mit deren Einverständnis gezeigt. Die Aufnahmen aus dem Laden gehören der Sie&Er Dessous GmbH."] },
+      { "titel": "Bilder", "text": ["Die Bilder der Kollektionen stammen von den jeweiligen Herstellern und werden mit deren Einverständnis gezeigt. Die Aufnahmen aus dem Laden gehören der Sie&Er Dessous GmbH.", "Die gestickte Karte beruht auf Daten von OpenStreetMap."] },
       { "titel": "Haftung", "text": ["Wir pflegen diese Seite sorgfältig. Für die Richtigkeit und Vollständigkeit der Angaben können wir trotzdem keine Gewähr übernehmen. Für Inhalte fremder Seiten, auf die wir verweisen, sind deren Betreiber verantwortlich."] }
     ]
   },
@@ -43,7 +43,7 @@
       { "titel": "Wer verantwortlich ist", "text": ["Verantwortlich ist die Sie&Er Dessous GmbH, Bahnhofstrasse 6, 8580 Amriswil. Fragen zum Datenschutz beantworten wir am Telefon oder per Mail."] },
       { "titel": "Was beim Aufruf der Seite geschieht", "text": ["Die Seite wird bei GitHub Pages bereitgestellt, einem Dienst der GitHub Inc. in den USA. Wie jeder Webserver verarbeitet dieser Dienst bei jedem Aufruf technische Angaben, darunter die IP-Adresse, den Zeitpunkt und den verwendeten Browser. Das ist nötig, um die Seite auszuliefern und vor Missbrauch zu schützen. Wir selbst haben keinen Zugriff auf diese Angaben.", "Schriften, Bilder und Skripte liegen auf derselben Adresse wie die Seite. Es werden keine Inhalte von Dritten nachgeladen."] },
       { "titel": "Wenn du uns anrufst oder schreibst", "text": ["Dann verwenden wir deine Angaben, um dein Anliegen zu beantworten oder einen Termin zu vereinbaren, und nur dafür. Wir geben sie nicht weiter."] },
-      { "titel": "Verweise auf andere Seiten", "text": ["Auf der Seite stehen Verweise auf unsere Profile bei Instagram und Facebook und auf die Routenplanung von Google Maps. Erst wenn du einen Verweis anklickst, gelten die Bestimmungen des jeweiligen Anbieters."] },
+      { "titel": "Verweise auf andere Seiten", "text": ["Auf der Seite stehen Verweise auf unsere Profile bei Instagram und Facebook, auf die Routenplanung von Google Maps und auf OpenStreetMap. Die gestickte Karte ist eine Zeichnung und lädt nichts von einem Kartendienst. Erst wenn du einen Verweis anklickst, gelten die Bestimmungen des jeweiligen Anbieters."] },
       { "titel": "Deine Rechte", "text": ["Du kannst jederzeit Auskunft darüber verlangen, welche Angaben wir über dich haben, und sie berichtigen oder löschen lassen. Ein Anruf oder eine Mail genügt."] }
     ]
   }

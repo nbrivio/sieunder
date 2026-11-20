@@ -2,6 +2,7 @@
 import '../../stile/unterseite.css';
 import Seite from '../../layouts/Seite.astro';
 import Betont from '../../components/Betont.astro';
+import BesuchBand from '../../components/BesuchBand.astro';
 import { betrieb, telefonZiel, telefonAnzeige } from '../../inhalt/betrieb.js';
 import { seiten } from '../../inhalt/seiten.js';
 import { start } from '../../inhalt/start.js';
@@ -32,4 +33,5 @@ const s = seiten.brust;
       {s.ablauf.map((schritt) => (<li><h3>{schritt.titel}</h3><p>{schritt.text}</p></li>))}
     </ol>
   </section>
+  <BesuchBand />
 </Seite>

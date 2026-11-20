@@ -2,9 +2,9 @@
 import '../stile/unterseite.css';
 import Seite from '../layouts/Seite.astro';
 import Betont from '../components/Betont.astro';
+import BesuchBand from '../components/BesuchBand.astro';
 import { marken } from '../inhalt/marken.js';
 import { seiten } from '../inhalt/seiten.js';
-import { pfad } from '../inhalt/pfad.js';
 
 const s = seiten.marken;
 const fuer = (wen) => marken.filter((m) => m.fuer.includes(wen));
@@ -23,7 +23,5 @@ const fuer = (wen) => marken.filter((m) => m.fuer.includes(wen));
     <h2 id="t-er" class="etikett">Für Ihn</h2>
     <ul class="u-inhalt liste-gross">{fuer('er').map((m) => <li>{m.name}</li>)}</ul>
   </section>
-  <section class="u-teil rose" aria-label="Besuch">
-    <div class="u-ganz wege"><a class="knopf" href={pfad('/#besuch')}>Besuch planen</a></div>
-  </section>
+  <BesuchBand />
 </Seite>
