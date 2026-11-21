@@ -49,6 +49,9 @@ h1 {
   max-width: 30em;
   font-size: clamp(17px, 1.4vw, 20px);
 }
+.satzzeile {
+  display: block;
+}
 .a-text .knopf {
   padding: 16px 28px;
   background: var(--se-weiss);

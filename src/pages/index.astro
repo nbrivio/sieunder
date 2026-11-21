@@ -39,6 +39,9 @@ const zerlegt = (text) => {
 const tag = zerlegt(start.collage);
 const nacht = zerlegt(start.collageNacht);
 if (tag.vor !== nacht.vor) throw new Error('Tag- und Nachtsatz der Collage müssen gleich beginnen (inhalt/start.json).');
+// Jeder Satz der Einleitung steht auf eigener Zeile. Zahl und folgendes Wort bleiben zusammen,
+// ebenso die letzten zwei Worte eines Satzes, damit nie ein Wort allein auf die Zeile rutscht.
+const leadSaetze = start.lead.split(/(?<=\.)\s+/).map((satz) => satz.replace(/(\d) /g, '$1\u00a0').replace(/ (\S+)$/, '\u00a0$1'));
 const halb = '(max-width: 860px) 64vw, 34vw';
 ---
 
@@ -52,7 +55,7 @@ const halb = '(max-width: 860px) 64vw, 34vw';
       <div class="a-text">
         <p class="etikett status" data-zeiten={JSON.stringify(zeitenMinuten)}><i aria-hidden="true"></i><span>Dienstag bis Samstag für dich da</span></p>
         <h1 class="gross"><Betont text={start.titel} /></h1>
-        <p class="lead">{start.lead}</p>
+        <p class="lead">{leadSaetze.map((satz) => <span class="satzzeile">{satz}</span>)}</p>
         <a class="knopf" href={pfad('/#besuch')}>Besuch planen</a>
       </div>
     </div>
