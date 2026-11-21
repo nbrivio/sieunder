@@ -87,7 +87,7 @@ h1 {
   overflow: hidden;
 }
 .bewegt .a-karte {
-  inset: calc(var(--p) * 17%) calc(var(--p) * 27%);
+  inset: calc(var(--p) * 17%) calc(var(--p) * 28%);
   border-radius: calc(var(--p) * 30px);
 }
 .bewegt .a-karte img {
@@ -105,6 +105,7 @@ h1 {
   opacity: calc(1 - var(--p) * 3);
   transform: translateY(calc(var(--p) * -70px));
 }
+/* Die beiden Worte stehen links und rechts neben der Karte, je auf zwei Zeilen, damit die Karte nichts verdeckt. */
 .bewegt .a-paar {
   position: absolute;
   z-index: 1;
@@ -113,18 +114,24 @@ h1 {
   top: 50%;
   display: flex;
   justify-content: space-between;
-  padding: 0 3vw;
+  align-items: center;
+  padding: 0 var(--rand);
   transform: translateY(-50%);
-  font-size: clamp(60px, 15vw, 236px);
-  line-height: 1;
-  white-space: nowrap;
+  font-size: clamp(60px, 13vw, 230px);
+  line-height: 0.92;
   opacity: calc(var(--p) * 2.5 - 1);
 }
-.bewegt .a-paar span:first-child {
-  transform: translateX(calc((1 - var(--p)) * 14vw));
+.bewegt .a-paar span {
+  width: min-content;
 }
 .bewegt .a-paar span:last-child {
-  transform: translateX(calc((1 - var(--p)) * -14vw));
+  text-align: right;
+}
+.bewegt .a-paar span:first-child {
+  transform: translateX(calc((1 - var(--p)) * 10vw));
+}
+.bewegt .a-paar span:last-child {
+  transform: translateX(calc((1 - var(--p)) * -10vw));
 }
 
 /* Sätze, deren Worte beim Scrollen scharf werden. Das Skript teilt sie in Worte. */
@@ -511,13 +518,18 @@ h2.gross {
     height: 190svh;
   }
   .bewegt .a-karte {
-    inset: calc(var(--p) * 24%) calc(var(--p) * 9%);
+    inset: calc(var(--p) * 26%) calc(var(--p) * 9%);
   }
   .bewegt .a-paar {
     flex-direction: column;
     align-items: center;
-    gap: 46svh;
+    gap: 56svh;
     font-size: 21vw;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .bewegt .a-paar span {
+    width: auto;
   }
   .bewegt .a-paar span:first-child,
   .bewegt .a-paar span:last-child {
