@@ -5,7 +5,7 @@ import roh from '../../inhalt/start.json';
 // Titel enden ohne Punkt, Sätze haben eine Obergrenze, damit sie auf dem Handy nicht ausufern.
 const titel = z.string().min(1).max(60).refine((t) => !/\.\*?$/.test(t), 'Titel enden ohne Punkt.');
 const satz = z.string().min(20).max(110);
-const absatz = z.string().min(20).max(260);
+const absatz = z.string().min(20).max(300);
 
 const schema = z.object({
   seitentitel: z.string().min(10),
