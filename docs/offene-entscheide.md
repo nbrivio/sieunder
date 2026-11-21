@@ -12,13 +12,12 @@
 | 13 | Gibt es eigene Aufnahmen von Laden, Team und Beratung in guter Qualität, neuer als 2013? | Sonst ein halber Tag Shooting | Nicolas |
 | 14 | Zuordnung der Marken zu «Sie» und «Er» in `inhalt/marken.json` ist eine Annahme. | Im Laden bestätigen | Inhaberin |
 | 17 | Sonntag steht nicht in den Öffnungszeiten der alten Seite. | Als geschlossen aufnehmen, nach Bestätigung | Inhaberin |
-| 18 | Texte der Startseite stammen aus dem Entwurf und brauchen eure Stimme: die zwei Gefühlssätze, «Komm herein», «Wer dahinter steht». | Gemeinsam durchgehen, dann `freigegeben` setzen | Nicolas, Inhaberin |
 | 19 | Porträt von Sandra und Denise fehlt. | Bild in den Ordner `Bilder/` legen | Nicolas |
 | 20 | Ladenbilder sind von 2013 und klein (1500 Pixel). | Neue Aufnahmen | Nicolas |
 | 21 | Bewegtbild fehlt: ein ruhiges Video (Stoff im Licht, Laden am Morgen) brächte am meisten Gefühl. | Zehn Sekunden vom Handy auf Stativ als Test | Nicolas |
 | 24 | Soll Sandra im Kapitel Brustprothesen namentlich stehen? | Ja, so steht es auf der alten Seite | Inhaberin |
 | 25 | Impressum: Die UID der GmbH fehlt, ich habe sie öffentlich nicht gefunden. | Aus dem Handelsregisterauszug eintragen | Nicolas |
-| 26 | Impressum und Datenschutz sind Entwürfe und nicht rechtlich geprüft. Der Satz zu den Herstellerbildern («mit deren Einverständnis») stimmt erst, wenn die Rechte geklärt sind. | Gegenlesen lassen, dann freigeben | Nicolas |
+| 26 | Impressum und Datenschutz sind Entwürfe und nicht rechtlich geprüft. Der Satz zu den Herstellerbildern («mit deren Einverständnis») stimmt erst, wenn die Rechte geklärt sind. | Gegenlesen lassen, dann `freigegeben` in `inhalt/seiten.json` setzen. Die übrigen Texte der Unterseiten (Marken, Über uns, Brustprothesen) sind seit 21. Nov. 26 abgenommen; nur diese beiden Rechtstexte halten die Freigabe noch zurück | Nicolas |
 | 27 | «So läuft ein Termin ab» auf der Brustprothesen-Seite ist ein Vorschlag. | Mit Sandra abgleichen | Inhaberin |
 | 28 | Markenseite listet nur Namen. Je Marke ein eigener Abschnitt bringt Suchtreffer wie «Marie Jo Amriswil». | Mit zwei bis drei Marken beginnen | Nicolas |
 | 29 | Trockenlauf für die richtige Adresse kann jetzt in die Bau-Strecke: Alle Weiterleitungen haben ihr Ziel. Er läuft aber erst grün, wenn die Texte freigegeben sind. | Mit der Freigabe einschalten | Nicolas |
