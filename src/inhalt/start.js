@@ -17,6 +17,8 @@ const schema = z.object({
   satz,
   markenTitel: titel,
   collage: satz,
+  // Derselbe Satz für die Nacht: Er löst den Tagessatz ab, sobald das dunkle Bild den Schirm füllt.
+  collageNacht: satz,
   laden: z.object({ titel, text: absatz }),
   menschen: z.object({ etikett: titel, namen: titel, text: absatz, bildHinweis: z.string().min(1).optional() }),
   beratung: z.object({ etikett: titel, satz }),

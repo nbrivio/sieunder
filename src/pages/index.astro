@@ -30,6 +30,15 @@ const markenBilder = marken.filter((m) => m.bild).map((m) => {
   if (!datei) throw new Error(`Bild zur Marke ${m.name} fehlt: src/assets/bilder/marken/${m.bild}`);
   return { name: m.name, bild: datei[1].default };
 });
+// Tag- und Nachtsatz teilen den Anfang; nur die betonte Stelle und das Verb wechseln. Beide bekommen eigene Zeilen,
+// damit die Sätze beim Überblenden genau aufeinanderliegen.
+const zerlegt = (text) => {
+  const [, vor, betont, nach] = text.match(/^(.*?)\s*\*(.+)\*\s*(.*)$/);
+  return { vor, betont, nach };
+};
+const tag = zerlegt(start.collage);
+const nacht = zerlegt(start.collageNacht);
+if (tag.vor !== nacht.vor) throw new Error('Tag- und Nachtsatz der Collage müssen gleich beginnen (inhalt/start.json).');
 const halb = '(max-width: 860px) 64vw, 34vw';
 ---
 
@@ -66,11 +75,12 @@ const halb = '(max-width: 860px) 64vw, 34vw';
 
   <section class="collage" data-roll aria-label="Stimmung">
     <div class="haft">
-      <p class="c-satz gross"><Betont text={start.collage} /></p>
+      <p class="c-satz c-tag gross">{tag.vor} <em class="c-zeile">{tag.betont}</em> <span class="c-zeile">{tag.nach}</span></p>
       <figure class="c-bild c-1"><Image src={janeNah} alt="Mintgrüne Stickerei auf Tüll, aus der Nähe" widths={breiten} sizes={halb} quality={70} /></figure>
       <figure class="c-bild c-2"><Image src={noriNah} alt="Korallenrote Spitze mit Bogenkante auf grünem Stoff" widths={breiten} sizes={halb} quality={70} /></figure>
       <figure class="c-bild c-3"><Image src={jane} alt="Mintgrüner BH mit Stickerei auf rosenholzfarbenem Leinen, daneben gelbgrüne Blüten" widths={breiten} sizes={halb} quality={70} /></figure>
       <figure class="c-bild c-4"><Image src={averoNah} alt="Träger mit gestickten Blüten in Bronze auf dunklem Samt" widths={breiten} sizes={halb} quality={70} /></figure>
+      <p class="c-satz c-nacht gross">{nacht.vor} <em class="c-zeile">{nacht.betont}</em> <span class="c-zeile">{nacht.nach}</span></p>
       <figure class="c-bild c-ende"><Image src={avero} alt="Dunkler BH mit gestickten Trägern auf anthrazitfarbenem Samt, dazwischen korallenrote Blüten" widths={[640, 960, 1440, 2000]} sizes="100vw" quality={70} /></figure>
     </div>
   </section>

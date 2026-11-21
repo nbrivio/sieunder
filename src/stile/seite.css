@@ -257,7 +257,7 @@ h1 {
 }
 
 /* 3 Collage: Ein Satz bleibt stehen, grosse Bilder ziehen an ihm vorbei.
-   Am Schluss füllt das dunkle Bild den Schirm, der Satz wird hell. */
+   Am Schluss füllt das dunkle Bild den Schirm: Der Satz für den Tag blendet in den Satz für die Nacht über. */
 .collage {
   --q: clamp(0, calc((var(--p) - 0.74) * 6), 1);
   background: var(--se-leinen);
@@ -286,6 +286,9 @@ h1 {
   aspect-ratio: 4 / 5;
   object-fit: cover;
 }
+.c-nacht {
+  margin-top: clamp(24px, 4vw, 48px);
+}
 .c-ende {
   grid-column: 1 / -1;
 }
@@ -307,8 +310,19 @@ h1 {
   position: relative;
   z-index: 4;
   margin: 0;
+  grid-area: 1 / 1;
   padding: 0 var(--rand);
-  color: color-mix(in srgb, var(--se-tinte), var(--se-weiss) calc(var(--q) * 100%));
+}
+.bewegt .c-zeile {
+  display: block;
+  white-space: nowrap;
+}
+.bewegt .c-tag {
+  opacity: calc(1 - var(--q));
+}
+.bewegt .c-nacht {
+  color: var(--se-weiss);
+  opacity: var(--q);
 }
 .bewegt .c-bild {
   position: absolute;
