@@ -16,7 +16,6 @@
 | 20 | Ladenbilder sind von 2013 und klein (1500 Pixel). | Neue Aufnahmen | Nicolas |
 | 21 | Bewegtbild fehlt: ein ruhiges Video (Stoff im Licht, Laden am Morgen) brächte am meisten Gefühl. | Zehn Sekunden vom Handy auf Stativ als Test | Nicolas |
 | 24 | Soll Sandra im Kapitel Brustprothesen namentlich stehen? | Ja, so steht es auf der alten Seite | Inhaberin |
-| 25 | Impressum: Die UID der GmbH fehlt, ich habe sie öffentlich nicht gefunden. | Aus dem Handelsregisterauszug eintragen | Nicolas |
 | 26 | Impressum und Datenschutz sind Entwürfe und nicht rechtlich geprüft. Der Satz zu den Herstellerbildern («mit deren Einverständnis») stimmt erst, wenn die Rechte geklärt sind. | Gegenlesen lassen, dann `freigegeben` in `inhalt/seiten.json` setzen. Die übrigen Texte der Unterseiten (Marken, Über uns, Brustprothesen) sind seit 21. Nov. 26 abgenommen; nur diese beiden Rechtstexte halten die Freigabe noch zurück | Nicolas |
 | 27 | «So läuft ein Termin ab» auf der Brustprothesen-Seite ist ein Vorschlag. | Mit Sandra abgleichen | Inhaberin |
 | 28 | Markenseite listet nur Namen. Je Marke ein eigener Abschnitt bringt Suchtreffer wie «Marie Jo Amriswil». | Mit zwei bis drei Marken beginnen | Nicolas |
