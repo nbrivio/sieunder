@@ -12,7 +12,7 @@ const schema = z.object({
   freigegeben: z.boolean(),
   marken: z.object({ ...kopf, lead: z.string().min(10).max(200) }),
   ueber: z.object({ ...kopf, ladenTitel: titel }),
-  brust: z.object({ ...kopf, ablaufTitel: titel, ablauf: z.array(z.object({ titel, text: z.string().min(10).max(160) })).length(3) }),
+  brust: z.object({ ...kopf, mehrTitel: titel, mehr: z.array(z.string().min(40).max(400)).min(1).max(3), ablaufTitel: titel, ablauf: z.array(z.object({ titel, text: z.string().min(10).max(160) })).length(3) }),
   impressum: z.object({ ...kopf, teile }),
   datenschutz: z.object({ ...kopf, stand: z.string().regex(/^\d{1,2}\. [A-Z][a-zä]{2}\. \d{2}$/, 'Datum als TT. Mon. JJ'), teile }),
 });

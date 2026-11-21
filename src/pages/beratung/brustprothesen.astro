@@ -26,6 +26,12 @@ const s = seiten.brust;
       </div>
     </div>
   </section>
+  <section class="u-teil leinen" aria-labelledby="t-mehr">
+    <h2 id="t-mehr" class="gross"><Betont text={s.mehrTitel} /></h2>
+    <div class="u-inhalt">
+      {s.mehr.map((absatz) => <p>{absatz}</p>)}
+    </div>
+  </section>
   <section class="u-teil" aria-labelledby="t-ablauf">
     <h2 id="t-ablauf" class="gross"><Betont text={s.ablaufTitel} /></h2>
     <ol class="u-ganz schritte">
