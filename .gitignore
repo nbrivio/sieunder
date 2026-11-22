@@ -8,7 +8,7 @@ berichte/
 
 # Arbeitsunterlagen und Rohbilder bleiben lokal: Das Repository ist öffentlich,
 # Herstellerbilder und Briefings gehören nicht hinein.
-Bilder/
+/Bilder/
 sie_er_brand_project/
 sie_er_brand_experience_master_briefing.md
 *.zip
