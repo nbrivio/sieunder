@@ -284,7 +284,7 @@ h1 {
 }
 
 /* 3 Collage: Ein Satz bleibt stehen, grosse Bilder ziehen an ihm vorbei.
-   Am Schluss wird es Nacht: Der Grund wird dunkel, drei Nachtbilder steigen auf,
+   Am Schluss wird es Nacht: Der Grund wird dunkel, zwei Nachtbilder steigen links und rechts auf,
    und der Satz für den Tag blendet in den Satz für die Nacht über. */
 .collage {
   --q: clamp(0, calc((var(--p) - 0.74) * 6), 1);
@@ -320,7 +320,7 @@ h1 {
 .c-ende {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 .c-n {
@@ -408,28 +408,24 @@ h1 {
   inset: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(12px, 2vw, 32px);
+  justify-content: space-between;
+  padding: 0 clamp(20px, 6vw, 120px);
   background: var(--se-tinte);
   opacity: var(--q);
 }
-/* Die drei Bilder steigen versetzt auf, das mittlere zuerst. */
+/* Die zwei Bilder steigen versetzt auf und lassen die Mitte für den Satz frei. */
 .bewegt .c-n {
   flex: none;
-  width: min(27vw, 54svh);
+  width: min(25vw, 56svh);
   transform: translateY(calc(var(--y) * 1svh + (1 - var(--q)) * var(--h) * 1svh));
 }
 .c-n1 {
-  --y: 5;
-  --h: 16;
-}
-.c-n2 {
-  --y: -4;
-  --h: 8;
+  --y: -3;
+  --h: 12;
 }
 .c-n3 {
-  --y: 7;
-  --h: 24;
+  --y: 5;
+  --h: 22;
 }
 /* Schleier über den Bildern, damit der weisse Satz davor lesbar bleibt. */
 .bewegt .c-ende::after {
@@ -610,20 +606,20 @@ h2.gross {
   .bewegt .a-paar span:last-child {
     transform: none;
   }
-  .bewegt .c-ende {
-    gap: 3vw;
-  }
+  /* Handy: ein Bild oben links, eines unten rechts, der Satz steht dazwischen. */
   .bewegt .c-n {
-    width: 66vw;
+    position: absolute;
+    width: 56vw;
   }
   .c-n1 {
-    --y: 15;
-  }
-  .c-n2 {
-    --y: -5;
+    --y: 0;
+    left: -7vw;
+    top: 5svh;
   }
   .c-n3 {
-    --y: 11;
+    --y: 0;
+    right: -7vw;
+    bottom: 5svh;
   }
   .c-1 {
     --w: 58vw;

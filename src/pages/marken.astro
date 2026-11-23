@@ -6,14 +6,14 @@ import Unterkopf from '../components/Unterkopf.astro';
 import BesuchBand from '../components/BesuchBand.astro';
 import { marken } from '../inhalt/marken.js';
 import { seiten } from '../inhalt/seiten.js';
-import avero from '../assets/bilder/avero.jpg';
+import kopf from '../assets/bilder/marken-kopf.jpg';
 
 const s = seiten.marken;
 const fuer = (wen) => marken.filter((m) => m.fuer.includes(wen));
 ---
 
 <Seite titel={s.seitentitel} beschreibung={s.beschreibung} pfad={[['Marken', '/marken/']]}>
-  <Unterkopf titel={s.titel} lead={s.lead} bild={avero} alt="Dunkler BH mit gestickten Trägern auf anthrazitfarbenem Samt, dazwischen korallenrote Blüten" />
+  <Unterkopf titel={s.titel} lead={s.lead} bild={kopf} alt="Frau im beigen Trenchcoat über einem zartrosa BH sitzt in einem rosa Samtsessel" oben />
   <section class="u-teil leinen" aria-labelledby="t-sie">
     <h2 id="t-sie" class="etikett">Für Sie</h2>
     <ul class="u-inhalt liste-gross">{fuer('sie').map((m) => <li>{m.name}</li>)}</ul>

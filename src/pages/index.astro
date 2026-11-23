@@ -9,13 +9,12 @@ import { start } from '../inhalt/start.js';
 import { istLive } from '../inhalt/stufe.js';
 import { pfad } from '../inhalt/pfad.js';
 import kopf from '../assets/bilder/kopf.jpg';
-import jane from '../assets/bilder/jane.jpg';
+import tag1 from '../assets/bilder/tag-1.jpg';
+import tag2 from '../assets/bilder/tag-2.jpg';
+import tag3 from '../assets/bilder/tag-3.jpg';
+import tag4 from '../assets/bilder/tag-4.jpg';
 import nacht1 from '../assets/bilder/nacht-1.jpg';
-import nacht2 from '../assets/bilder/nacht-2.jpg';
 import nacht3 from '../assets/bilder/nacht-3.jpg';
-import janeNah from '../assets/bilder/jane-detail.jpg';
-import noriNah from '../assets/bilder/nori-detail.jpg';
-import averoNah from '../assets/bilder/avero-detail.jpg';
 import laden1 from '../assets/bilder/laden-1.jpg';
 import laden2 from '../assets/bilder/laden-2.jpg';
 
@@ -82,14 +81,13 @@ const drittel = '(max-width: 860px) 46vw, 27vw';
   <section class="collage" data-roll aria-label="Stimmung">
     <div class="haft">
       <p class="c-satz c-tag gross">{tag.vor} <em class="c-zeile">{tag.betont}</em> <span class="c-zeile">{tag.nach}</span></p>
-      <figure class="c-bild c-1"><Image src={janeNah} alt="Mintgrüne Stickerei auf Tüll, aus der Nähe" widths={breiten} sizes={halb} quality={70} /></figure>
-      <figure class="c-bild c-2"><Image src={noriNah} alt="Korallenrote Spitze mit Bogenkante auf grünem Stoff" widths={breiten} sizes={halb} quality={70} /></figure>
-      <figure class="c-bild c-3"><Image src={jane} alt="Mintgrüner BH mit Stickerei auf rosenholzfarbenem Leinen, daneben gelbgrüne Blüten" widths={breiten} sizes={halb} quality={70} /></figure>
-      <figure class="c-bild c-4"><Image src={averoNah} alt="Träger mit gestickten Blüten in Bronze auf dunklem Samt" widths={breiten} sizes={halb} quality={70} /></figure>
+      <figure class="c-bild c-1"><Image src={tag1} alt="Frau im beigen Trenchcoat über einem zartrosa BH sitzt in einem rosa Samtsessel" widths={breiten} sizes={halb} quality={70} /></figure>
+      <figure class="c-bild c-2"><Image src={tag2} alt="Frau in dunkler Spitzenwäsche lehnt an einer Ballettstange" widths={breiten} sizes={halb} quality={70} /></figure>
+      <figure class="c-bild c-3"><Image src={tag3} alt="Frau in zartrosa BH und offenem Trenchcoat lehnt lächelnd im Sessel" widths={breiten} sizes={halb} quality={70} /></figure>
+      <figure class="c-bild c-4"><Image src={tag4} alt="Mann in Loungewear liegt entspannt auf einer Lederbank" widths={breiten} sizes={halb} quality={70} /></figure>
       <p class="c-satz c-nacht gross">{nacht.vor} <em class="c-zeile">{nacht.betont}</em> <span class="c-zeile">{nacht.nach}</span></p>
       <div class="c-ende">
         <figure class="c-n c-n1"><Image src={nacht1} alt="Frau in weinroter Loungewear sitzt entspannt auf einem weissen Bett" widths={[480, 800]} sizes={drittel} quality={72} /></figure>
-        <figure class="c-n c-n2"><Image src={nacht2} alt="Zwei Frauen in Nachtwäsche aus Satin, die eine im hellen Top mit Spitze, die andere im gemusterten Pyjama" widths={[480, 800]} sizes={drittel} quality={72} /></figure>
         <figure class="c-n c-n3"><Image src={nacht3} alt="Mann im dunkelblauen Pyjama lehnt an einer Betonwand" widths={[480, 800]} sizes={drittel} quality={72} /></figure>
       </div>
     </div>
