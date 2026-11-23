@@ -4,11 +4,12 @@
 import { Image } from 'astro:assets';
 import Betont from './Betont.astro';
 
-const { titel, lead, bild, alt } = Astro.props;
+// «oben» hält den oberen Bildrand fest, wenn dort ein Gesicht liegt.
+const { titel, lead, bild, alt, oben = false } = Astro.props;
 ---
 
 <header class="u-kopf">
   <h1 class="gross"><Betont text={titel} /></h1>
-  <figure class="u-blick"><Image src={bild} alt={alt} widths={[480, 800, 1200]} sizes="(max-width: 860px) 92vw, 42vw" quality={72} loading="eager" fetchpriority="high" /></figure>
+  <figure class:list={['u-blick', { oben }]}><Image src={bild} alt={alt} widths={[480, 800, 1200]} sizes="(max-width: 860px) 92vw, 42vw" quality={72} loading="eager" fetchpriority="high" /></figure>
   <p class="lead">{lead}</p>
 </header>

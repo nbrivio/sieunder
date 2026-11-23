@@ -37,6 +37,9 @@
   height: 100%;
   object-fit: cover;
 }
+.u-blick.oben img {
+  object-position: 50% 0;
+}
 .bewegt .u-blick img {
   animation: ankommen 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }

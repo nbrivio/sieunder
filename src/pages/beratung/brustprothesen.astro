@@ -7,13 +7,13 @@ import BesuchBand from '../../components/BesuchBand.astro';
 import { betrieb, telefonZiel, telefonAnzeige } from '../../inhalt/betrieb.js';
 import { seiten } from '../../inhalt/seiten.js';
 import { start } from '../../inhalt/start.js';
-import janeNah from '../../assets/bilder/jane-detail.jpg';
+import brust from '../../assets/bilder/brust.jpg';
 
 const s = seiten.brust;
 ---
 
 <Seite titel={s.seitentitel} beschreibung={s.beschreibung} pfad={[['Brustprothesen', '/beratung/brustprothesen/']]}>
-  <Unterkopf titel={s.titel} lead={start.brust.text} bild={janeNah} alt="Mintgrüne Stickerei auf Tüll, aus der Nähe" />
+  <Unterkopf titel={s.titel} lead={start.brust.text} bild={brust} alt="Frau mit silbergrauem Haar in taupefarbenem BH und Slip lehnt lächelnd an einem Stuhl, daneben ein heller Vorhang" oben />
   <section class="u-teil rose" aria-labelledby="t-frage">
     <h2 id="t-frage" class="gross"><Betont text={start.brust.satz} /></h2>
     <div class="u-inhalt">
