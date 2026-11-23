@@ -1,6 +1,6 @@
 [
   {"name": "Marie Jo", "fuer": ["sie"], "bild": "marie-jo.jpg"},
-  {"name": "Mey", "fuer": ["sie", "er"]},
+  {"name": "Mey", "fuer": ["sie", "er"], "bild": "mey.jpg"},
   {"name": "Anita", "fuer": ["sie"]},
   {"name": "Hanro", "fuer": ["sie", "er"]},
   {"name": "Dacapo", "fuer": ["sie"]},
