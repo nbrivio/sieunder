@@ -610,8 +610,20 @@ h2.gross {
   .bewegt .a-paar span:last-child {
     transform: none;
   }
+  .bewegt .c-ende {
+    gap: 3vw;
+  }
   .bewegt .c-n {
-    width: 52vw;
+    width: 66vw;
+  }
+  .c-n1 {
+    --y: 15;
+  }
+  .c-n2 {
+    --y: -5;
+  }
+  .c-n3 {
+    --y: 11;
   }
   .c-1 {
     --w: 58vw;
