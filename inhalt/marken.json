@@ -4,7 +4,7 @@
   {"name": "Anita", "fuer": ["sie"]},
   {"name": "Hanro", "fuer": ["sie", "er"]},
   {"name": "Dacapo", "fuer": ["sie"]},
-  {"name": "Simone Pérèle", "fuer": ["sie"]},
+  {"name": "Simone Pérèle", "fuer": ["sie"], "bild": "simone-perele.jpg"},
   {"name": "Short Stories", "fuer": ["sie"]},
   {"name": "Hom", "fuer": ["er"]},
   {"name": "Zeybra", "fuer": ["er"]},
