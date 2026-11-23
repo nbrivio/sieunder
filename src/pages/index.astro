@@ -10,7 +10,9 @@ import { istLive } from '../inhalt/stufe.js';
 import { pfad } from '../inhalt/pfad.js';
 import kopf from '../assets/bilder/kopf.jpg';
 import jane from '../assets/bilder/jane.jpg';
-import avero from '../assets/bilder/avero.jpg';
+import nacht1 from '../assets/bilder/nacht-1.jpg';
+import nacht2 from '../assets/bilder/nacht-2.jpg';
+import nacht3 from '../assets/bilder/nacht-3.jpg';
 import janeNah from '../assets/bilder/jane-detail.jpg';
 import noriNah from '../assets/bilder/nori-detail.jpg';
 import averoNah from '../assets/bilder/avero-detail.jpg';
@@ -43,6 +45,7 @@ if (tag.vor !== nacht.vor) throw new Error('Tag- und Nachtsatz der Collage müss
 // ebenso die letzten zwei Worte eines Satzes, damit nie ein Wort allein auf die Zeile rutscht.
 const leadSaetze = start.lead.split(/(?<=\.)\s+/).map((satz) => satz.replace(/(\d) /g, '$1\u00a0').replace(/ (\S+)$/, '\u00a0$1'));
 const halb = '(max-width: 860px) 64vw, 34vw';
+const drittel = '(max-width: 860px) 46vw, 27vw';
 ---
 
 <Seite start titel={start.seitentitel} beschreibung={start.beschreibung}>
@@ -84,7 +87,11 @@ const halb = '(max-width: 860px) 64vw, 34vw';
       <figure class="c-bild c-3"><Image src={jane} alt="Mintgrüner BH mit Stickerei auf rosenholzfarbenem Leinen, daneben gelbgrüne Blüten" widths={breiten} sizes={halb} quality={70} /></figure>
       <figure class="c-bild c-4"><Image src={averoNah} alt="Träger mit gestickten Blüten in Bronze auf dunklem Samt" widths={breiten} sizes={halb} quality={70} /></figure>
       <p class="c-satz c-nacht gross">{nacht.vor} <em class="c-zeile">{nacht.betont}</em> <span class="c-zeile">{nacht.nach}</span></p>
-      <figure class="c-bild c-ende"><Image src={avero} alt="Dunkler BH mit gestickten Trägern auf anthrazitfarbenem Samt, dazwischen korallenrote Blüten" widths={[640, 960, 1440, 2000]} sizes="100vw" quality={70} /></figure>
+      <div class="c-ende">
+        <figure class="c-n c-n1"><Image src={nacht1} alt="Frau in weinroter Loungewear sitzt entspannt auf einem weissen Bett" widths={[480, 800]} sizes={drittel} quality={72} /></figure>
+        <figure class="c-n c-n2"><Image src={nacht2} alt="Zwei Frauen in Nachtwäsche aus Satin, die eine im hellen Top mit Spitze, die andere im gemusterten Pyjama" widths={[480, 800]} sizes={drittel} quality={72} /></figure>
+        <figure class="c-n c-n3"><Image src={nacht3} alt="Mann im dunkelblauen Pyjama lehnt an einer Betonwand" widths={[480, 800]} sizes={drittel} quality={72} /></figure>
+      </div>
     </div>
   </section>
 

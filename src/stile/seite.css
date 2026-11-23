@@ -284,7 +284,8 @@ h1 {
 }
 
 /* 3 Collage: Ein Satz bleibt stehen, grosse Bilder ziehen an ihm vorbei.
-   Am Schluss füllt das dunkle Bild den Schirm: Der Satz für den Tag blendet in den Satz für die Nacht über. */
+   Am Schluss wird es Nacht: Der Grund wird dunkel, drei Nachtbilder steigen auf,
+   und der Satz für den Tag blendet in den Satz für die Nacht über. */
 .collage {
   --q: clamp(0, calc((var(--p) - 0.74) * 6), 1);
   background: var(--se-leinen);
@@ -318,9 +319,19 @@ h1 {
 }
 .c-ende {
   grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
-.c-ende img {
-  aspect-ratio: 3 / 2;
+.c-n {
+  overflow: hidden;
+  border-radius: 18px;
+}
+.c-n img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
 }
 
 .bewegt .collage {
@@ -395,21 +406,37 @@ h1 {
   position: absolute;
   z-index: 3;
   inset: 0;
-  width: auto;
-  border-radius: 0;
-  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 32px);
+  background: var(--se-tinte);
   opacity: var(--q);
-  transform: none;
 }
-.bewegt .c-ende img {
-  aspect-ratio: auto;
-  transform: scale(calc(1.16 - var(--q) * 0.16));
+/* Die drei Bilder steigen versetzt auf, das mittlere zuerst. */
+.bewegt .c-n {
+  flex: none;
+  width: min(27vw, 54svh);
+  transform: translateY(calc(var(--y) * 1svh + (1 - var(--q)) * var(--h) * 1svh));
 }
+.c-n1 {
+  --y: 5;
+  --h: 16;
+}
+.c-n2 {
+  --y: -4;
+  --h: 8;
+}
+.c-n3 {
+  --y: 7;
+  --h: 24;
+}
+/* Schleier über den Bildern, damit der weisse Satz davor lesbar bleibt. */
 .bewegt .c-ende::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgb(24 34 30 / 0.32);
+  background: rgb(24 34 30 / 0.46);
 }
 
 /* 4 Laden: grosses Bild oben, darunter links der Text und rechts das zweite Bild, das ins erste greift. */
@@ -582,6 +609,9 @@ h2.gross {
   .bewegt .a-paar span:first-child,
   .bewegt .a-paar span:last-child {
     transform: none;
+  }
+  .bewegt .c-n {
+    width: 52vw;
   }
   .c-1 {
     --w: 58vw;
