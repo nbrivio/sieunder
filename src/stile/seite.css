@@ -88,11 +88,12 @@ h1 {
 .status {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  font-size: 15px;
 }
 .status i {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgb(255 255 255 / 0.7);
 }

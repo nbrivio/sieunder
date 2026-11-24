@@ -42,7 +42,8 @@ const nacht = zerlegt(start.collageNacht);
 if (tag.vor !== nacht.vor) throw new Error('Tag- und Nachtsatz der Collage müssen gleich beginnen (inhalt/start.json).');
 // Jeder Satz der Einleitung steht auf eigener Zeile. Zahl und folgendes Wort bleiben zusammen,
 // ebenso die letzten zwei Worte eines Satzes, damit nie ein Wort allein auf die Zeile rutscht.
-const leadSaetze = start.lead.split(/(?<=\.)\s+/).map((satz) => satz.replace(/(\d) /g, '$1\u00a0').replace(/ (\S+)$/, '\u00a0$1'));
+// Jede Zeile ist ein Satz; der Zeilenumbruch schliesst ihn, darum steht am Ende kein Punkt.
+const leadSaetze = start.lead.split(/(?<=\.)\s+/).map((satz) => satz.replace(/\.$/, '').replace(/(\d) /g, '$1\u00a0').replace(/ (\S+)$/, '\u00a0$1'));
 const halb = '(max-width: 860px) 64vw, 34vw';
 const drittel = '(max-width: 860px) 46vw, 27vw';
 ---
